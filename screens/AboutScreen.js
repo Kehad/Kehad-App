@@ -2,6 +2,7 @@ import { Button, StyleSheet, Text, View } from "react-native";
 import { GlobalStyles } from "../constants/styles";
 import PrimaryButton from "../components/Buttons/PrimaryButton";
 import SecondaryButton from "../components/Buttons/SecondaryButton";
+import SocialLinks from "../components/UI/SocialLinks";
 
 function HomeScreen() {
   return (
@@ -15,6 +16,7 @@ function HomeScreen() {
         projects, each one presenting a unique challenge that I've eagerly
         tackled.
       </Text>
+      <SocialLinks />
       <View style={styles.buttonsContainer}>
         <View style={styles.buttonContainer}>
           <PrimaryButton>hire me</PrimaryButton>

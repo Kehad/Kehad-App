@@ -51,7 +51,7 @@ export default function App() {
 
       <NavigationContainer
         screenOptions={{
-          headerStyle: { backgroundColor: GlobalStyles.colors.primary50 },
+          // headerStyle: { backgroundColor: GlobalStyles.colors.primary50 },
           headerTintColor: "white",
         }}
       >
@@ -59,18 +59,10 @@ export default function App() {
           screenOptions={({ navigation }) => ({
             headerStyle: { backgroundColor: GlobalStyles.colors.background },
             headerTintColor: "white",
-            tabBarStyle: { backgroundColor: GlobalStyles.colors.primary500 },
-            tabBarActiveTintColor: GlobalStyles.colors.accent500,
-            // headerStyle: { backgroundColor: "#351401" },
-            headerTintColor: "white",
-            sceneContainerStyle: { backgroundColor: "#3f2f25" },
-            tabBarStyle: { backgroundColor: "#351401" },
-            tabInactiveTintColor: "white",
-            tabActiveTintColor: "#351401",
-            tabActiveBackgroundColor: "#e4baa1",
+            tabBarStyle: { backgroundColor: GlobalStyles.colors.background },
+            tabBarActiveTintColor: GlobalStyles.colors.primary50,
+            tabBarInActiveTintColor: GlobalStyles.colors.primary500,
             headerTitle: () => <Header />,
-            // headerTitle: 'sss',
-
             headerRight: ({ tintColor }) => (
               <IconButton
                 icon="menu"

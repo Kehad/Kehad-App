@@ -1,0 +1,82 @@
+// function MyTabs() {
+//   return (
+//     <Tab.Navigator>
+//       <Tab.Screen name="Home" component={HomeScreen} />
+//       <Tab.Screen name="Contact" component={ContactScreen} />
+//     </Tab.Navigator>
+//   );
+// }
+
+// function MyTab2() {
+//   return (
+//     <Tab.Navigator>
+//       <Tab.Screen name="Skills" component={SkillsScreen} />
+//       <Tab.Screen name="Works" component={WorksScreen} />
+//       <Tab.Screen name="Contact" component={ContactScreen} />
+//     </Tab.Navigator>
+//   );
+// }
+
+// const Drawer = createDrawerNavigator();
+
+// function MyDrawer() {
+//   return (
+//     <Drawer.Navigator>
+//       <Drawer.Screen name="Tabs" component={MyTabs} />
+//       <Drawer.Screen name="Tab" component={MyTabs} />
+//     </Drawer.Navigator>
+//   );
+// }
+
+// export default function App() {
+//   return (
+//     <NavigationContainer>
+//       <MyDrawer />
+//     </NavigationContainer>
+//   );
+// }
+
+
+function MyTabs() {
+  return (
+    <Drawer.Navigator >
+      <Drawer.Screen name="Home" component={HomeScreen} />
+      <Drawer.Screen name="Contact" component={ContactScreen} />
+    </Drawer.Navigator>
+  );
+}
+
+function MyTabs2() {
+  return (
+    <Drawer.Navigator>
+      <Drawer.Screen name="Contact" component={ContactScreen} />
+    </Drawer.Navigator>
+  );
+}
+
+const Drawer = createDrawerNavigator();
+
+function MyDrawer() {
+  return (
+    <Tab.Navigator
+      screenOptions={{
+        headerShown: true,
+      }}
+    >
+      <Tab.Screen name="About" component={AboutScreen} />
+      <Tab.Screen name="Skills" component={SkillsScreen} />
+      <Tab.Screen name="Works" component={WorksScreen} />
+      <Tab.Screen name="Home" component={HomeScreen} />
+      <Tab.Screen name="Projects" component={ProjectsScreen} />
+      <Tab.Screen name="Mytabs" component={MyTabs} />
+    </Tab.Navigator>
+  );
+}
+
+export default function App() {
+  return (
+    <NavigationContainer>
+      <MyDrawer />
+    </NavigationContainer>
+  );
+}

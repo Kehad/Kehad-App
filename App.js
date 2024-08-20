@@ -50,23 +50,25 @@ export default function App() {
       <StatusBar style="light" />
 
       <NavigationContainer
-        screenOptions={{
-          // headerStyle: { backgroundColor: GlobalStyles.colors.primary50 },
-          headerTintColor: "white",
-        }}
+        screenOptions={
+          {
+            // headerStyle: { backgroundColor: GlobalStyles.colors.primary50 },
+            // headerTintColor: "white",
+          }
+        }
       >
         <BottomTabs.Navigator
           screenOptions={({ navigation }) => ({
-            headerStyle: { backgroundColor: GlobalStyles.colors.background },
-            headerTintColor: "white",
-            tabBarStyle: { backgroundColor: GlobalStyles.colors.background },
+            headerStyle: { backgroundColor: GlobalStyles.colors.white },
+            headerTintColor: GlobalStyles.colors.textBlack,
+            tabBarStyle: { backgroundColor: GlobalStyles.colors.white },
             tabBarActiveTintColor: GlobalStyles.colors.primary50,
-            tabBarInActiveTintColor: GlobalStyles.colors.primary500,
+            tabBarInactiveTintColor: GlobalStyles.colors.textBlack,
             headerTitle: () => <Header />,
             headerRight: ({ tintColor }) => (
               <IconButton
                 icon="menu"
-                size={24}
+                size={32}
                 color={tintColor}
                 onPress={() => {
                   // navigation.navigate("ContactScreen");

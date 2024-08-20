@@ -1,4 +1,5 @@
 import { Image, Text , View, StyleSheet } from 'react-native'
+import { GlobalStyles } from '../constants/styles';
 
 function Header() {
   return (
@@ -13,8 +14,8 @@ export default Header;
 
 const styles = StyleSheet.create({
   headerText: {
-    fontSize: 24,
+    fontSize: 32,
     fontWeight: 'bold',
-    color: 'white'
+    color: GlobalStyles.colors.textBlack
   }
 })

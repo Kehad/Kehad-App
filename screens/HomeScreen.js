@@ -3,11 +3,12 @@ import { GlobalStyles } from "../constants/styles";
 import PrimaryButton from "../components/Buttons/PrimaryButton";
 import SecondaryButton from "../components/Buttons/SecondaryButton";
 import SocialLinks from "../components/UI/SocialLinks";
+import Title from "../components/UI/Title";
 
 function HomeScreen() {
   return (
     <View style={styles.container}>
-      <Text style={styles.headerHead}>Hi.</Text>
+      <Title>Hi.</Title>
       <Text style={styles.name}>I'm Kehinde Adigun</Text>
       <Text style={styles.paragraph}>
         I am a web developer with over 5 years of experience, specializing in
@@ -34,7 +35,7 @@ export default HomeScreen;
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: GlobalStyles.colors.background,
+    backgroundColor: GlobalStyles.colors.white,
     flex: 1,
     padding: 24,
   },
@@ -46,13 +47,12 @@ const styles = StyleSheet.create({
   },
   name: {
     fontSize: 36,
-    color: GlobalStyles.colors.white,
-    // lineHeight: 24,
+    color: GlobalStyles.colors.textBlack,
     marginBottom: 24,
   },
   paragraph: {
     fontSize: 20,
-    color: GlobalStyles.colors.white,
+    color: GlobalStyles.colors.textBlack,
     lineHeight: 30,
   },
   buttonsContainer: {

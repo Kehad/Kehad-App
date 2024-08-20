@@ -3,11 +3,12 @@ import { GlobalStyles } from "../constants/styles";
 import PrimaryButton from "../components/Buttons/PrimaryButton";
 import SecondaryButton from "../components/Buttons/SecondaryButton";
 import SocialLinks from "../components/UI/SocialLinks";
+import Title from "../components/UI/Title";
 
 function HomeScreen() {
   return (
     <View style={styles.container}>
-      <Text style={styles.headerHead}>About me</Text>
+      <Title>About me</Title>
       <Text style={styles.paragraph}>
         I've always been fascinated by the intersection of design and
         technology, and I've made it my mission to bring beautiful,
@@ -30,7 +31,7 @@ export default HomeScreen;
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: GlobalStyles.colors.background,
+    backgroundColor: GlobalStyles.colors.white,
     flex: 1,
     padding: 24,
   },
@@ -40,16 +41,11 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     fontSize: 50,
   },
-  name: {
-    fontSize: 36,
-    color: GlobalStyles.colors.white,
-    // lineHeight: 24,
-    marginBottom: 24,
-  },
   paragraph: {
     fontSize: 20,
-    color: GlobalStyles.colors.white,
+    color: GlobalStyles.colors.textBlack,
     lineHeight: 30,
+    fontWeight: '400'
   },
   buttonsContainer: {
     flexDirection: "row",

@@ -18,7 +18,7 @@ import ContactScreen from "./screens/ContactScreen";
 import { GlobalStyles } from "./constants/styles";
 import IconButton from "./components/Buttons/IconButton";
 import Header from "./components/Header";
-import ModalScreen from "./components/UI/ModalScreen";
+import ModalScreen from "./screens/ModalScreen";
 
 const Stack = createNativeStackNavigator();
 const BottomTabs = createBottomTabNavigator();
@@ -43,11 +43,11 @@ function ExpensesOverview() {
       />
     </Drawer.Navigator>
   );
-};
+}
 
 function StackNavigator() {
   return (
-    <Stack.Navigator>   
+    <Stack.Navigator>
       <Stack.Screen
         name="WorksScreen"
         component={WorksScreen}
@@ -57,15 +57,14 @@ function StackNavigator() {
           headerShown: false,
         }}
       />
-       <Stack.Screen
-          name="ModalScreen"
-          component={ModalScreen}
-          options={{ presentation: "modal" }} // This sets the screen as a modal
-        />
+      <Stack.Screen
+        name="ModalScreen"
+        component={ModalScreen}
+        options={{ presentation: "modal" }} // This sets the screen as a modal
+      />
     </Stack.Navigator>
   );
 }
-
 
 function StackNavigator2() {
   return (
@@ -219,8 +218,6 @@ export default function App() {
     </>
   );
 }
-
-
 
 // facebook-with-circle
 // sc-facebook  EvilIcons

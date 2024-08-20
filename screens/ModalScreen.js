@@ -1,15 +1,9 @@
-import {
-  Image,
-  ScrollView,
-  StyleSheet,
-  Text,
-  View,
-} from "react-native";
+import { Image, ScrollView, StyleSheet, Text, View } from "react-native";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import * as Linking from "expo-linking";
 
-import PrimaryButton from "../Buttons/PrimaryButton";
-import { GlobalStyles } from "../../constants/styles";
+import PrimaryButton from "../components/Buttons/PrimaryButton";
+import { GlobalStyles } from "../constants/styles";
 import { useLayoutEffect } from "react";
 
 function ModalScreen() {

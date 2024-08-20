@@ -1,8 +1,9 @@
-import { FlatList, StyleSheet, View } from "react-native";
+import { Alert, FlatList, StyleSheet, View } from "react-native";
+import * as FileSystem from "expo-file-system";
+
 import Title from "../components/UI/Title";
 import { GlobalStyles } from "../constants/styles";
 import SkillsList from "../components/skills/SkillsList";
-import { Ionicons } from "@expo/vector-icons";
 import PrimaryButton from "../components/Buttons/PrimaryButton";
 
 const itemList = [
@@ -58,14 +59,25 @@ const itemList = [
 
 function renderSkillsItem(itemData) {
     return <SkillsList {...itemData.item} />;
-//   return <Text>{itemData.item.description}</Text>;
 }
-
-function cvDownloadHandler() {
   
-}
-
 function SkillsScreen() {
+
+  // const downloadFile = async () => {
+  //   const url = "http://techslides.com/demos/sample-videos/small.mp4";
+  //   console.log(url) // Replace with your file URL
+  //   // const fileUri = FileSystem.documentDirectory + 'icon.png'; // Local file path
+  //   const fileUri = `${FileSystem.documentDirectory}icon.png`;
+
+  //   try {
+  //     const { uri } = await FileSystem.downloadAsync(url, fileUri);
+  //     Alert.alert('Success', 'File downloaded to: ' + uri);
+  //   } catch (error) {
+  //     console.log(error)
+  //     Alert.alert('Error', 'Failed to download file: ' + error.message);
+  //   }
+  // };
+  
   return (
     <View style={styles.container}>
       <Title>My Skills</Title>
@@ -75,7 +87,7 @@ function SkillsScreen() {
         renderItem={renderSkillsItem}
       />
       <View style={styles.button}>
-        <PrimaryButton onPress={cvDownloadHandler}>Download CV</PrimaryButton>
+        <PrimaryButton>Download CV</PrimaryButton>
       </View>
 
     </View>

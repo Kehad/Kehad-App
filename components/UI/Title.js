@@ -14,6 +14,6 @@ const styles = StyleSheet.create({
     marginBottom: 4,
     color: GlobalStyles.colors.primary50,
     fontWeight: "bold",
-    fontSize: 50,
+    fontSize: 49,
   },
 });

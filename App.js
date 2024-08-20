@@ -47,8 +47,7 @@ function ExpensesOverview() {
 
 function StackNavigator() {
   return (
-    <Stack.Navigator>
-      
+    <Stack.Navigator>   
       <Stack.Screen
         name="WorksScreen"
         component={WorksScreen}
@@ -67,6 +66,27 @@ function StackNavigator() {
   );
 }
 
+
+function StackNavigator2() {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen
+        name="ProjectsScreen"
+        component={ProjectsScreen}
+        // headerShown= false
+        options={{
+          presentation: "card",
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="ModalScreen"
+        component={ModalScreen}
+        options={{ presentation: "modal" }} // This sets the screen as a modal
+      />
+    </Stack.Navigator>
+  );
+}
 // const ModalScreen = () => {
 //   return (
 //     <NavigationContainer>
@@ -141,7 +161,7 @@ function BottomTabsNavigator() {
         }}
       /> */}
       <BottomTabs.Screen
-        name="WorksScreen"
+        name="Works"
         component={StackNavigator}
         options={{
           title: "Works",
@@ -152,8 +172,8 @@ function BottomTabsNavigator() {
         }}
       />
       <BottomTabs.Screen
-        name="ProjectsScreen"
-        component={ProjectsScreen}
+        name="Projects"
+        component={StackNavigator2}
         options={{
           title: "Projects",
           tabBarLabel: "Projects",
@@ -170,6 +190,17 @@ function BottomTabsNavigator() {
           tabBarLabel: "About",
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="person" size={size} color={color} />
+          ),
+        }}
+      />
+      <BottomTabs.Screen
+        name="ContactScreen"
+        component={ContactScreen}
+        options={{
+          title: "Contact",
+          tabBarLabel: "Contact",
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="mail" size={size} color={color} />
           ),
         }}
       />

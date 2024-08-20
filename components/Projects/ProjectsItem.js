@@ -1,15 +1,26 @@
 import { Button, StyleSheet, Text, View } from "react-native";
 import { GlobalStyles } from "../../constants/styles";
 import PrimaryButton from "../Buttons/PrimaryButton";
+import { useNavigation } from "@react-navigation/native";
 
-function ProjectsItem({ description, name }) {
+function ProjectsItem({ description, name, website, imageUrl }) {
+  const navigation = useNavigation();
+
+  function itemDetailsHandler() {
+    navigation.navigate("ModalScreen", {
+      title: name,
+      description: description,
+      website: website,
+      imageUrl: imageUrl,
+    });
+  }
   return (
     <View style={styles.container}>
       <Text style={styles.headerHead}>{name}</Text>
       <Text style={styles.paragraph}>{description}</Text>
       <View style={styles.buttonsContainer}>
         <View style={styles.buttonContainer}>
-          <PrimaryButton>Visit Website</PrimaryButton>
+          <PrimaryButton onPress={itemDetailsHandler}>See Details</PrimaryButton>
         </View>
       </View>
     </View>

@@ -27,8 +27,9 @@ const styles = StyleSheet.create({
   headerHead: {
     marginBottom: 4,
     color: GlobalStyles.colors.primary50,
+    backgroundColor: GlobalStyles.colors.textBlack,
     fontWeight: "bold",
-    fontSize: 50,
+    fontSize: 40,
   },
   name: {
     fontSize: 36,

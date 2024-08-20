@@ -4,8 +4,15 @@ import PrimaryButton from "../components/Buttons/PrimaryButton";
 import SecondaryButton from "../components/Buttons/SecondaryButton";
 import SocialLinks from "../components/UI/SocialLinks";
 import Title from "../components/UI/Title";
+import { useNavigation } from "@react-navigation/native";
 
 function HomeScreen() {
+  const navigation = useNavigation();
+
+  function aboutMeHandler() {
+    navigation.navigate("AboutScreen");
+  }
+
   return (
     <View style={styles.container}>
       <Title>Hi.</Title>
@@ -24,7 +31,7 @@ function HomeScreen() {
           <PrimaryButton>hire me</PrimaryButton>
         </View>
         <View style={styles.buttonContainer}>
-          <SecondaryButton>about me</SecondaryButton>
+          <SecondaryButton onPress={aboutMeHandler}>about me</SecondaryButton>
         </View>
       </View>
     </View>

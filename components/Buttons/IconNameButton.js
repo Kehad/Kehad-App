@@ -1,17 +1,20 @@
 import React from "react";
-import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
+import { View, Text, TouchableOpacity, StyleSheet, Pressable } from "react-native";
 import { GlobalStyles } from "../../constants/styles";
 import { FontAwesome } from "@expo/vector-icons";
 
-function IconNameButton() {
+function IconNameButton({ onPress }) {
   return (
     <View style={styles.container}>
-      <View style={styles.innerContainer}>
-        <TouchableOpacity style={styles.button}>
+      <Pressable
+        style={styles.innerContainer}
+        android_ripple={{ color: GlobalStyles.colors.primary100 }}
+      >
+        <TouchableOpacity style={styles.button} onPress={onPress}>
           <Text style={styles.buttonText}>Download CV</Text>
           <FontAwesome name="arrow-down" size={24} color="black" />
         </TouchableOpacity>
-      </View>
+      </Pressable>
     </View>
   );
 };
@@ -26,7 +29,7 @@ const styles = StyleSheet.create({
     overflow: "hidden",
     borderWidth: 2,
     borderColor: GlobalStyles.colors.primary50,
-        backgroundColor: GlobalStyles.colors.primary50,
+    backgroundColor: GlobalStyles.colors.primary50,
   },
   innerContainer: {
     backgroundColor: GlobalStyles.colors.primary50,

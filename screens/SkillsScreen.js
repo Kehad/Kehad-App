@@ -1,4 +1,11 @@
-import { Alert, FlatList, StyleSheet, View } from "react-native";
+import {
+  Alert,
+  Button,
+  FlatList,
+  ScrollView,
+  StyleSheet,
+  View,
+} from "react-native";
 import * as FileSystem from "expo-file-system";
 
 import Title from "../components/UI/Title";
@@ -8,6 +15,9 @@ import PrimaryButton from "../components/Buttons/PrimaryButton";
 import IconButton from "../components/Buttons/IconButton";
 import { Ionicons } from "@expo/vector-icons";
 import IconNameButton from "../components/Buttons/IconNameButton";
+import { useState } from "react";
+import Modal from "../components/UI/ModalDownload";
+import ModalDownload from "../components/UI/ModalDownload";
 
 const itemList = [
   {
@@ -65,6 +75,13 @@ function renderSkillsItem(itemData) {
 }
 
 function SkillsScreen() {
+  const [modalVisible, setModalVisible] = useState(false);
+
+  function showModalHandler(isModalVisible) {
+    console.log(isModalVisible);
+    console.log("Modal");
+    setModalVisible(isModalVisible);
+  }
   // const downloadFile = async () => {
   //   const url = "http://techslides.com/demos/sample-videos/small.mp4";
   //   console.log(url) // Replace with your file URL
@@ -83,18 +100,21 @@ function SkillsScreen() {
   return (
     <View style={styles.container}>
       <Title>My Skills</Title>
-      <FlatList
-        data={itemList}
-        keyExtractor={(item) => item.id}
-        renderItem={renderSkillsItem}
-      />
-      <View style={styles.button}>
-        {/* <PrimaryButton icon="jdh">Download CV</PrimaryButton>
+      <ScrollView>
+        <FlatList
+          data={itemList}
+          keyExtractor={(item) => item.id}
+          renderItem={renderSkillsItem}
+        />
+        <View style={styles.button}>
+          {/* <PrimaryButton icon="jdh">Download CV</PrimaryButton>
         <IconButton icon="menu" size={32}>
-          Download CV
+        Download CV
         </IconButton> */}
-        <IconNameButton />
-      </View>
+          <IconNameButton onPress={showModalHandler} />
+          {modalVisible && <ModalDownload isModalVisible={showModalHandler} />}
+        </View>
+      </ScrollView>
     </View>
   );
 }
@@ -108,6 +128,6 @@ const styles = StyleSheet.create({
     padding: 24,
   },
   button: {
-    width: "70%",
+    // width: "70%",
   },
 });

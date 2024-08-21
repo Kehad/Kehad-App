@@ -13,9 +13,9 @@ function HomeScreen() {
     navigation.navigate("AboutScreen");
   }
 
-    function hireMeHandler() {
-      navigation.navigate("AboutScreen");
-    }
+  function hireMeHandler() {
+    navigation.navigate("AboutScreen");
+  }
 
   return (
     <View style={styles.container}>
@@ -46,11 +46,12 @@ export default HomeScreen;
 
 const styles = StyleSheet.create({
   container: {
-backgroundColor: GlobalStyles.colors.white100,
+    backgroundColor: GlobalStyles.colors.white100,
     flex: 1,
     padding: 24,
     paddingBottom: 0,
-    paddingTop: 35
+    paddingTop: 35,
+    justifyContent: 'center',
   },
   headerHead: {
     marginBottom: 4,

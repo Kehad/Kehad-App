@@ -22,9 +22,8 @@ function PrimaryButton({ children, onPress, icon }) {
             ? [styles.buttonInnerContainer, styles.pressed]
             : styles.buttonInnerContainer
         }
-        j
         onPress={onPress}
-        android_ripple={{ color: GlobalStyles.colors.primary500 }}
+        android_ripple={{ color: GlobalStyles.colors.primary100 }}
       >
       
         <Text style={styles.buttonText}>{children}</Text>
@@ -38,8 +37,8 @@ export default PrimaryButton;
 const styles = StyleSheet.create({
   buttonOuterContainer: {
     borderRadius: 28,
-    margin: 4,
-    marginVertical: 28,
+    // margin: 4,
+    // marginVertical: 28,
     overflow: "hidden",
     borderWidth: 2,
     borderColor: GlobalStyles.colors.primary50,

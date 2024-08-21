@@ -1,10 +1,11 @@
-import { Text, View, TextInput, StyleSheet } from "react-native";
+import { Text, View, TextInput, StyleSheet, Modal, Pressable } from "react-native";
 import * as Linking from "expo-linking";
 
 import SocialLinks from "../components/UI/SocialLinks";
 import PrimaryButton from "../components/Buttons/PrimaryButton";
 import Title from "../components/UI/Title";
 import { GlobalStyles } from "../constants/styles";
+import { useState } from "react";
 
 function ContactScreen() {
   const openLink = async () => {
@@ -49,6 +50,7 @@ function ContactScreen() {
         <View style={styles.messageBox}>
           <TextInput
             placeholder="your message"
+            multiline
             placeholderTextColor={GlobalStyles.colors.primary50}
             style={styles.messageInput}
           />
@@ -70,13 +72,13 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 16,
-    backgroundColor: GlobalStyles.colors.white100
+    backgroundColor: GlobalStyles.colors.white100,
   },
   text: {
     fontSize: 20,
   },
   span: {
-    color: GlobalStyles.colors.primary50
+    color: GlobalStyles.colors.primary50,
   },
   form: {
     width: "100%",
@@ -99,7 +101,6 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     borderColor: GlobalStyles.colors.primary50,
     color: GlobalStyles.colors.primary50,
-    fontWeight: "bold",
   },
   messageInput: {
     height: 150,
@@ -111,16 +112,16 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     borderColor: GlobalStyles.colors.primary50,
     color: GlobalStyles.colors.primary50,
-    fontWeight: "bold",
-    textAlign: 'auto',
-    alignItems: ''
+    textAlign: "auto",
+    textAlignVertical: "top",
+    flexWrap: 'wrap'
   },
   socialsBox: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between'
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
   },
   buttonBox: {
-    width: '30%'
-  }
+    width: "30%",
+  },
 });

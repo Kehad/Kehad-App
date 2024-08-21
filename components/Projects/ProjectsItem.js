@@ -31,7 +31,7 @@ export default ProjectsItem;
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: GlobalStyles.colors.white,
+    backgroundColor: GlobalStyles.colors.white100,
     flex: 1,
   },
   headerHead: {

@@ -1,15 +1,34 @@
 import { Text, View, TextInput, StyleSheet } from "react-native";
+import * as Linking from "expo-linking";
+
 import SocialLinks from "../components/UI/SocialLinks";
 import PrimaryButton from "../components/Buttons/PrimaryButton";
 import Title from "../components/UI/Title";
 import { GlobalStyles } from "../constants/styles";
 
 function ContactScreen() {
+  const openLink = async () => {
+
+    const url = 'mailto:keahnney01@gmail.com'; // Replace with your URL
+
+    try {
+      const supported = await Linking.canOpenURL(url);
+
+      if (supported) {
+        await Linking.openURL(url);
+      } else {
+        Alert.alert(`Don't know how to open this URL: ${url}`);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <View style={styles.container}>
       <Title>Hello</Title>
       <Text style={styles.text}>
-        Looking to start a project and need that magical touch?<Text style={styles.span}>React out!!!</Text>
+        Looking to start a project and need that magical touch?<Text onPress={openLink} style={styles.span}>React out!!!</Text>
       </Text>
       <View style={styles.form}>
         <View style={styles.textBox}>
@@ -36,6 +55,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 16,
+    backgroundColor: GlobalStyles.colors.white100
   },
   text: {
     fontSize: 20,

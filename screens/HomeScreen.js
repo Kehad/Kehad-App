@@ -13,6 +13,10 @@ function HomeScreen() {
     navigation.navigate("AboutScreen");
   }
 
+    function hireMeHandler() {
+      navigation.navigate("AboutScreen");
+    }
+
   return (
     <View style={styles.container}>
       <Title>Hi.</Title>
@@ -28,7 +32,7 @@ function HomeScreen() {
       <SocialLinks />
       <View style={styles.buttonsContainer}>
         <View style={styles.buttonContainer}>
-          <PrimaryButton>hire me</PrimaryButton>
+          <PrimaryButton onPress={hireMeHandler}>hire me</PrimaryButton>
         </View>
         <View style={styles.buttonContainer}>
           <SecondaryButton onPress={aboutMeHandler}>about me</SecondaryButton>
@@ -42,9 +46,11 @@ export default HomeScreen;
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: GlobalStyles.colors.white,
+backgroundColor: GlobalStyles.colors.white100,
     flex: 1,
     padding: 24,
+    paddingBottom: 0,
+    paddingTop: 35
   },
   headerHead: {
     marginBottom: 4,

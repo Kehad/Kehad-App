@@ -20,7 +20,7 @@ export default ProjectsScreen;
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: GlobalStyles.colors.white,
+    backgroundColor: GlobalStyles.colors.white100,
     flex: 1,
     padding: 24,
   },

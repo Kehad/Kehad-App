@@ -1,6 +1,7 @@
 import React from "react";
-import { FlatList } from "react-native";
+import { FlatList, StyleSheet } from "react-native";
 import WorksItem from "./WorksItem";
+import { GlobalStyles } from "../../constants/styles";
 const worksData = [
   {
     id: "m1",
@@ -55,9 +56,21 @@ function WorksList() {
         data={worksData}
         keyExtractor={(item) => item.id}
         renderItem={renderWorksList}
+        style={styles.worksList}
       />
     // </View>
   );
 }
 
 export default WorksList;
+
+const styles = StyleSheet.create({
+  worksList: {
+    // backgroundColor: '#2d0689',
+    // elevation: 8,
+    // shadowColor: 'purple',
+    // shadowRadius: 1,
+    // shadowOffset: { width: 1, height: 1 },
+    // shadowOpacity: 15,
+  },
+});

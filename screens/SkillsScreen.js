@@ -58,11 +58,10 @@ const itemList = [
 ];
 
 function renderSkillsItem(itemData) {
-    return <SkillsList {...itemData.item} />;
+  return <SkillsList {...itemData.item} />;
 }
-  
-function SkillsScreen() {
 
+function SkillsScreen() {
   // const downloadFile = async () => {
   //   const url = "http://techslides.com/demos/sample-videos/small.mp4";
   //   console.log(url) // Replace with your file URL
@@ -77,7 +76,7 @@ function SkillsScreen() {
   //     Alert.alert('Error', 'Failed to download file: ' + error.message);
   //   }
   // };
-  
+
   return (
     <View style={styles.container}>
       <Title>My Skills</Title>
@@ -89,21 +88,19 @@ function SkillsScreen() {
       <View style={styles.button}>
         <PrimaryButton>Download CV</PrimaryButton>
       </View>
-
     </View>
   );
 }
 
 export default SkillsScreen;
 
-
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: GlobalStyles.colors.white,
+    backgroundColor: GlobalStyles.colors.white100,
     flex: 1,
     padding: 24,
   },
   button: {
-    width: '70%'
-  }
+    width: "70%",
+  },
 });

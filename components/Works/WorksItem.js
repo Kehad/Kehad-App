@@ -39,8 +39,20 @@ export default WorksItem;
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: GlobalStyles.colors.white,
+    backgroundColor: GlobalStyles.colors.white100,
     flex: 1,
+    marginVertical: 25,
+    // elevation: 8,
+    // shadowColor: 'red',
+    // shadowRadius: 4,
+    // shadowOffset: { width: 10, height: 10 },
+    // shadowOpacity: 10,
+    padding: 24,
+    borderRadius: 8,
+    borderWidth: 2,
+    borderColor: GlobalStyles.colors.primary50,
+    borderRightWidth: 0,
+    borderLeftWidth: 0,
   },
   headerHead: {
     marginBottom: 4,

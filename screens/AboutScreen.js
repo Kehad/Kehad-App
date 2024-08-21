@@ -31,7 +31,7 @@ export default HomeScreen;
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: GlobalStyles.colors.white,
+    backgroundColor: GlobalStyles.colors.white100,
     flex: 1,
     padding: 24,
   },
@@ -45,11 +45,11 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color: GlobalStyles.colors.textBlack,
     lineHeight: 30,
-    fontWeight: '400'
+    fontWeight: "400",
   },
   buttonsContainer: {
     flexDirection: "row",
-    width: '50%'
+    width: "50%",
   },
   buttonContainer: {
     flex: 1,

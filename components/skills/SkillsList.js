@@ -1,6 +1,7 @@
 import { StyleSheet, Text, View } from "react-native";
 import { GlobalStyles } from "../../constants/styles";
 import { Ionicons, FontAwesome6, Fontisto, MaterialCommunityIcons } from "@expo/vector-icons";
+import IconNameButton from "../Buttons/IconNameButton";
 
 const SkillsList = function ({
   name,
@@ -9,7 +10,6 @@ const SkillsList = function ({
   iconSize,
   iconColor,
 }) {
-  console.log(iconTitle);
   let content = '';
   if (iconTitle === 'FontAwesome6') {
     content = <FontAwesome6 name={iconName} size={iconSize} color={iconColor} />;
@@ -26,10 +26,9 @@ const SkillsList = function ({
       <View style={styles.container}>
         <View style={styles.box}>
           <Text style={styles.iconText}>{name}</Text>
-          <View>
-            {content}
-          </View>
+          <View>{content}</View>
         </View>
+     
       </View>
     );
 };

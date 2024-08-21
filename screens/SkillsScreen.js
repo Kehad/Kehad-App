@@ -5,6 +5,9 @@ import Title from "../components/UI/Title";
 import { GlobalStyles } from "../constants/styles";
 import SkillsList from "../components/skills/SkillsList";
 import PrimaryButton from "../components/Buttons/PrimaryButton";
+import IconButton from "../components/Buttons/IconButton";
+import { Ionicons } from "@expo/vector-icons";
+import IconNameButton from "../components/Buttons/IconNameButton";
 
 const itemList = [
   {
@@ -86,7 +89,11 @@ function SkillsScreen() {
         renderItem={renderSkillsItem}
       />
       <View style={styles.button}>
-        <PrimaryButton>Download CV</PrimaryButton>
+        {/* <PrimaryButton icon="jdh">Download CV</PrimaryButton>
+        <IconButton icon="menu" size={32}>
+          Download CV
+        </IconButton> */}
+        <IconNameButton />
       </View>
     </View>
   );

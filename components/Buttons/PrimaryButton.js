@@ -1,8 +1,19 @@
 import React from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 import { GlobalStyles } from "../../constants/styles";
+import { Ionicons } from "@expo/vector-icons";
 
-function PrimaryButton({ children, onPress }) {
+function PrimaryButton({ children, onPress, icon }) {
+  // let content = <Text>{children}</Text>;
+  // console.log(icon)
+  // if (icon) {
+  //   return content = (
+  //     <View style={[{ flexDirection: "row", alignItems: "center" },styles.buttonText]}>
+  //       <Text>{children}</Text>
+  //       {/* <Ionicons name="logo-html5" size="23" color="black" /> */}
+  //     </View>
+  //   );
+  // }
   return (
     <View style={styles.buttonOuterContainer}>
       <Pressable
@@ -13,8 +24,9 @@ function PrimaryButton({ children, onPress }) {
         }
         j
         onPress={onPress}
-        android_ripple={{ color: GlobalStyles.colors.primary500}}
+        android_ripple={{ color: GlobalStyles.colors.primary500 }}
       >
+      
         <Text style={styles.buttonText}>{children}</Text>
       </Pressable>
     </View>
@@ -36,7 +48,7 @@ const styles = StyleSheet.create({
   buttonInnerContainer: {
     backgroundColor: GlobalStyles.colors.primary50,
     paddingVertical: 8,
-    paddingHorizontal: 4,
+    // paddingHorizontal: 4,
     elevation: 2,
     width: "max-width",
   },

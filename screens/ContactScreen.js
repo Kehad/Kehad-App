@@ -28,15 +28,30 @@ function ContactScreen() {
     <View style={styles.container}>
       <Title>Hello</Title>
       <Text style={styles.text}>
-        Looking to start a project and need that magical touch?<Text onPress={openLink} style={styles.span}>React out!!!</Text>
+        Looking to start a project and need that magical touch?
+        <Text onPress={openLink} style={styles.span}>
+          React out!!!
+        </Text>
       </Text>
       <View style={styles.form}>
         <View style={styles.textBox}>
-          <TextInput placeholder="name" style={styles.textInput} />
-          <TextInput placeholder="email" style={styles.textInput} />
+          <TextInput
+            placeholder="name"
+            style={styles.textInput}
+            placeholderTextColor={GlobalStyles.colors.primary50}
+          />
+          <TextInput
+            placeholder="email"
+            style={styles.textInput}
+            placeholderTextColor={GlobalStyles.colors.primary50}
+          />
         </View>
         <View style={styles.messageBox}>
-          <TextInput placeholder="your message" style={styles.messageInput} />
+          <TextInput
+            placeholder="your message"
+            placeholderTextColor={GlobalStyles.colors.primary50}
+            style={styles.messageInput}
+          />
         </View>
         <View style={styles.socialsBox}>
           <SocialLinks />
@@ -90,6 +105,7 @@ const styles = StyleSheet.create({
     height: 150,
     marginVertical: 8,
     paddingLeft: 16,
+    paddingVertical: 0,
     fontSize: 24,
     borderWidth: 2,
     borderRadius: 8,

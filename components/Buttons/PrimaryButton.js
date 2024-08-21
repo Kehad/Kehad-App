@@ -3,7 +3,7 @@ import { Pressable, StyleSheet, Text, View } from "react-native";
 import { GlobalStyles } from "../../constants/styles";
 import { Ionicons } from "@expo/vector-icons";
 
-function PrimaryButton({ children, onPress, icon }) {
+function PrimaryButton({ children, onPress, style }) {
   // let content = <Text>{children}</Text>;
   // console.log(icon)
   // if (icon) {
@@ -19,8 +19,8 @@ function PrimaryButton({ children, onPress, icon }) {
       <Pressable
         style={({ pressed }) =>
           pressed
-            ? [styles.buttonInnerContainer, styles.pressed]
-            : styles.buttonInnerContainer
+            ? [styles.buttonInnerContainer, styles.pressed, style]
+            : [styles.buttonInnerContainer, style]
         }
         onPress={onPress}
         android_ripple={{ color: GlobalStyles.colors.primary100 }}
@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
   buttonInnerContainer: {
     backgroundColor: GlobalStyles.colors.primary50,
     paddingVertical: 8,
-    // paddingHorizontal: 4,
+    // paddingHorizontal: 40,
     elevation: 2,
     width: "max-width",
   },

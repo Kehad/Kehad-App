@@ -33,6 +33,7 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: GlobalStyles.colors.white100,
     flex: 1,
+    marginVertical: 25,
   },
   headerHead: {
     marginBottom: 4,
@@ -52,5 +53,6 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     flex: 1,
+    marginTop: 20,
   },
 });

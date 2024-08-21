@@ -10,6 +10,12 @@ const ModalDownload = ({ isModalVisible }) => {
       <Modal animationType="slide" transparent={true} visible={true}>
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
+            <View style={styles.button}>
+              <PrimaryButton>Download Image</PrimaryButton>
+            </View>
+            <View style={styles.button}>
+              <PrimaryButton>Download PDF</PrimaryButton>
+            </View>
             <Pressable
               style={styles.buttonOpen}
               onPress={() => isModalVisible(false)}
@@ -21,12 +27,6 @@ const ModalDownload = ({ isModalVisible }) => {
                 onPress={() => isModalVisible(false)}
               />
             </Pressable>
-            <View style={styles.button}>
-              <PrimaryButton>Download Image</PrimaryButton>
-            </View>
-            <View style={styles.button}>
-              <PrimaryButton>Download PDF</PrimaryButton>
-            </View>
           </View>
         </View>
       </Modal>
@@ -60,9 +60,6 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
     elevation: 5,
   },
-  buttonOuterContainer: {
-    overflow: "hidden",
-  },
   button: {
     padding: 10,
     borderRadius: 20,
@@ -71,27 +68,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   buttonOpen: {
-    alignSelf: "flex-end",
-    justifyContent: "flex-end",
-  },
-  buttonClose: {
-    marginTop: 10,
-    width: "90%",
-    backgroundColor: GlobalStyles.colors.primary50,
-  },
-  textStyle: {
-    color: "white",
-    fontWeight: "bold",
-    textAlign: "center",
-  },
-  modalClose: {
-    backgroundColor: "none",
-    fontSize: 24,
-    letterSpacing: 10,
-    textAlign: "center",
-  },
-  pressed: {
-    opacity: 0.75,
-    backgroundColor: "red",
-  },
+    marginTop: 20,
+    alignSelf: "center",
+  }
 });

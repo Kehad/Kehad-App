@@ -111,10 +111,11 @@ function BottomTabsNavigator() {
         tabBarActiveTintColor: GlobalStyles.colors.primary50,
         tabBarInactiveTintColor: GlobalStyles.colors.textBlack,
         headerTitle: () => <Header />,
+        headerRightContainerStyle: { paddingRight: 10, paddingBottom: 10  },
         headerRight: ({ tintColor }) => (
           <IconButton
             icon="menu"
-            size={32}
+            size={40}
             color={tintColor}
             onPress={() => {
               // navigation.navigate("ContactScreen");

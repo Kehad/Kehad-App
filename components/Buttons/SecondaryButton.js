@@ -26,8 +26,6 @@ export default SecondaryButton;
 const styles = StyleSheet.create({
   buttonOuterContainer: {
     borderRadius: 28,
-    margin: 4,
-    marginVertical: 28,
     overflow: "hidden",
     borderWidth: 2,
     borderColor: GlobalStyles.colors.primary50,
@@ -36,7 +34,6 @@ const styles = StyleSheet.create({
   buttonInnerContainer: {
     backgroundColor: "transparent",
     paddingVertical: 8,
-    paddingHorizontal: 4,
     elevation: 2,
   },
   buttonText: {

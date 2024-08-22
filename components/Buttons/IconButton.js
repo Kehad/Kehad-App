@@ -1,11 +1,42 @@
 import React from "react";
-import { Button, Pressable, StyleSheet, Text, View } from "react-native";
-// import { Ionicons } from "@expo/vector-icons";
-import Ionicons from "@expo/vector-icons/Ionicons";
-import { GlobalStyles } from "../../constants/styles";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { Pressable, StyleSheet, View } from "react-native";
 
-function IconButton({ icon, color, size, onPress, children }) {
+import {
+  Ionicons,
+  FontAwesome6,
+  Fontisto,
+  MaterialCommunityIcons,
+  Feather
+} from "@expo/vector-icons";
+
+function IconButton({
+  iconName,
+  iconSize,
+  onPress,
+  iconColor,
+  iconTitle,
+}) {
+  console.log(iconTitle, iconName, iconSize, iconColor,);
+  let content = "";
+  if (iconTitle === "FontAwesome6") {
+    content = (
+      <FontAwesome6 name={iconName} size={iconSize} color={iconColor} />
+    );
+  } else if (iconTitle === "Ionicons") {
+    content = <Ionicons name={iconName} size={iconSize} color={iconColor} />;
+  } else if (iconTitle === "Fontisto") {
+    content = <Fontisto name={iconName} size={iconSize} color={iconColor} />; // Replace Fontisto with FontAwesome6 if you want to use FontAwesome6 instead.  // Fontisto is a free alternative to FontAwesome.
+  } else if (iconTitle === "Feather") {
+    content = <Fontisto name={iconName} size={iconSize} color={iconColor} />; // Replace Fontisto with FontAwesome6 if you want to use FontAwesome6 instead.  // Fontisto is a free alternative to FontAwesome.
+  } else if (iconTitle === "MaterialCommunityIcons") {
+    content = (
+      <MaterialCommunityIcons
+        name={iconName}
+        size={iconSize}
+        color={iconColor}
+      />
+    );
+  }
 
   return (
     <Pressable
@@ -13,8 +44,7 @@ function IconButton({ icon, color, size, onPress, children }) {
       style={({ pressed }) => pressed && styles.pressed}
     >
       <View style={styles.buttonContainer}>
-        <Text>{children}</Text>
-        <MaterialCommunityIcons name={icon} color={color} size={size} />
+        {content}
       </View>
     </Pressable>
   );

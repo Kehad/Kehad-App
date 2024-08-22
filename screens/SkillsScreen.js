@@ -55,7 +55,7 @@ const itemList = [
   {
     id: "m5",
     name: "TAILWIND CSS",
-    iconTitle: "MaterialCommunityIcon",
+    iconTitle: "MaterialCommunityIcons",
     iconSize: 24,
     iconColor: GlobalStyles.colors.primary50,
     iconName: "tailwind",
@@ -78,8 +78,6 @@ function SkillsScreen() {
   const [modalVisible, setModalVisible] = useState(false);
 
   function showModalHandler(isModalVisible) {
-    console.log(isModalVisible);
-    console.log("Modal");
     setModalVisible(isModalVisible);
   }
   // const downloadFile = async () => {

@@ -1,7 +1,8 @@
 import { StyleSheet, Text, View } from "react-native";
 import { GlobalStyles } from "../../constants/styles";
-import { Ionicons, FontAwesome6, Fontisto, MaterialCommunityIcons } from "@expo/vector-icons";
+
 import IconNameButton from "../Buttons/IconNameButton";
+import IconButton from "../Buttons/IconButton";
 
 const SkillsList = function ({
   name,
@@ -10,23 +11,26 @@ const SkillsList = function ({
   iconSize,
   iconColor,
 }) {
+  console.log(iconTitle, iconName, iconSize, iconColor);
   let content = '';
   if (iconTitle === 'FontAwesome6') {
-    content = <FontAwesome6 name={iconName} size={iconSize} color={iconColor} />;
+    content = <IconButton iconTitle={iconTitle} iconName={iconName} iconSize={iconSize} iconColor={iconColor} />;
   } else if (iconTitle === 'Ionicons') {
-    content = <Ionicons name={iconName} size={iconSize} color={iconColor} />; 
+    content = <IconButton iconTitle={iconTitle} iconName={iconName} iconSize={iconSize} iconColor={iconColor} />; 
   } else if (iconTitle === 'Fontisto') {
-    content = <Fontisto name={iconName} size={iconSize} color={iconColor} />;  // Replace Fontisto with FontAwesome6 if you want to use FontAwesome6 instead.  // Fontisto is a free alternative to FontAwesome.
-  } else if (iconTitle === "MaterialCommunityIcon") {
+    content = <IconButton iconTitle={iconTitle} iconName={iconName} iconSize={iconSize} iconColor={iconColor} />;  // Replace Fontisto with FontAwesome6 if you want to use FontAwesome6 instead.  // Fontisto is a free alternative to FontAwesome.
+  } else if (iconTitle === "MaterialCommunityIcons") {
     content = (
-      <MaterialCommunityIcons name={iconName} size={iconSize} color={iconColor} />
+      <IconButton iconTitle={iconTitle} iconName={iconName} iconSize={iconSize} iconColor={iconColor} />
     );
   }
+  console.log(content);
     return (
       <View style={styles.container}>
         <View style={styles.box}>
           <Text style={styles.iconText}>{name}</Text>
           <View>{content}</View>
+          
         </View>
      
       </View>

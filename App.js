@@ -1,13 +1,9 @@
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from "@react-navigation/native";
-import { createDrawerNavigator } from "@react-navigation/drawer";
-import { Entypo, Foundation, Ionicons } from "@expo/vector-icons";
-import { Feather } from "@expo/vector-icons";
+import { Foundation, Ionicons } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
-import { FontAwesome } from "@expo/vector-icons";
 
 import HomeScreen from "./screens/HomeScreen";
 import SkillsScreen from "./screens/SkillsScreen";
@@ -17,33 +13,14 @@ import AboutScreen from "./screens/AboutScreen";
 import ContactScreen from "./screens/ContactScreen";
 import { GlobalStyles } from "./constants/styles";
 import IconButton from "./components/Buttons/IconButton";
-import Header from "./components/Header";
+import Header from "./components/UI/Header";
 import ModalScreen from "./screens/ModalScreen";
+import ToggleMode from "./components/UI/ToggleMode";
+import { useState } from "react";
+import { StyleSheet, View } from "react-native";
 
 const Stack = createNativeStackNavigator();
 const BottomTabs = createBottomTabNavigator();
-const Drawer = createDrawerNavigator();
-
-function ExpensesOverview() {
-  return (
-    <Drawer.Navigator>
-      <Drawer.Screen
-        name="ExpensesOverview"
-        component={ExpensesOverview}
-        options={{
-          headerShown: false,
-        }}
-      />
-      <Drawer.Screen
-        name="ContactScreen"
-        component={ContactScreen}
-        options={{
-          presentation: "card",
-        }}
-      />
-    </Drawer.Navigator>
-  );
-}
 
 function StackNavigator() {
   return (
@@ -86,22 +63,15 @@ function StackNavigator2() {
     </Stack.Navigator>
   );
 }
-// const ModalScreen = () => {
-//   return (
-//     <NavigationContainer>
-//       <Stack.Navigator>
-//         <Stack.Screen name="Home" component={HomeScreen} />
-//         <Stack.Screen
-//           name="MyModal"
-//           component={ModalScreen}
-//           options={{ presentation: "modal" }} // This sets the screen as a modal
-//         />
-//       </Stack.Navigator>
-//     </NavigationContainer>
-//   );
-// };
 
 function BottomTabsNavigator() {
+  const [modalVisible, setModalVisible] = useState(false);
+  console.log(modalVisible);
+
+  function showModalHandler(isModalVisible) {
+    setModalVisible(isModalVisible);
+    console.log(modalVisible);
+  }
   return (
     <BottomTabs.Navigator
       screenOptions={({ route }) => ({
@@ -113,14 +83,40 @@ function BottomTabsNavigator() {
         headerTitle: () => <Header title="Kehad" />,
         headerRightContainerStyle: { paddingRight: 10, paddingBottom: 10 },
         headerRight: ({ tintColor }) => (
-          <IconButton
-            icon="dots-vertical"
-            size={40}
-            color={tintColor}
-            onPress={() => {
-              // navigation.navigate("ContactScreen");
-            }}
-          />
+          <View style={styles.menu}>
+            {/* {!modalVisible && <ToggleMode isModalVisible={showModalHandler} />} */}
+
+            <View style={styles.toggleIcon}>
+              <View style={styles.sun}>
+
+                <IconButton
+                  iconTitle="Feather"
+                  iconName="sun"
+                  iconSize={24}
+                  iconColor="black"
+                  // onPress={() => isModalVisible(false)}
+                  />
+                  </View>
+              <View style={styles.moon}>
+                <IconButton
+                  iconTitle="Ionicons"
+                  iconName="moon"
+                  iconSize={24}
+                  iconColor="black"
+                />
+              </View>
+            </View>
+            <IconButton
+              iconName="dots-vertical"
+              iconTitle="MaterialCommunityIcons"
+              iconSize={40}
+              iconColor={tintColor}
+              onPress={() => {
+                // navigation.navigate("ContactScreen");
+                showModalHandler(true);
+              }}
+            />
+          </View>
         ),
       })}
     >
@@ -200,6 +196,40 @@ function BottomTabsNavigator() {
     </BottomTabs.Navigator>
   );
 }
+
+const styles = StyleSheet.create({
+  menu: {
+    flexDirection: "row",
+    gap: 20,
+    // alignItems: 'flex-start',
+    justifyContent: "space-between",
+    // flex: 1,
+  },
+  toggleIcon: {
+    flexDirection: "row",
+    // gap: 20,
+    width: 100,
+    justifyContent: "space-between",
+    // flex: 1,
+    padding: 10,
+    alignItems: "center",
+    backgroundColor: "red",
+    borderBottomLeftRadius: 0,
+    borderTopLeftRadius: 0,
+  },
+  moon: {
+    backgroundColor: GlobalStyles.colors.primary50,
+    alignItems: "center",
+    justifyContent: "center",
+    borderRadius: 10,
+    padding: 1,
+    width: "50%",
+  },
+  sun: {
+    backgroundColor: 'blue'
+  }
+  
+});
 
 export default function App() {
   return (

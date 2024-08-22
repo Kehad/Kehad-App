@@ -1,5 +1,5 @@
 import { Image, Text , View, StyleSheet } from 'react-native'
-import { GlobalStyles } from '../constants/styles';
+import { GlobalStyles } from '../../constants/styles';
 
 function Header({title}) {
   return (

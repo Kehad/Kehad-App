@@ -99,7 +99,7 @@ function SkillsScreen() {
 
   return (
     <View style={styles.container}>
-      <Title>My Skills</Title>
+      {/* <Title>My Skills</Title> */}
       <ScrollView>
         <FlatList
           data={itemList}

@@ -110,11 +110,11 @@ function BottomTabsNavigator() {
         tabBarStyle: { backgroundColor: GlobalStyles.colors.white },
         tabBarActiveTintColor: GlobalStyles.colors.primary50,
         tabBarInactiveTintColor: GlobalStyles.colors.textBlack,
-        headerTitle: () => <Header />,
-        headerRightContainerStyle: { paddingRight: 10, paddingBottom: 10  },
+        headerTitle: () => <Header title="Kehad" />,
+        headerRightContainerStyle: { paddingRight: 10, paddingBottom: 10 },
         headerRight: ({ tintColor }) => (
           <IconButton
-            icon="menu"
+            icon="dots-vertical"
             size={40}
             color={tintColor}
             onPress={() => {
@@ -127,6 +127,7 @@ function BottomTabsNavigator() {
       <BottomTabs.Screen
         name="HomeScreen"
         component={HomeScreen}
+        headerShown={true}
         options={{
           title: "Home",
           tabBarLabel: "Home",
@@ -139,32 +140,21 @@ function BottomTabsNavigator() {
         name="SkillsScreen"
         component={SkillsScreen}
         options={{
-          title: "Skills",
+          headerTitle: <Header title="Skills" />,
+          title: <Header title="Skills" />,
           tabBarLabel: "Skills",
           tabBarIcon: ({ color, size }) => (
-            // <Entypo name="graduation-cap" size={size} color={color} />
             <Ionicons name="medal" size={size} color={color} />
-            // <MaterialIcons name="school" size={size} color={color} />
-            // <FontAwesome name="graduation-cap" size={size} color={color} />
           ),
         }}
       />
-      {/* <BottomTabs.Screen
-        name="WorksScreen"
-        component={WorksScreen}
-        options={{
-          title: "Works",
-          tabBarLabel: "Works",
-          tabBarIcon: ({ color, size }) => (
-            <MaterialIcons name="work" size={size} color={color} />
-          ),
-        }}
-      /> */}
+
       <BottomTabs.Screen
         name="Works"
         component={StackNavigator}
         options={{
-          title: "Works",
+          headerTitle: <Header title="Works" />,
+          title: <Header title="Works" />,
           tabBarLabel: "Works",
           tabBarIcon: ({ color, size }) => (
             <MaterialIcons name="work" size={size} color={color} />
@@ -175,7 +165,8 @@ function BottomTabsNavigator() {
         name="Projects"
         component={StackNavigator2}
         options={{
-          title: "Projects",
+          headerTitle: <Header title="Projects" />,
+          title: <Header title="Projects" />,
           tabBarLabel: "Projects",
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="layers" size={size} color={color} />
@@ -186,7 +177,8 @@ function BottomTabsNavigator() {
         name="AboutScreen"
         component={AboutScreen}
         options={{
-          title: "About",
+          headerTitle: <Header title="About" />,
+          title: <Header title="About" />,
           tabBarLabel: "About",
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="person" size={size} color={color} />
@@ -197,7 +189,8 @@ function BottomTabsNavigator() {
         name="ContactScreen"
         component={ContactScreen}
         options={{
-          title: "Contact",
+          headerTitle: <Header title="Contact" />,
+          title: <Header title="Contact" />,
           tabBarLabel: "Contact",
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="mail" size={size} color={color} />
@@ -211,7 +204,7 @@ function BottomTabsNavigator() {
 export default function App() {
   return (
     <>
-      <StatusBar style="light" />
+      <StatusBar style="auto" />
 
       <NavigationContainer>
         <BottomTabsNavigator />

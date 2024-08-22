@@ -15,7 +15,7 @@ function HomeScreen() {
   
   return (
     <View style={styles.container}>
-      <Title>About me</Title>
+      {/* <Title>About me</Title> */}
       <ScrollView>
         <Text
           style={styles.paragraph}

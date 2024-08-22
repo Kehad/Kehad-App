@@ -9,7 +9,7 @@ import WorksList from "../components/Works/WorksList";
 function WorksScreen() {
   return (
     <View style={styles.container}>
-      <Title>Works</Title>
+      {/* <Title>Works</Title> */}
       
       <WorksList />
       
@@ -21,9 +21,9 @@ export default WorksScreen;
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: GlobalStyles.colors.white,
+    // backgroundColor: GlobalStyles.colors.white,
     flex: 1,
-    // padding: 24,
+    padding: 24,
   },
   headerHead: {
     marginBottom: 4,

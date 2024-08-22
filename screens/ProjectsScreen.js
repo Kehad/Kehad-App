@@ -9,7 +9,7 @@ import ProjectsList from "../components/Projects/ProjectsList";
 function ProjectsScreen() {
   return (
     <View style={styles.container}>
-      <Title>Projects</Title>
+      {/* <Title>Projects</Title> */}
 
       <ProjectsList />
     </View>

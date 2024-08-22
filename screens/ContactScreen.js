@@ -34,7 +34,7 @@ function ContactScreen() {
 
   return (
     <View style={styles.container}>
-      <Title>Hello</Title>
+      {/* <Title>Hello</Title> */}
       <ScrollView>
         <Text style={styles.text}>
           Looking to start a project and need that magical touch?{"\n"} {"\n"}{" "}

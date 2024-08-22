@@ -7,26 +7,29 @@ import IconButton from "../Buttons/IconButton";
 const ModalDownload = ({ isModalVisible }) => {
   return (
     <View style={styles.centeredView}>
-      <Modal animationType="slide" transparent={true} visible={true}>
-        <View style={styles.centeredView}>
-          <View style={styles.modalView}>
-            <View style={styles.button}>
-              <PrimaryButton>Download Image</PrimaryButton>
-            </View>
-            <View style={styles.button}>
-              <PrimaryButton>Download PDF</PrimaryButton>
-            </View>
-            <Pressable
-              style={styles.buttonOpen}
-              onPress={() => isModalVisible(false)}
-            >
-              <IconButton
-                icon="close-circle-outline" // close-circle, close
-                size={48}
-                color={GlobalStyles.colors.primary50}
-                onPress={() => isModalVisible(false)}
-              />
-            </Pressable>
+      <Modal animationType="fade" transparent={true} visible={true}>
+        <View style={styles.backdrop}>
+          <View style={styles.centeredView}>
+        
+              <View style={styles.modalView}>
+                <View style={styles.button}>
+                  <PrimaryButton>Download Image</PrimaryButton>
+                </View>
+                <View style={styles.button}>
+                  <PrimaryButton>Download PDF</PrimaryButton>
+                </View>
+                <Pressable
+                  style={styles.buttonOpen}
+                  onPress={() => isModalVisible(false)}
+                >
+                  <IconButton
+                    icon="close-circle-outline" // close-circle, close
+                    size={48}
+                    color={GlobalStyles.colors.primary50}
+                    onPress={() => isModalVisible(false)}
+                  />
+                </Pressable>
+              </View>
           </View>
         </View>
       </Modal>
@@ -60,6 +63,13 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
     elevation: 5,
   },
+  backdrop: {
+    marginTop: 51,
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "rgba(0, 0, 0, 0.5)", // This gives the semi-transparent backdrop
+  },
   button: {
     padding: 10,
     borderRadius: 20,
@@ -70,5 +80,5 @@ const styles = StyleSheet.create({
   buttonOpen: {
     marginTop: 20,
     alignSelf: "center",
-  }
+  },
 });

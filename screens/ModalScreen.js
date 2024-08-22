@@ -29,7 +29,6 @@ function ModalScreen() {
     });
   }, []);
   const openLink = async () => {
-    console.log(website);
     const url = ModalData.website; // Replace with your URL
 
     try {

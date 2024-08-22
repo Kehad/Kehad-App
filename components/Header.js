@@ -1,11 +1,11 @@
 import { Image, Text , View, StyleSheet } from 'react-native'
 import { GlobalStyles } from '../constants/styles';
 
-function Header() {
+function Header({title}) {
   return (
     <View>
       {/* <Image source={require('.') } /> */}
-      <Text style={styles.headerText}>Kehad</Text>
+      <Text style={styles.headerText}>{title}</Text>
     </View>
   )
 }

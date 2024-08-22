@@ -3,6 +3,7 @@ import { Button, Pressable, StyleSheet, Text, View } from "react-native";
 // import { Ionicons } from "@expo/vector-icons";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { GlobalStyles } from "../../constants/styles";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 function IconButton({ icon, color, size, onPress, children }) {
 
@@ -13,7 +14,7 @@ function IconButton({ icon, color, size, onPress, children }) {
     >
       <View style={styles.buttonContainer}>
         <Text>{children}</Text>
-        <Ionicons name={icon} color={color} size={size} />
+        <MaterialCommunityIcons name={icon} color={color} size={size} />
       </View>
     </Pressable>
   );

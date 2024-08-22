@@ -105,6 +105,7 @@ function SkillsScreen() {
           data={itemList}
           keyExtractor={(item) => item.id}
           renderItem={renderSkillsItem}
+          scrollEnabled={false}
         />
         <View style={styles.button}>
           {/* <PrimaryButton icon="jdh">Download CV</PrimaryButton>

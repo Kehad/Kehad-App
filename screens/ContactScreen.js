@@ -1,4 +1,12 @@
-import { Text, View, TextInput, StyleSheet, Modal, Pressable } from "react-native";
+import {
+  Text,
+  View,
+  TextInput,
+  StyleSheet,
+  Modal,
+  Pressable,
+  ScrollView,
+} from "react-native";
 import * as Linking from "expo-linking";
 
 import SocialLinks from "../components/UI/SocialLinks";
@@ -9,8 +17,7 @@ import { useState } from "react";
 
 function ContactScreen() {
   const openLink = async () => {
-
-    const url = 'mailto:keahnney01@gmail.com'; // Replace with your URL
+    const url = "mailto:keahnney01@gmail.com"; // Replace with your URL
 
     try {
       const supported = await Linking.canOpenURL(url);
@@ -28,40 +35,46 @@ function ContactScreen() {
   return (
     <View style={styles.container}>
       <Title>Hello</Title>
-      <Text style={styles.text}>
-        Looking to start a project and need that magical touch?
-        <Text onPress={openLink} style={styles.span}>
-          React out!!!
+      <ScrollView>
+        <Text style={styles.text}>
+          Looking to start a project and need that magical touch?{"\n"} {"\n"}{" "}
+          I'm here to help! Expertise in coding, app development, and React.
+          Building stunning mobile apps for iOS and Android. Crafting responsive
+          frontends and scalable backends. Integrating React Native and Expo for
+          cutting-edge results.
+          <Text onPress={openLink} style={styles.span}>
+            React out!!!
+          </Text>
         </Text>
-      </Text>
-      <View style={styles.form}>
-        <View style={styles.textBox}>
-          <TextInput
-            placeholder="name"
-            style={styles.textInput}
-            placeholderTextColor={GlobalStyles.colors.primary50}
-          />
-          <TextInput
-            placeholder="email"
-            style={styles.textInput}
-            placeholderTextColor={GlobalStyles.colors.primary50}
-          />
-        </View>
-        <View style={styles.messageBox}>
-          <TextInput
-            placeholder="your message"
-            multiline
-            placeholderTextColor={GlobalStyles.colors.primary50}
-            style={styles.messageInput}
-          />
-        </View>
-        <View style={styles.socialsBox}>
-          <SocialLinks />
-          <View style={styles.buttonBox}>
-            <PrimaryButton>send</PrimaryButton>
+        <View style={styles.form}>
+          <View style={styles.textBox}>
+            <TextInput
+              placeholder="name"
+              style={styles.textInput}
+              placeholderTextColor={GlobalStyles.colors.primary50}
+            />
+            <TextInput
+              placeholder="email"
+              style={styles.textInput}
+              placeholderTextColor={GlobalStyles.colors.primary50}
+            />
+          </View>
+          <View style={styles.messageBox}>
+            <TextInput
+              placeholder="your message"
+              multiline
+              placeholderTextColor={GlobalStyles.colors.primary50}
+              style={styles.messageInput}
+            />
+          </View>
+          <View style={styles.socialsBox}>
+            <SocialLinks />
+            <View style={styles.buttonBox}>
+              <PrimaryButton>send</PrimaryButton>
+            </View>
           </View>
         </View>
-      </View>
+      </ScrollView>
     </View>
   );
 }
@@ -79,6 +92,7 @@ const styles = StyleSheet.create({
   },
   span: {
     color: GlobalStyles.colors.primary50,
+    fontWeight: "bold",
   },
   form: {
     width: "100%",
@@ -114,7 +128,7 @@ const styles = StyleSheet.create({
     color: GlobalStyles.colors.primary50,
     textAlign: "auto",
     textAlignVertical: "top",
-    flexWrap: 'wrap'
+    flexWrap: "wrap",
   },
   socialsBox: {
     flexDirection: "row",

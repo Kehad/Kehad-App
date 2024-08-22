@@ -14,7 +14,7 @@ function HomeScreen() {
   }
 
   function hireMeHandler() {
-    navigation.navigate("AboutScreen");
+    navigation.navigate("ContactScreen");
   }
 
   return (

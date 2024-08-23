@@ -10,7 +10,7 @@ const ToggleMode = ({ isModalVisible }) => {
   const dispatch = useDispatch();
   const themes = useSelector((state) => state.theme.theme)
 
-  const { colorScheme, toggleColorScheme } = useColorScheme();
+  // const { colorScheme, toggleColorScheme } = useColorScheme();
     const systemColorScheme = useColorScheme(); // 'light' or 'dark'
     // console.log(systemColorScheme)
 

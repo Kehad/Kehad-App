@@ -6,12 +6,15 @@ import SocialLinks from "../components/UI/SocialLinks";
 import PrimaryButton from "../components/Buttons/PrimaryButton";
 import { GlobalStyles } from "../constants/styles";
 import { useColorScheme } from "nativewind";
+import { useSelector } from "react-redux";
 
 function AboutScreen() {
-    const { colorScheme, toggleColorScheme } = useColorScheme();
+  const { colorScheme, toggleColorScheme } = useColorScheme();
+  const themes = useSelector((state) => state.theme.theme);
+  
   const navigation =  useNavigation();
   console.log('About');
-  console.log(colorScheme);
+  console.log(themes);
   console.log("About");
 
     function hireMeHandler() {
@@ -19,7 +22,7 @@ function AboutScreen() {
   }
   
   return (
-    <View style={colorScheme ? styles.container : styles.darkmode}>
+    <View style={themes === 'dark' ? styles.container : styles.darkmode}>
       {/* <Title>About me</Title> */}
       <ScrollView>
         <Text

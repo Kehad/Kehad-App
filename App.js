@@ -1,9 +1,12 @@
-import { StatusBar } from "expo-status-bar";
+import { useState } from "react";
+import { StyleSheet, View } from "react-native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from "@react-navigation/native";
+import { StatusBar } from "expo-status-bar";
 import { Foundation, Ionicons } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
+import { useColorScheme } from "nativewind";
 
 import HomeScreen from "./screens/HomeScreen";
 import SkillsScreen from "./screens/SkillsScreen";
@@ -11,13 +14,12 @@ import WorksScreen from "./screens/WorksScreen";
 import ProjectsScreen from "./screens/ProjectsScreen";
 import AboutScreen from "./screens/AboutScreen";
 import ContactScreen from "./screens/ContactScreen";
-import { GlobalStyles } from "./constants/styles";
 import IconButton from "./components/Buttons/IconButton";
 import Header from "./components/UI/Header";
 import ModalScreen from "./screens/ModalScreen";
 import ToggleMode from "./components/UI/ToggleMode";
-import { useState } from "react";
-import { StyleSheet, View } from "react-native";
+import { GlobalStyles } from "./constants/styles";
+import NativeScreen from "./screens/NativeScreen";
 
 const Stack = createNativeStackNavigator();
 const BottomTabs = createBottomTabNavigator();
@@ -66,11 +68,11 @@ function StackNavigator2() {
 
 function BottomTabsNavigator() {
   const [modalVisible, setModalVisible] = useState(false);
-  console.log(modalVisible);
+    const { colorScheme, toggleColorScheme } = useColorScheme();
 
   function showModalHandler(isModalVisible) {
-    setModalVisible(isModalVisible);
-    console.log(modalVisible);
+    // setModalVisible(isModalVisible); // use this if you want to hide the modal when a button is clicked in the toggleMode component
+    setModalVisible(!modalVisible); //
   }
   return (
     <BottomTabs.Navigator
@@ -82,37 +84,18 @@ function BottomTabsNavigator() {
         tabBarInactiveTintColor: GlobalStyles.colors.textBlack,
         headerTitle: () => <Header title="Kehad" />,
         headerRightContainerStyle: { paddingRight: 10, paddingBottom: 10 },
-        headerRight: ({ tintColor }) => (
+        // headerRight: () => {
+        //   modalVisible && <ToggleMode isModalVisible={showModalHandler} />;
+        // },
+        headerRight: () => (
           <View style={styles.menu}>
-            {/* {!modalVisible && <ToggleMode isModalVisible={showModalHandler} />} */}
-
-            <View style={styles.toggleIcon}>
-              <View style={styles.sun}>
-
-                <IconButton
-                  iconTitle="Feather"
-                  iconName="sun"
-                  iconSize={24}
-                  iconColor="black"
-                  // onPress={() => isModalVisible(false)}
-                  />
-                  </View>
-              <View style={styles.moon}>
-                <IconButton
-                  iconTitle="Ionicons"
-                  iconName="moon"
-                  iconSize={24}
-                  iconColor="black"
-                />
-              </View>
-            </View>
+            {modalVisible && <ToggleMode isModalVisible={showModalHandler} />}
             <IconButton
               iconName="dots-vertical"
               iconTitle="MaterialCommunityIcons"
               iconSize={40}
-              iconColor={tintColor}
+              iconColor="black"
               onPress={() => {
-                // navigation.navigate("ContactScreen");
                 showModalHandler(true);
               }}
             />
@@ -193,6 +176,18 @@ function BottomTabsNavigator() {
           ),
         }}
       />
+      <BottomTabs.Screen
+        name="NativeScreen"
+        component={NativeScreen}
+        options={{
+          headerTitle: <Header title="Native" />,
+          title: <Header title="Native" />,
+          tabBarLabel: "Native",
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="mail" size={size} color={color} />
+          ),
+        }}
+      />
     </BottomTabs.Navigator>
   );
 }
@@ -200,35 +195,9 @@ function BottomTabsNavigator() {
 const styles = StyleSheet.create({
   menu: {
     flexDirection: "row",
-    gap: 20,
-    // alignItems: 'flex-start',
+    // gap: ,
     justifyContent: "space-between",
-    // flex: 1,
   },
-  toggleIcon: {
-    flexDirection: "row",
-    // gap: 20,
-    width: 100,
-    justifyContent: "space-between",
-    // flex: 1,
-    padding: 10,
-    alignItems: "center",
-    backgroundColor: "red",
-    borderBottomLeftRadius: 0,
-    borderTopLeftRadius: 0,
-  },
-  moon: {
-    backgroundColor: GlobalStyles.colors.primary50,
-    alignItems: "center",
-    justifyContent: "center",
-    borderRadius: 10,
-    padding: 1,
-    width: "50%",
-  },
-  sun: {
-    backgroundColor: 'blue'
-  }
-  
 });
 
 export default function App() {

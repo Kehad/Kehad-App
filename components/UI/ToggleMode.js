@@ -1,46 +1,61 @@
-import { Alert, Modal, StyleSheet, Text, Pressable, View } from "react-native";
+import { Modal, StyleSheet, Pressable, View } from "react-native";
+import { useState } from 'react'
 import { GlobalStyles } from "../../constants/styles";
-import PrimaryButton from "../Buttons/PrimaryButton";
-import { Ionicons, Feather } from "@expo/vector-icons";
 import IconButton from "../Buttons/IconButton";
+import { useColorScheme } from "nativewind";
 
 const ToggleMode = ({ isModalVisible }) => {
-    // console.log("Toggle mode");
-    // console.log(isModalVisible)
+  const { colorScheme, toggleColorScheme } = useColorScheme();
+    const systemColorScheme = useColorScheme(); // 'light' or 'dark'
+    // console.log(systemColorScheme)
+    // Track the color scheme, initially following the system setting
+  const [theme, setTheme] = useState(systemColorScheme);
+  // console.log("before changing");
+  // console.log(theme);
+
+    // Function to switch to light mode manually
+    const switchToLightMode = () => {
+      setTheme("light");
+      // console.log(theme)
+    };
+
+    // Function to switch to dark mode manually
+    const switchToDarkMode = () => {
+      setTheme("dark");
+      // console.log(theme)
+    };
+
+  // console.log('after changing');
+  // console.log(theme);
+
+
   return (
-    <View style={styles.centeredView}>
-      <Modal animationType="fade" transparent={true} visible={true}>
-        {/* <View style={styles.backdrop}> */}
-          {/* <View style={styles.centeredView}> */}
-            <View style={styles.modalView}>
-              {/* <Text>Toggle Mode</Text> */}
-              <Pressable
-                style={styles.buttonOpen}
-                onPress={() => isModalVisible(false)}
-              >
-                <IconButton
-                  iconTitle="Ionicons"
-                  iconName="moon"
-                  iconSize={36}
-                  iconColor="black"
-                />
-              </Pressable>
-              <Pressable
-                style={styles.buttonOpen}
-                onPress={() => isModalVisible(false)}
-              >
-                <IconButton
-                  iconTitle="Feather"
-                  iconName="sun"
-                  iconSize={36}
-                  iconColor="black"
-                  onPress={() => isModalVisible(false)}
-                />
-              </Pressable>
-            </View>
-          {/* </View> */}
-        {/* </View> */}
-      </Modal>
+    <View style={styles.toggleIcon}>
+      <View style={styles.sun}>
+        <Pressable>
+          <IconButton
+            iconTitle="Feather"
+            iconName="sun"
+            iconSize={24}
+            iconColor="black"
+            // onPress={() => isModalVisible(false)}
+            onPress={switchToLightMode}
+          />
+        </Pressable>
+      </View>
+      <View style={styles.moon}>
+        <View style={styles.moonView}>
+          <Pressable>
+            <IconButton
+              iconTitle="Ionicons"
+              iconName="moon"
+              iconSize={24}
+              iconColor="black"
+              onPress={switchToDarkMode}
+            />
+          </Pressable>
+        </View>
+      </View>
     </View>
   );
 };
@@ -50,44 +65,42 @@ const ToggleMode = ({ isModalVisible }) => {
 export default ToggleMode;
 
 const styles = StyleSheet.create({
-  centeredView: {
-    // flex: 1,
-    // justifyContent: "center",
-    // alignItems: "center",
-    // marginTop: 22,
-  },
-  modalView: {
-    // width: 300,
-    // height: 200,
-    // margin: 20,
-    // borderRadius: 20,
-    // padding: 15,
-    // backgroundColor: "white",
-      // alignItems: "center",
-    //   alignSelf: 'flex-end',
+  toggleIcon: {
     flexDirection: "row",
-      shadowColor: "#000",
-    gap:12,
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    // marginRight: 40,
-    shadowOpacity: 0.25,
-    shadowRadius: 4,
-    elevation: 5,
-      width: 'max-width',
-    
-    },
-  backdrop: {
-    marginTop: 51,
-    flex: 1,
-    // justifyContent: "center",
-    // alignItems: "center",
-    backgroundColor: "rgba(0, 0, 0, 0.5)", // This gives the semi-transparent backdrop
+    // gap: 20,
+    width: 120,
+    justifyContent: "space-between",
+    // flex: 1,
+    // padding: 10,
+    alignItems: "center",
+    borderColor: GlobalStyles.colors.primary50,
+    borderWidth: 2,
+    borderRadius: 20,
   },
-  buttonOpen: {
-    // marginTop: 20,
-    alignSelf: "center",
+  moon: {
+    alignItems: "center",
+    justifyContent: "center",
+    height: "100%",
+    borderBottomLeftRadius: 0,
+    borderTopLeftRadius: 0,
+    width: "50%",
+    borderRadius: 20,
+  },
+  moonView: {
+    borderRadius: 20,
+    padding: 3,
+    backgroundColor: GlobalStyles.colors.primary50,
+    height: "min-height",
+  },
+  sun: {
+    borderRadius: 20,
+    borderBottomRightRadius: 0,
+    backgroundColor: GlobalStyles.colors.primary50,
+
+    borderTopRightRadius: 0,
+    width: "50%",
+    height: "100%",
+    alignItems: "center",
+    justifyContent: "center",
   },
 });

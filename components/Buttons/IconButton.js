@@ -6,7 +6,9 @@ import {
   FontAwesome6,
   Fontisto,
   MaterialCommunityIcons,
-  Feather
+  Feather,
+  AntDesign,
+  Entypo
 } from "@expo/vector-icons";
 
 function IconButton({
@@ -16,7 +18,7 @@ function IconButton({
   iconColor,
   iconTitle,
 }) {
-  console.log(iconTitle, iconName, iconSize, iconColor,);
+  // console.log(iconTitle, iconName, iconSize, iconColor,);
   let content = "";
   if (iconTitle === "FontAwesome6") {
     content = (
@@ -27,7 +29,11 @@ function IconButton({
   } else if (iconTitle === "Fontisto") {
     content = <Fontisto name={iconName} size={iconSize} color={iconColor} />; // Replace Fontisto with FontAwesome6 if you want to use FontAwesome6 instead.  // Fontisto is a free alternative to FontAwesome.
   } else if (iconTitle === "Feather") {
-    content = <Fontisto name={iconName} size={iconSize} color={iconColor} />; // Replace Fontisto with FontAwesome6 if you want to use FontAwesome6 instead.  // Fontisto is a free alternative to FontAwesome.
+    content = <Feather name={iconName} size={iconSize} color={iconColor} />; 
+  } else if (iconTitle === "Entypo") {
+    content = <Entypo name={iconName} size={iconSize} color={iconColor} />; 
+  } else if (iconTitle === "AntDesign") {
+    content = <AntDesign name={iconName} size={iconSize} color={iconColor} />; 
   } else if (iconTitle === "MaterialCommunityIcons") {
     content = (
       <MaterialCommunityIcons
@@ -55,9 +61,6 @@ export default IconButton;
 const styles = StyleSheet.create({
   buttonContainer: {
     borderRadius: 24,
-    // padding: 6,
-    // marginHorizontal: 8,
-    // marginVertical: 2,
   },
   pressed: {
     opacity: 0.75,

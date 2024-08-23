@@ -1,7 +1,7 @@
-import { Pressable, StyleSheet, View } from "react-native";
-import * as Linking from "expo-linking";
-import { AntDesign, Entypo, FontAwesome6 } from "@expo/vector-icons";
+import {  StyleSheet, View } from "react-native";
+import { openBrowserAsync } from "expo-web-browser";
 
+import IconButton from "../Buttons/IconButton";
 import { GlobalStyles } from "../../constants/styles";
 
 const SocialLinks = function () {
@@ -16,13 +16,15 @@ const SocialLinks = function () {
     const url = website; // Replace with your URL
 
     try {
-      const supported = await Linking.canOpenURL(url);
+      // const supported = await Linking.canOpenURL(url);
+      const supported = await openBrowserAsync(url);
+      console.log(supported)
 
-      if (supported) {
-        await Linking.openURL(url);
-      } else {
-        Alert.alert(`Don't know how to open this URL: ${url}`);
-      }
+      // if (supported) {
+      //   // await Linking.openURL(url);
+      // } else {
+      //   // Alert.alert(`Don't know how to open this URL: ${url}`);
+      // }
     } catch (error) {
       console.log(error);
     }
@@ -31,27 +33,27 @@ const SocialLinks = function () {
   return (
     <View className="">
       <View style={styles.iconContainer}>
-        <Pressable onPress={() => openLink(AppLinks.linkedIn)}>
-          <Entypo
-            name="linkedin"
-            size={24}
-            color={GlobalStyles.colors.primary50}
-          />
-        </Pressable>
-        <Pressable onPress={() => openLink(AppLinks.github)}>
-          <AntDesign
-            name="github"
-            size={24}
-            color={GlobalStyles.colors.primary50}
-          />
-        </Pressable>
-        <Pressable onPress={() => openLink(AppLinks.twitter)}>
-          <FontAwesome6
-            name="x-twitter"
-            size={24}
-            color={GlobalStyles.colors.primary50}
-          />
-        </Pressable>
+        <IconButton
+          iconTitle="Entypo"
+          iconName="linkedin"
+          iconSize={24}
+          iconColor={GlobalStyles.colors.primary50}
+          onPress={() => openLink(AppLinks.linkedIn)}
+        />
+        <IconButton
+          iconTitle="AntDesign"
+          iconName="github"
+          iconSize={24}
+          iconColor={GlobalStyles.colors.primary50}
+          onPress={() => openLink(AppLinks.github)}
+        />
+        <IconButton
+          iconTitle="FontAwesome6"
+          iconName="x-twitter"
+          iconSize={24}
+          iconColor={GlobalStyles.colors.primary50}
+          onPress={() => openLink(AppLinks.twitter)}
+        />
       </View>
     </View>
   );

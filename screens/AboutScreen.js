@@ -5,16 +5,21 @@ import Title from "../components/UI/Title";
 import SocialLinks from "../components/UI/SocialLinks";
 import PrimaryButton from "../components/Buttons/PrimaryButton";
 import { GlobalStyles } from "../constants/styles";
+import { useColorScheme } from "nativewind";
 
 function HomeScreen() {
+    const { colorScheme, toggleColorScheme } = useColorScheme();
   const navigation =  useNavigation();
+  console.log('About')
+  console.log(colorScheme)
+  console.log("About");
 
     function hireMeHandler() {
       navigation.navigate("ContactScreen");
   }
   
   return (
-    <View style={styles.container}>
+    <View style={colorScheme ? styles.container : styles.darkmode}>
       {/* <Title>About me</Title> */}
       <ScrollView>
         <Text
@@ -80,5 +85,10 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     flex: 1,
+  },
+  darkmode: {
+    backgroundColor: "black",
+    flex: 1,
+    padding: 24,
   },
 });

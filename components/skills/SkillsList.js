@@ -1,8 +1,7 @@
 import { StyleSheet, Text, View } from "react-native";
-import { GlobalStyles } from "../../constants/styles";
 
-import IconNameButton from "../Buttons/IconNameButton";
 import IconButton from "../Buttons/IconButton";
+import { GlobalStyles } from "../../constants/styles";
 
 const SkillsList = function ({
   name,
@@ -11,28 +10,18 @@ const SkillsList = function ({
   iconSize,
   iconColor,
 }) {
-  console.log(iconTitle, iconName, iconSize, iconColor);
-  let content = '';
-  if (iconTitle === 'FontAwesome6') {
-    content = <IconButton iconTitle={iconTitle} iconName={iconName} iconSize={iconSize} iconColor={iconColor} />;
-  } else if (iconTitle === 'Ionicons') {
-    content = <IconButton iconTitle={iconTitle} iconName={iconName} iconSize={iconSize} iconColor={iconColor} />; 
-  } else if (iconTitle === 'Fontisto') {
-    content = <IconButton iconTitle={iconTitle} iconName={iconName} iconSize={iconSize} iconColor={iconColor} />;  // Replace Fontisto with FontAwesome6 if you want to use FontAwesome6 instead.  // Fontisto is a free alternative to FontAwesome.
-  } else if (iconTitle === "MaterialCommunityIcons") {
-    content = (
-      <IconButton iconTitle={iconTitle} iconName={iconName} iconSize={iconSize} iconColor={iconColor} />
-    );
-  }
-  console.log(content);
+  
     return (
       <View style={styles.container}>
         <View style={styles.box}>
           <Text style={styles.iconText}>{name}</Text>
-          <View>{content}</View>
-          
+          <IconButton
+            iconTitle={iconTitle}
+            iconName={iconName}
+            iconSize={iconSize}
+            iconColor={iconColor}
+          />
         </View>
-     
       </View>
     );
 };

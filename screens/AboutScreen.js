@@ -7,11 +7,11 @@ import PrimaryButton from "../components/Buttons/PrimaryButton";
 import { GlobalStyles } from "../constants/styles";
 import { useColorScheme } from "nativewind";
 
-function HomeScreen() {
+function AboutScreen() {
     const { colorScheme, toggleColorScheme } = useColorScheme();
   const navigation =  useNavigation();
-  console.log('About')
-  console.log(colorScheme)
+  console.log('About');
+  console.log(colorScheme);
   console.log("About");
 
     function hireMeHandler() {
@@ -59,7 +59,7 @@ function HomeScreen() {
   );
 }
 
-export default HomeScreen;
+export default AboutScreen;
 
 const styles = StyleSheet.create({
   container: {

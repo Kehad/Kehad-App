@@ -3,30 +3,31 @@ import { useState } from 'react'
 import { GlobalStyles } from "../../constants/styles";
 import IconButton from "../Buttons/IconButton";
 import { useColorScheme } from "nativewind";
+import { useDispatch, useSelector } from "react-redux";
+import { setDarkMode, setLightMode } from "../../store/themeSlice";
 
 const ToggleMode = ({ isModalVisible }) => {
+  const dispatch = useDispatch();
+  const themes = useSelector((state) => state.theme.theme)
+
   const { colorScheme, toggleColorScheme } = useColorScheme();
     const systemColorScheme = useColorScheme(); // 'light' or 'dark'
     // console.log(systemColorScheme)
-    // Track the color scheme, initially following the system setting
+
+  // Create state for the theme, defaulting to the system color scheme
   const [theme, setTheme] = useState(systemColorScheme);
-  // console.log("before changing");
-  // console.log(theme);
 
-    // Function to switch to light mode manually
-    const switchToLightMode = () => {
-      setTheme("light");
-      // console.log(theme)
-    };
+  // Function to switch to light mode
+  const switchToLightMode = () => {
+    setTheme("light");
+    dispatch(setLightMode())
+  };
 
-    // Function to switch to dark mode manually
-    const switchToDarkMode = () => {
-      setTheme("dark");
-      // console.log(theme)
-    };
-
-  // console.log('after changing');
-  // console.log(theme);
+  // Function to switch to dark mode
+  const switchToDarkMode = () => {
+    setTheme("dark");
+    dispatch(setDarkMode())
+  };
 
 
   return (

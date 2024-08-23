@@ -20,6 +20,8 @@ import ModalScreen from "./screens/ModalScreen";
 import ToggleMode from "./components/UI/ToggleMode";
 import { GlobalStyles } from "./constants/styles";
 import NativeScreen from "./screens/NativeScreen";
+import { Provider } from "react-redux";
+import store from "./store/store";
 
 const Stack = createNativeStackNavigator();
 const BottomTabs = createBottomTabNavigator();
@@ -75,6 +77,8 @@ function BottomTabsNavigator() {
     setModalVisible(!modalVisible); //
   }
   return (
+        <Provider store={store}>
+
     <BottomTabs.Navigator
       screenOptions={({ route }) => ({
         headerStyle: { backgroundColor: GlobalStyles.colors.white },
@@ -188,7 +192,9 @@ function BottomTabsNavigator() {
           ),
         }}
       />
-    </BottomTabs.Navigator>
+      </BottomTabs.Navigator>
+        </Provider>
+      
   );
 }
 
@@ -206,7 +212,7 @@ export default function App() {
       <StatusBar style="auto" />
 
       <NavigationContainer>
-        <BottomTabsNavigator />
+          <BottomTabsNavigator />
       </NavigationContainer>
     </>
   );

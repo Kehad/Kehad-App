@@ -56,45 +56,39 @@
 import React, { useState } from "react";
 import { View, Text, Button, useColorScheme } from "react-native";
 import tw from "tailwind-react-native-classnames";
+import { useSelector } from "react-redux";
 
 const MyComponent = () => {
-  // Get the system's initial color scheme
-  const systemColorScheme = useColorScheme(); // 'light' or 'dark'
+  const themes = useSelector((state) => state.theme.theme)
 
-  // // Track the color scheme, initially following the system setting
+
+  const systemColorScheme = useColorScheme();
+
+  // Create state for the theme, defaulting to the system color scheme
   const [theme, setTheme] = useState(systemColorScheme);
-  console.log(theme)
-  console.log("before changing");
-  // // Function to switch to light mode manually
+
+  // Function to switch to light mode
   const switchToLightMode = () => {
     setTheme("light");
-      console.log(theme);
-
   };
 
-  // Function to switch to dark mode manually
+  // Function to switch to dark mode
   const switchToDarkMode = () => {
     setTheme("dark");
-      console.log(theme);
-
   };
-   console.log('after changing');
-  console.log(theme);
-  // const { colorScheme, toggleColorScheme } = useColorScheme();
-  // console.log(colorScheme)
 
   return (
     <View
       style={tw`${
-        theme === "dark" ? "bg-gray-900" : "bg-white"
+        themes === "dark" ? "bg-gray-900" : "bg-white"
       } flex-1 justify-center items-center`}
     >
       <Text
         style={tw`${
-          theme === "dark" ? "text-white" : "text-black"
+          themes === "dark" ? "text-white" : "text-black"
         } text-lg mb-4`}
       >
-        {theme === "dark" ? "Dark Mode" : "Light Mode"}
+        {themes === "dark" ? "Dark Mode" : "Light Mode"}
       </Text>
 
       {/* Button to switch to Light Mode */}

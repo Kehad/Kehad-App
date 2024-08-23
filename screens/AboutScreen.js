@@ -11,22 +11,20 @@ import { useSelector } from "react-redux";
 function AboutScreen() {
   const { colorScheme, toggleColorScheme } = useColorScheme();
   const themes = useSelector((state) => state.theme.theme);
+   const isDarkMode = themes === "dark";
   
   const navigation =  useNavigation();
-  console.log('About');
-  console.log(themes);
-  console.log("About");
 
     function hireMeHandler() {
       navigation.navigate("ContactScreen");
   }
   
   return (
-    <View style={themes === 'dark' ? styles.container : styles.darkmode}>
+    <View style={[!isDarkMode ? styles.lightMode : styles.darkMode, styles.container]}>
       {/* <Title>About me</Title> */}
       <ScrollView>
         <Text
-          style={styles.paragraph}
+          style={[!isDarkMode ? styles.lightMode : styles.darkModeText, styles.paragraph]}
           textBreakStrategy="simple"
           lineBreakStrategyIOS="standard"
         >
@@ -66,7 +64,6 @@ export default AboutScreen;
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: GlobalStyles.colors.white100,
     flex: 1,
     padding: 24,
   },
@@ -78,7 +75,6 @@ const styles = StyleSheet.create({
   },
   paragraph: {
     fontSize: 20,
-    color: GlobalStyles.colors.textBlack,
     lineHeight: 30,
     fontWeight: "400",
   },
@@ -89,9 +85,16 @@ const styles = StyleSheet.create({
   buttonContainer: {
     flex: 1,
   },
-  darkmode: {
-    backgroundColor: "black",
-    flex: 1,
-    padding: 24,
+  darkMode: {
+    backgroundColor: GlobalStyles.colors.textBlack,
+  },
+  darkModeText: {
+    color: GlobalStyles.colors.white,
+  },
+  lightMode: {
+    backgroundColor: GlobalStyles.colors.white100,
+  },
+  lightModeText: {
+    color: GlobalStyles.colors.textBlack,
   },
 });

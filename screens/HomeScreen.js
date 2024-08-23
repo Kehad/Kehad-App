@@ -5,8 +5,12 @@ import SecondaryButton from "../components/Buttons/SecondaryButton";
 import SocialLinks from "../components/UI/SocialLinks";
 import Title from "../components/UI/Title";
 import { useNavigation } from "@react-navigation/native";
+import { useSelector } from "react-redux";
 
 function HomeScreen() {
+  const themes = useSelector((state) => state.theme.theme);
+  const isDarkMode = themes === "dark";
+
   const navigation = useNavigation();
 
   function aboutMeHandler() {
@@ -18,10 +22,19 @@ function HomeScreen() {
   }
 
   return (
-    <View style={styles.container}>
+    <View
+      style={[
+        isDarkMode ? styles.darkMode : styles.lightMode,
+        styles.container,
+      ]}
+    >
       <Title>Hi.</Title>
-      <Text style={styles.name}>I'm Kehinde Adigun</Text>
-      <Text style={styles.paragraph}>
+      <Text
+        style={[isDarkMode ? styles.darkModeText : styles.lightModeText, styles.name]}
+      >
+        I'm Kehinde Adigun
+      </Text>
+      <Text style={[isDarkMode ? styles.darkModeText : styles.lightModeText, styles.paragraph]}>
         I am a web developer with over 5 years of experience, specializing in
         creating dynamic and responsive web applications. Currently, I am on a
         journey to become a full stack and mobile app developer, expanding my
@@ -46,12 +59,11 @@ export default HomeScreen;
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: GlobalStyles.colors.white100,
     flex: 1,
     padding: 24,
     paddingBottom: 0,
     paddingTop: 35,
-    justifyContent: 'center',
+    justifyContent: "center",
   },
   headerHead: {
     marginBottom: 4,
@@ -75,5 +87,17 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     flex: 1,
+  },
+  darkMode: {
+    backgroundColor: GlobalStyles.colors.textBlack,
+  },
+  darkModeText: {
+    color: GlobalStyles.colors.white,
+  },
+  lightMode: {
+    backgroundColor: GlobalStyles.colors.white100,
+  },
+  lightModeText: {
+    color: GlobalStyles.colors.textBlack,
   },
 });

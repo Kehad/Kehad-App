@@ -9,22 +9,29 @@ import { useColorScheme } from "nativewind";
 import { useSelector } from "react-redux";
 
 function AboutScreen() {
-  const { colorScheme, toggleColorScheme } = useColorScheme();
   const themes = useSelector((state) => state.theme.theme);
-   const isDarkMode = themes === "dark";
-  
-  const navigation =  useNavigation();
+  const isDarkMode = themes === "dark";
 
-    function hireMeHandler() {
-      navigation.navigate("ContactScreen");
+  const navigation = useNavigation();
+
+  function hireMeHandler() {
+    navigation.navigate("ContactScreen");
   }
-  
+
   return (
-    <View style={[!isDarkMode ? styles.lightMode : styles.darkMode, styles.container]}>
+    <View
+      style={[
+        !isDarkMode ? styles.lightMode : styles.darkMode,
+        styles.container,
+      ]}
+    >
       {/* <Title>About me</Title> */}
       <ScrollView>
         <Text
-          style={[!isDarkMode ? styles.lightMode : styles.darkModeText, styles.paragraph]}
+          style={[
+            !isDarkMode ? styles.lightMode : styles.darkModeText,
+            styles.paragraph,
+          ]}
           textBreakStrategy="simple"
           lineBreakStrategyIOS="standard"
         >

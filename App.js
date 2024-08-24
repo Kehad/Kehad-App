@@ -22,6 +22,7 @@ import { GlobalStyles } from "./constants/styles";
 import NativeScreen from "./screens/NativeScreen";
 import { Provider, useSelector } from "react-redux";
 import store from "./store/store";
+import { BlurView } from "expo-blur";
 
 const Stack = createNativeStackNavigator();
 const BottomTabs = createBottomTabNavigator();
@@ -71,128 +72,131 @@ function StackNavigator2() {
 function BottomTabsNavigator() {
   const [modalVisible, setModalVisible] = useState(false);
   const { colorScheme, toggleColorScheme } = useColorScheme();
-  // const themes = useSelector((state) => state.theme.theme);
-  // const isDarkMode = themes === "dark";
+  const themes = useSelector((state) => state.theme.theme);
+  const isDarkMode = themes === "dark";
 
   function showModalHandler(isModalVisible) {
     // setModalVisible(isModalVisible); // use this if you want to hide the modal when a button is clicked in the toggleMode component
     setModalVisible(!modalVisible); //
   }
   return (
-    <Provider store={store}>
-      <BottomTabs.Navigator
-        screenOptions={({ route }) => ({
-          headerStyle: { backgroundColor: GlobalStyles.colors.white },
-          headerTitle: () => <Header title="Kehad" />,
-          headerTintColor: GlobalStyles.colors.textBlack,
-          tabBarStyle: { backgroundColor: GlobalStyles.colors.white },
-          tabBarActiveTintColor: GlobalStyles.colors.primary50,
-          tabBarInactiveTintColor: GlobalStyles.colors.textBlack,
-          // tabBarBackground: GlobalStyles.colors.white,
-          headerRightContainerStyle: { paddingRight: 10, paddingBottom: 10 },
-          headerRight: () => (
-            <View style={styles.menu}>
-              {modalVisible && <ToggleMode isModalVisible={showModalHandler} />}
-              <IconButton
-                iconName="dots-vertical"
-                iconTitle="MaterialCommunityIcons"
-                iconSize={40}
-                iconColor="black"
-                onPress={() => {
-                  showModalHandler(true);
-                }}
-              />
-            </View>
+    <BottomTabs.Navigator
+      screenOptions={({ route }) => ({
+        headerStyle: { backgroundColor: GlobalStyles.colors.white },
+        headerTitle: () => <Header title="Kehad" />,
+        headerTintColor: GlobalStyles.colors.textBlack,
+        tabBarStyle: {
+          backgroundColor: isDarkMode
+            ? GlobalStyles.colors.textBlack
+            : GlobalStyles.colors.white,
+        },
+        tabBarActiveTintColor: GlobalStyles.colors.primary50,
+        tabBarInactiveTintColor: isDarkMode
+          ? GlobalStyles.colors.white
+          : GlobalStyles.colors.textBlack,
+        headerRightContainerStyle: { paddingRight: 10, paddingBottom: 10 },
+        headerRight: () => (
+          <View style={styles.menu}>
+            {modalVisible && <ToggleMode isModalVisible={showModalHandler} />}
+            <IconButton
+              iconName="dots-vertical"
+              iconTitle="MaterialCommunityIcons"
+              iconSize={40}
+              iconColor="black"
+              onPress={() => {
+                showModalHandler(true);
+              }}
+            />
+          </View>
+        ),
+      })}
+    >
+      <BottomTabs.Screen
+        name="HomeScreen"
+        component={HomeScreen}
+        headerShown={true}
+        options={{
+          title: "Home",
+          tabBarLabel: "Home",
+          tabBarIcon: ({ color, size }) => (
+            <Foundation name="home" size={size} color={color} />
           ),
-        })}
-      >
-        <BottomTabs.Screen
-          name="HomeScreen"
-          component={HomeScreen}
-          headerShown={true}
-          options={{
-            title: "Home",
-            tabBarLabel: "Home",
-            tabBarIcon: ({ color, size }) => (
-              <Foundation name="home" size={size} color={color} />
-            ),
-          }}
-        />
-        <BottomTabs.Screen
-          name="SkillsScreen"
-          component={SkillsScreen}
-          options={{
-            headerTitle: <Header title="Skills" />,
-            title: <Header title="Skills" />,
-            tabBarLabel: "Skills",
-            tabBarIcon: ({ color, size }) => (
-              <Ionicons name="medal" size={size} color={color} />
-            ),
-          }}
-        />
+        }}
+      />
+      <BottomTabs.Screen
+        name="SkillsScreen"
+        component={SkillsScreen}
+        options={{
+          headerTitle: <Header title="Skills" />,
+          title: <Header title="Skills" />,
+          tabBarLabel: "Skills",
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="medal" size={size} color={color} />
+          ),
+        }}
+      />
 
-        <BottomTabs.Screen
-          name="Works"
-          component={StackNavigator}
-          options={{
-            headerTitle: <Header title="Works" />,
-            title: <Header title="Works" />,
-            tabBarLabel: "Works",
-            tabBarIcon: ({ color, size }) => (
-              <MaterialIcons name="work" size={size} color={color} />
-            ),
-          }}
-        />
-        <BottomTabs.Screen
-          name="Projects"
-          component={StackNavigator2}
-          options={{
-            headerTitle: <Header title="Projects" />,
-            title: <Header title="Projects" />,
-            tabBarLabel: "Projects",
-            tabBarIcon: ({ color, size }) => (
-              <Ionicons name="layers" size={size} color={color} />
-            ),
-          }}
-        />
-        <BottomTabs.Screen
-          name="AboutScreen"
-          component={AboutScreen}
-          options={{
-            headerTitle: <Header title="About" />,
-            title: <Header title="About" />,
-            tabBarLabel: "About",
-            tabBarIcon: ({ color, size }) => (
-              <Ionicons name="person" size={size} color={color} />
-            ),
-          }}
-        />
-        <BottomTabs.Screen
-          name="ContactScreen"
-          component={ContactScreen}
-          options={{
-            headerTitle: <Header title="Contact" />,
-            title: <Header title="Contact" />,
-            tabBarLabel: "Contact",
-            tabBarIcon: ({ color, size }) => (
-              <Ionicons name="mail" size={size} color={color} />
-            ),
-          }}
-        />
-        <BottomTabs.Screen
-          name="NativeScreen"
-          component={NativeScreen}
-          options={{
-            headerTitle: <Header title="Native" />,
-            title: <Header title="Native" />,
-            tabBarLabel: "Native",
-            tabBarIcon: ({ color, size }) => (
-              <Ionicons name="mail" size={size} color={color} />
-            ),
-          }}
-        />
-      </BottomTabs.Navigator>
-    </Provider>
+      <BottomTabs.Screen
+        name="Works"
+        component={StackNavigator}
+        options={{
+          headerTitle: <Header title="Works" />,
+          title: <Header title="Works" />,
+          tabBarLabel: "Works",
+          tabBarIcon: ({ color, size }) => (
+            <MaterialIcons name="work" size={size} color={color} />
+          ),
+        }}
+      />
+      <BottomTabs.Screen
+        name="Projects"
+        component={StackNavigator2}
+        options={{
+          headerTitle: <Header title="Projects" />,
+          title: <Header title="Projects" />,
+          tabBarLabel: "Projects",
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="layers" size={size} color={color} />
+          ),
+        }}
+      />
+      <BottomTabs.Screen
+        name="AboutScreen"
+        component={AboutScreen}
+        options={{
+          headerTitle: <Header title="About" />,
+          title: <Header title="About" />,
+          tabBarLabel: "About",
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="person" size={size} color={color} />
+          ),
+        }}
+      />
+      <BottomTabs.Screen
+        name="ContactScreen"
+        component={ContactScreen}
+        options={{
+          headerTitle: <Header title="Contact" />,
+          title: <Header title="Contact" />,
+          tabBarLabel: "Contact",
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="mail" size={size} color={color} />
+          ),
+        }}
+      />
+      <BottomTabs.Screen
+        name="NativeScreen"
+        component={NativeScreen}
+        options={{
+          headerTitle: <Header title="Native" />,
+          title: <Header title="Native" />,
+          tabBarLabel: "Native",
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="mail" size={size} color={color} />
+          ),
+        }}
+      />
+    </BottomTabs.Navigator>
   );
 }
 
@@ -202,16 +206,29 @@ const styles = StyleSheet.create({
     // gap: ,
     justifyContent: "space-between",
   },
+  darkMode: {
+    backgroundColor: GlobalStyles.colors.textBlack,
+  },
+  darkModeText: {
+    color: GlobalStyles.colors.white,
+  },
+  lightMode: {
+    backgroundColor: GlobalStyles.colors.white100,
+  },
+  lightModeText: {
+    color: GlobalStyles.colors.textBlack,
+  },
 });
 
 export default function App() {
   return (
     <>
       <StatusBar style="auto" />
-
-      <NavigationContainer>
-        <BottomTabsNavigator />
-      </NavigationContainer>
+      <Provider store={store}>
+        <NavigationContainer>
+          <BottomTabsNavigator />
+        </NavigationContainer>
+      </Provider>
     </>
   );
 }

@@ -1,21 +1,19 @@
 import { Image, Text , View, StyleSheet } from 'react-native'
 import { GlobalStyles } from '../../constants/styles';
 
-function Header({title}) {
+function Header({title, tintColor}) {
+  console.log(tintColor);
+  const styles = {
+    color: tintColor,
+    fontSize: 32,
+    fontWeight: "bold",
+  };
   return (
     <View>
       {/* <Image source={require('.') } /> */}
-      <Text style={styles.headerText}>{title}</Text>
+      <Text style={styles}>{title}</Text>
     </View>
   )
 }
 
 export default Header;
-
-const styles = StyleSheet.create({
-  headerText: {
-    fontSize: 32,
-    fontWeight: 'bold',
-    color: GlobalStyles.colors.textBlack
-  }
-})

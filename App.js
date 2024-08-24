@@ -82,9 +82,15 @@ function BottomTabsNavigator() {
   return (
     <BottomTabs.Navigator
       screenOptions={({ route }) => ({
-        headerStyle: { backgroundColor: GlobalStyles.colors.white },
-        headerTitle: () => <Header title="Kehad" />,
-        headerTintColor: GlobalStyles.colors.textBlack,
+        headerStyle: {
+          backgroundColor: isDarkMode
+            ? GlobalStyles.colors.textBlack
+            : GlobalStyles.colors.white,
+        },
+        headerTitle: ({ tintColor }) => <Header title="Kehad" tintColor={tintColor} />,
+        headerTintColor: isDarkMode
+        ? GlobalStyles.colors.white
+          : GlobalStyles.colors.textBlack,
         tabBarStyle: {
           backgroundColor: isDarkMode
             ? GlobalStyles.colors.textBlack
@@ -95,14 +101,14 @@ function BottomTabsNavigator() {
           ? GlobalStyles.colors.white
           : GlobalStyles.colors.textBlack,
         headerRightContainerStyle: { paddingRight: 10, paddingBottom: 10 },
-        headerRight: () => (
+        headerRight: ({ tintColor }) => (
           <View style={styles.menu}>
             {modalVisible && <ToggleMode isModalVisible={showModalHandler} />}
             <IconButton
               iconName="dots-vertical"
               iconTitle="MaterialCommunityIcons"
               iconSize={40}
-              iconColor="black"
+              iconColor={tintColor}
               onPress={() => {
                 showModalHandler(true);
               }}

@@ -5,8 +5,11 @@ import * as Linking from "expo-linking";
 import PrimaryButton from "../components/Buttons/PrimaryButton";
 import { GlobalStyles } from "../constants/styles";
 import { useLayoutEffect } from "react";
+import { useSelector } from "react-redux";
 
 function ModalScreen() {
+   const themes = useSelector((state) => state.theme.theme);
+   const isDarkMode = themes === "dark";
   const navigation = useNavigation();
   const route = useRoute();
 
@@ -20,9 +23,9 @@ function ModalScreen() {
   useLayoutEffect(() => {
     navigation.setOptions({
       title: ModalData.title,
-      //   headerStyle: { backgroundColor: GlobalStyles.colors.primary50 },
       headerTitleStyle: {
         color: GlobalStyles.colors.primary50,
+        backgroundColor: 'red',
         fontSize: 25,
         fontWeight: "bold",
       },
@@ -44,10 +47,22 @@ function ModalScreen() {
     }
   };
   return (
-    <ScrollView style={styles.container}>
+    <ScrollView
+      style={[
+        isDarkMode ? styles.darkMode : styles.lightMode,
+        styles.container,
+      ]}
+    >
       <View style={styles.box}>
         {/* <Text style={styles.headerHead}>{ModalData.title}</Text> */}
-        <Text style={styles.paragraph}>{ModalData.description}</Text>
+        <Text
+          style={[
+            isDarkMode ? styles.darkModeText : styles.lightModeText,
+            styles.paragraph,
+          ]}
+        >
+          {ModalData.description}
+        </Text>
         <View style={styles.imageContainer}>
           <Image style={styles.image} source={ModalData.imageUrl} />
         </View>
@@ -65,7 +80,6 @@ export default ModalScreen;
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: GlobalStyles.colors.white,
     flex: 1,
   },
   box: {
@@ -80,7 +94,6 @@ const styles = StyleSheet.create({
   },
   paragraph: {
     fontSize: 20,
-    color: GlobalStyles.colors.textBlack,
     lineHeight: 30,
     fontWeight: "400",
   },
@@ -106,5 +119,17 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     flex: 1,
+  },
+  darkMode: {
+    backgroundColor: GlobalStyles.colors.textBlack,
+  },
+  darkModeText: {
+    color: GlobalStyles.colors.white,
+  },
+  lightMode: {
+    backgroundColor: GlobalStyles.colors.white100,
+  },
+  lightModeText: {
+    color: GlobalStyles.colors.textBlack,
   },
 });

@@ -5,10 +5,18 @@ import SecondaryButton from "../components/Buttons/SecondaryButton";
 import SocialLinks from "../components/UI/SocialLinks";
 import Title from "../components/UI/Title";
 import ProjectsList from "../components/Projects/ProjectsList";
+import { useSelector } from "react-redux";
 
 function ProjectsScreen() {
+  const themes = useSelector((state) => state.theme.theme);
+  const isDarkMode = themes === "dark";
   return (
-    <View style={styles.container}>
+    <View
+      style={[
+        isDarkMode ? styles.darkMode : styles.lightMode,
+        styles.container,
+      ]}
+    >
       {/* <Title>Projects</Title> */}
 
       <ProjectsList />
@@ -20,14 +28,14 @@ export default ProjectsScreen;
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: GlobalStyles.colors.white100,
+    // backgroundColor: GlobalStyles.colors.white100,
     flex: 1,
     padding: 24,
   },
   headerHead: {
     marginBottom: 4,
     color: GlobalStyles.colors.primary50,
-    backgroundColor: GlobalStyles.colors.textBlack,
+    // backgroundColor: GlobalStyles.colors.textBlack,
     fontWeight: "bold",
     fontSize: 40,
   },
@@ -46,5 +54,17 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     flex: 1,
+  },
+  darkMode: {
+    backgroundColor: GlobalStyles.colors.textBlack,
+  },
+  darkModeText: {
+    color: GlobalStyles.colors.white,
+  },
+  lightMode: {
+    backgroundColor: GlobalStyles.colors.white100,
+  },
+  lightModeText: {
+    color: GlobalStyles.colors.textBlack,
   },
 });

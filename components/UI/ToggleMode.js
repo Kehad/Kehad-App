@@ -32,31 +32,25 @@ const ToggleMode = ({ isModalVisible }) => {
 
   return (
     <View style={styles.toggleIcon}>
-      <View style={styles.sun}>
-        <Pressable>
+      <Pressable style={styles.sun} onPress={switchToLightMode}>
+        <IconButton
+          iconTitle="Feather"
+          iconName="sun"
+          iconSize={24}
+          iconColor="black"
+          // onPress={() => isModalVisible(false)}
+        />
+      </Pressable>
+      <Pressable style={styles.moon} onPress={switchToDarkMode}>
+        <Pressable style={styles.moonView} onPress={switchToDarkMode}>
           <IconButton
-            iconTitle="Feather"
-            iconName="sun"
+            iconTitle="Ionicons"
+            iconName="moon"
             iconSize={24}
             iconColor="black"
-            // onPress={() => isModalVisible(false)}
-            onPress={switchToLightMode}
           />
         </Pressable>
-      </View>
-      <View style={styles.moon}>
-        <View style={styles.moonView}>
-          <Pressable>
-            <IconButton
-              iconTitle="Ionicons"
-              iconName="moon"
-              iconSize={24}
-              iconColor="black"
-              onPress={switchToDarkMode}
-            />
-          </Pressable>
-        </View>
-      </View>
+      </Pressable>
     </View>
   );
 };
@@ -97,7 +91,6 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     borderBottomRightRadius: 0,
     backgroundColor: GlobalStyles.colors.primary50,
-
     borderTopRightRadius: 0,
     width: "50%",
     height: "100%",

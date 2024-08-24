@@ -5,10 +5,13 @@ import SecondaryButton from "../components/Buttons/SecondaryButton";
 import SocialLinks from "../components/UI/SocialLinks";
 import Title from "../components/UI/Title";
 import WorksList from "../components/Works/WorksList";
+import { useSelector } from "react-redux";
 
 function WorksScreen() {
+    const themes = useSelector((state) => state.theme.theme);
+    const isDarkMode = themes === "dark";
   return (
-    <View style={styles.container}>
+    <View style={[isDarkMode ? styles.darkMode : styles.lightMode, styles.container]}>
       {/* <Title>Works</Title> */}
       
       <WorksList />
@@ -46,5 +49,17 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     flex: 1,
+  },
+  darkMode: {
+    backgroundColor: GlobalStyles.colors.textBlack,
+  },
+  darkModeText: {
+    color: GlobalStyles.colors.white,
+  },
+  lightMode: {
+    backgroundColor: GlobalStyles.colors.white100,
+  },
+  lightModeText: {
+    color: GlobalStyles.colors.textBlack,
   },
 });

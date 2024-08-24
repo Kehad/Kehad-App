@@ -73,12 +73,10 @@ const styles = StyleSheet.create({
   },
   name: {
     fontSize: 36,
-    color: GlobalStyles.colors.textBlack,
     marginBottom: 24,
   },
   paragraph: {
     fontSize: 20,
-    color: GlobalStyles.colors.textBlack,
     lineHeight: 30,
   },
   buttonsContainer: {

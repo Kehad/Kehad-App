@@ -2,9 +2,12 @@ import { Button, StyleSheet, Text, View } from "react-native";
 import { GlobalStyles } from "../../constants/styles";
 import PrimaryButton from "../Buttons/PrimaryButton";
 import { useNavigation } from "@react-navigation/native";
+import { useSelector } from "react-redux";
 
 function ProjectsItem({ description, name, website, imageUrl }) {
   const navigation = useNavigation();
+  const themes = useSelector((state) => state.theme.theme);
+  const isDarkMode = themes === "dark";
 
   function itemDetailsHandler() {
     navigation.navigate("ModalScreen", {
@@ -15,12 +18,26 @@ function ProjectsItem({ description, name, website, imageUrl }) {
     });
   }
   return (
-    <View style={styles.container}>
+    <View
+      style={[
+        isDarkMode ? styles.darkMode : styles.lightMode,
+        styles.container,
+      ]}
+    >
       <Text style={styles.headerHead}>{name}</Text>
-      <Text style={styles.paragraph}>{description}</Text>
+      <Text
+        style={[
+          isDarkMode ? styles.darkModeText : styles.lightModeText,
+          styles.paragraph,
+        ]}
+      >
+        {description}
+      </Text>
       <View style={styles.buttonsContainer}>
         <View style={styles.buttonContainer}>
-          <PrimaryButton onPress={itemDetailsHandler}>See Details</PrimaryButton>
+          <PrimaryButton onPress={itemDetailsHandler}>
+            See Details
+          </PrimaryButton>
         </View>
       </View>
     </View>
@@ -31,7 +48,6 @@ export default ProjectsItem;
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: GlobalStyles.colors.white100,
     flex: 1,
     marginVertical: 25,
   },
@@ -43,7 +59,6 @@ const styles = StyleSheet.create({
   },
   paragraph: {
     fontSize: 20,
-    color: GlobalStyles.colors.textBlack,
     lineHeight: 30,
     fontWeight: "400",
   },
@@ -54,5 +69,17 @@ const styles = StyleSheet.create({
   buttonContainer: {
     flex: 1,
     marginTop: 20,
+  },
+  darkMode: {
+    backgroundColor: GlobalStyles.colors.textBlack,
+  },
+  darkModeText: {
+    color: GlobalStyles.colors.white,
+  },
+  lightMode: {
+    backgroundColor: GlobalStyles.colors.white100,
+  },
+  lightModeText: {
+    color: GlobalStyles.colors.textBlack,
   },
 });

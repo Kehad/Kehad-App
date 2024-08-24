@@ -2,6 +2,7 @@ import { StyleSheet, Text, View } from "react-native";
 
 import IconButton from "../Buttons/IconButton";
 import { GlobalStyles } from "../../constants/styles";
+import { useSelector } from "react-redux";
 
 const SkillsList = function ({
   name,
@@ -10,27 +11,30 @@ const SkillsList = function ({
   iconSize,
   iconColor,
 }) {
-  
-    return (
-      <View style={styles.container}>
-        <View style={styles.box}>
-          <Text style={styles.iconText}>{name}</Text>
-          <IconButton
-            iconTitle={iconTitle}
-            iconName={iconName}
-            iconSize={iconSize}
-            iconColor={iconColor}
-          />
-        </View>
+  const themes = useSelector((state) => state.theme.theme);
+  const isDarkMode = themes === "dark";
+
+  return (
+    <View style={styles.container}>
+      <View
+        style={[isDarkMode ? styles.darkMode : styles.lightMode, styles.box]}
+      >
+        <Text style={styles.iconText}>{name}</Text>
+        <IconButton
+          iconTitle={iconTitle}
+          iconName={iconName}
+          iconSize={iconSize}
+          iconColor={iconColor}
+        />
       </View>
-    );
+    </View>
+  );
 };
 
 export default SkillsList;
 
 const styles = StyleSheet.create({
   container: {
-    // backgroundColor: GlobalStyles.colors.textBlack,
     flex: 1,
   },
   box: {
@@ -39,11 +43,22 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    backgroundColor: GlobalStyles.colors.primaryBackground,
     marginVertical: 16,
-},
-iconText: {
-    fontSize: 16,
+  },
+  iconText: {
+    fontSize: 20,
     color: GlobalStyles.colors.primary50,
+  },
+  darkMode: {
+    backgroundColor: GlobalStyles.colors.white,
+  },
+  darkModeText: {
+    color: GlobalStyles.colors.white,
+  },
+  lightMode: {
+    backgroundColor: GlobalStyles.colors.textBlack,
+  },
+  lightModeText: {
+    color: GlobalStyles.colors.textBlack,
   },
 });

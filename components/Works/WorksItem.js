@@ -8,9 +8,12 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { GlobalStyles } from "../../constants/styles";
 import Title from "../../components/UI/Title";
 import PrimaryButton from "../Buttons/PrimaryButton";
+import { useSelector } from "react-redux";
 
 function WorksItem({ description, name, website, imageUrl }) {
   const navigation = useNavigation();
+  const themes = useSelector((state) => state.theme.theme);
+  const isDarkMode = themes === "dark";
 
   function itemDetailsHandler() {
     navigation.navigate("ModalScreen", {
@@ -23,9 +26,9 @@ function WorksItem({ description, name, website, imageUrl }) {
 
   
   return (
-    <View style={styles.container}>
+    <View style={[isDarkMode ? styles.darkMode : styles.lightMode, styles.container]}>
       <Text style={styles.headerHead}>{name}</Text>
-      <Text style={styles.paragraph}>{description}</Text>
+      <Text style={[isDarkMode ? styles.darkModeText : styles.lightModeText ,styles.paragraph]}>{description}</Text>
       <View style={styles.buttonsContainer}>
         <View style={styles.buttonContainer}>
           <PrimaryButton onPress={itemDetailsHandler}>See Details</PrimaryButton>
@@ -39,20 +42,8 @@ export default WorksItem;
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: GlobalStyles.colors.white100,
     flex: 1,
     marginVertical: 25,
-    // elevation: 8,
-    // shadowColor: 'red',
-    // shadowRadius: 4,
-    // shadowOffset: { width: 10, height: 10 },
-    // shadowOpacity: 10,
-    // padding: 24,
-    // borderRadius: 8,
-    // borderWidth: 2,
-    // borderColor: GlobalStyles.colors.primary50,
-    // borderRightWidth: 0,
-    // borderLeftWidth: 0,
   },
   headerHead: {
     marginBottom: 4,
@@ -62,7 +53,6 @@ const styles = StyleSheet.create({
   },
   paragraph: {
     fontSize: 20,
-    color: GlobalStyles.colors.textBlack,
     lineHeight: 30,
     fontWeight: "400",
   },
@@ -72,6 +62,18 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     flex: 1,
-    marginTop: 20
+    marginTop: 20,
+  },
+  darkMode: {
+    backgroundColor: GlobalStyles.colors.textBlack,
+  },
+  darkModeText: {
+    color: GlobalStyles.colors.white,
+  },
+  lightMode: {
+    backgroundColor: GlobalStyles.colors.white100,
+  },
+  lightModeText: {
+    color: GlobalStyles.colors.textBlack,
   },
 });

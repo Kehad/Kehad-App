@@ -18,6 +18,7 @@ import IconNameButton from "../components/Buttons/IconNameButton";
 import { useState } from "react";
 import Modal from "../components/UI/ModalDownload";
 import ModalDownload from "../components/UI/ModalDownload";
+import { useSelector } from "react-redux";
 
 const itemList = [
   {
@@ -76,6 +77,8 @@ function renderSkillsItem(itemData) {
 
 function SkillsScreen() {
   const [modalVisible, setModalVisible] = useState(false);
+   const themes = useSelector((state) => state.theme.theme);
+  const isDarkMode = themes === "dark";
 
   function showModalHandler(isModalVisible) {
     setModalVisible(isModalVisible);
@@ -96,7 +99,12 @@ function SkillsScreen() {
   // };
 
   return (
-    <View style={styles.container}>
+    <View
+      style={[
+        isDarkMode ? styles.darkMode : styles.lightMode,
+        , styles.container,
+      ]}
+    >
       {/* <Title>My Skills</Title> */}
       <ScrollView>
         <FlatList
@@ -122,11 +130,22 @@ export default SkillsScreen;
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: GlobalStyles.colors.white100,
     flex: 1,
     padding: 24,
   },
   button: {
     // width: "70%",
+  },
+  darkMode: {
+    backgroundColor: GlobalStyles.colors.textBlack,
+  },
+  darkModeText: {
+    color: GlobalStyles.colors.white,
+  },
+  lightMode: {
+    backgroundColor: GlobalStyles.colors.white100,
+  },
+  lightModeText: {
+    color: GlobalStyles.colors.textBlack,
   },
 });

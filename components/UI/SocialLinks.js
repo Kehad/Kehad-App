@@ -12,19 +12,11 @@ const SocialLinks = function () {
   };
 
   const openLink = async (website) => {
-    console.log(website);
+    // console.log(website);
     const url = website; // Replace with your URL
 
     try {
-      // const supported = await Linking.canOpenURL(url);
       const supported = await openBrowserAsync(url);
-      console.log(supported)
-
-      // if (supported) {
-      //   // await Linking.openURL(url);
-      // } else {
-      //   // Alert.alert(`Don't know how to open this URL: ${url}`);
-      // }
     } catch (error) {
       console.log(error);
     }

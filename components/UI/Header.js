@@ -1,10 +1,10 @@
 import { Image, Text , View, StyleSheet } from 'react-native'
 import { GlobalStyles } from '../../constants/styles';
 
-function Header({title, tintColor}) {
-  console.log(tintColor);
+function Header({title, color}) {
+  // console.log(color);
   const styles = {
-    color: tintColor,
+    color: color,
     fontSize: 32,
     fontWeight: "bold",
   };

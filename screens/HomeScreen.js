@@ -62,8 +62,8 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 24,
     paddingBottom: 0,
-    paddingTop: 35,
-    justifyContent: "center",
+    // paddingTop: 0,
+    // justifyContent: "center",
   },
   headerHead: {
     marginBottom: 4,

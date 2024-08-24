@@ -20,13 +20,15 @@ const ToggleMode = ({ isModalVisible }) => {
   // Function to switch to light mode
   const switchToLightMode = () => {
     setTheme("light");
-    dispatch(setLightMode())
+    dispatch(setLightMode());
+    isModalVisible();
   };
 
   // Function to switch to dark mode
   const switchToDarkMode = () => {
     setTheme("dark");
-    dispatch(setDarkMode())
+    dispatch(setDarkMode());
+    isModalVisible();
   };
 
 
@@ -39,6 +41,7 @@ const ToggleMode = ({ isModalVisible }) => {
           iconSize={24}
           iconColor="black"
           // onPress={() => isModalVisible(false)}
+          onPress={switchToLightMode}
         />
       </Pressable>
       <Pressable style={styles.moon} onPress={switchToDarkMode}>
@@ -48,6 +51,7 @@ const ToggleMode = ({ isModalVisible }) => {
             iconName="moon"
             iconSize={24}
             iconColor="black"
+            onPress={switchToDarkMode}
           />
         </Pressable>
       </Pressable>

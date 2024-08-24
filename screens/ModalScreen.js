@@ -6,14 +6,15 @@ import PrimaryButton from "../components/Buttons/PrimaryButton";
 import { GlobalStyles } from "../constants/styles";
 import { useLayoutEffect } from "react";
 import { useSelector } from "react-redux";
+import { openBrowserAsync } from "expo-web-browser";
 
 function ModalScreen() {
    const themes = useSelector((state) => state.theme.theme);
    const isDarkMode = themes === "dark";
   const navigation = useNavigation();
   const route = useRoute();
-
-  console.log(route);
+console.log(isDarkMode)
+  // console.log(route);
   const ModalData = {
     title: route.params.title,
     description: route.params.description,
@@ -23,9 +24,18 @@ function ModalScreen() {
   useLayoutEffect(() => {
     navigation.setOptions({
       title: ModalData.title,
+      headerStyle: {
+        // backgroundColor: isDarkMode
+        //   ? GlobalStyles.colors.textBlack
+        //   : GlobalStyles.colors.white,
+        // backgroundColor: isDarkMode ? "#282828" : "#EFEFEF",
+        // backgroundColor: isDarkMode
+        // backgroundColor: isDarkMode && "#282828",
+        // backgroundColor: isDarkMode && "#EFEFEF",
+      },
       headerTitleStyle: {
-        color: GlobalStyles.colors.primary50,
-        backgroundColor: 'red',
+        // color: GlobalStyles.colors.primary50,
+        // color: isDarkMode ? 'white' : 'black',
         fontSize: 25,
         fontWeight: "bold",
       },
@@ -35,13 +45,7 @@ function ModalScreen() {
     const url = ModalData.website; // Replace with your URL
 
     try {
-      const supported = await Linking.canOpenURL(url);
-
-      if (supported) {
-        await Linking.openURL(url);
-      } else {
-        Alert.alert(`Don't know how to open this URL: ${url}`);
-      }
+      const supported = await openBrowserAsync(url);
     } catch (error) {
       console.log(error);
     }

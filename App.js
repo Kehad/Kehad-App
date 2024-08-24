@@ -28,12 +28,20 @@ const Stack = createNativeStackNavigator();
 const BottomTabs = createBottomTabNavigator();
 
 function StackNavigator() {
+  const themes = useSelector((state) => state.theme.theme);
+  const isDarkMode = themes === "dark";
   return (
-    <Stack.Navigator>
+    <Stack.Navigator
+      screenOptions={({ route }) => ({
+        // headerStyle: {
+        //   backgroundColor: isDarkMode && "#282828",
+        // },
+        headerTintColor: isDarkMode ? "#EFEFEF" : "#282828",
+      })}
+    >
       <Stack.Screen
         name="WorksScreen"
         component={WorksScreen}
-        // headerShown= false
         options={{
           presentation: "card",
           headerShown: false,
@@ -42,19 +50,33 @@ function StackNavigator() {
       <Stack.Screen
         name="ModalScreen"
         component={ModalScreen}
-        options={{ presentation: "modal" }} // This sets the screen as a modal
+        options={{
+          presentation: "modal",
+          headerStyle: { backgroundColor: "green" },
+        }} // This sets the screen as a modal
       />
     </Stack.Navigator>
   );
 }
 
 function StackNavigator2() {
+  const themes = useSelector((state) => state.theme.theme);
+  const isDarkMode = themes === "dark";
+
   return (
-    <Stack.Navigator>
+    <Stack.Navigator
+      screenOptions={({ route }) => ({
+        headerStyle: {
+          // backgroundColor: isDarkMode
+          //   ? GlobalStyles.colors.textBlack
+          //   : GlobalStyles.colors.white,
+        },
+        headerTintColor: isDarkMode ? "#EFEFEF" : "#282828",
+      })}
+    >
       <Stack.Screen
         name="ProjectsScreen"
         component={ProjectsScreen}
-        // headerShown= false
         options={{
           presentation: "card",
           headerShown: false,
@@ -63,7 +85,10 @@ function StackNavigator2() {
       <Stack.Screen
         name="ModalScreen"
         component={ModalScreen}
-        options={{ presentation: "modal" }} // This sets the screen as a modal
+        options={{
+          presentation: "modal",
+          headerTintColor: isDarkMode ? "white" : "black",
+        }}
       />
     </Stack.Navigator>
   );
@@ -87,9 +112,11 @@ function BottomTabsNavigator() {
             ? GlobalStyles.colors.textBlack
             : GlobalStyles.colors.white,
         },
-        headerTitle: ({ tintColor }) => <Header title="Kehad" tintColor={tintColor} />,
+        headerTitle: ({ tintColor }) => (
+          <Header title="Kehad" color={tintColor} />
+        ),
         headerTintColor: isDarkMode
-        ? GlobalStyles.colors.white
+          ? GlobalStyles.colors.white
           : GlobalStyles.colors.textBlack,
         tabBarStyle: {
           backgroundColor: isDarkMode
@@ -134,7 +161,16 @@ function BottomTabsNavigator() {
         component={SkillsScreen}
         options={{
           headerTitle: <Header title="Skills" />,
-          title: <Header title="Skills" />,
+          title: (
+            <Header
+              title="Skills"
+              color={
+                isDarkMode
+                  ? GlobalStyles.colors.white
+                  : GlobalStyles.colors.textBlack
+              }
+            />
+          ),
           tabBarLabel: "Skills",
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="medal" size={size} color={color} />
@@ -147,7 +183,16 @@ function BottomTabsNavigator() {
         component={StackNavigator}
         options={{
           headerTitle: <Header title="Works" />,
-          title: <Header title="Works" />,
+          title: (
+            <Header
+              title="Works"
+              color={
+                isDarkMode
+                  ? GlobalStyles.colors.white
+                  : GlobalStyles.colors.textBlack
+              }
+            />
+          ),
           tabBarLabel: "Works",
           tabBarIcon: ({ color, size }) => (
             <MaterialIcons name="work" size={size} color={color} />
@@ -159,7 +204,16 @@ function BottomTabsNavigator() {
         component={StackNavigator2}
         options={{
           headerTitle: <Header title="Projects" />,
-          title: <Header title="Projects" />,
+          title: (
+            <Header
+              title="Projects"
+              color={
+                isDarkMode
+                  ? GlobalStyles.colors.white
+                  : GlobalStyles.colors.textBlack
+              }
+            />
+          ),
           tabBarLabel: "Projects",
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="layers" size={size} color={color} />
@@ -171,7 +225,16 @@ function BottomTabsNavigator() {
         component={AboutScreen}
         options={{
           headerTitle: <Header title="About" />,
-          title: <Header title="About" />,
+          title: (
+            <Header
+              title="About"
+              color={
+                isDarkMode
+                  ? GlobalStyles.colors.white
+                  : GlobalStyles.colors.textBlack
+              }
+            />
+          ),
           tabBarLabel: "About",
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="person" size={size} color={color} />
@@ -183,14 +246,23 @@ function BottomTabsNavigator() {
         component={ContactScreen}
         options={{
           headerTitle: <Header title="Contact" />,
-          title: <Header title="Contact" />,
+          title: (
+            <Header
+              title="Contact"
+              color={
+                isDarkMode
+                  ? GlobalStyles.colors.white
+                  : GlobalStyles.colors.textBlack
+              }
+            />
+          ),
           tabBarLabel: "Contact",
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="mail" size={size} color={color} />
           ),
         }}
       />
-      <BottomTabs.Screen
+      {/* <BottomTabs.Screen
         name="NativeScreen"
         component={NativeScreen}
         options={{
@@ -201,7 +273,7 @@ function BottomTabsNavigator() {
             <Ionicons name="mail" size={size} color={color} />
           ),
         }}
-      />
+      /> */}
     </BottomTabs.Navigator>
   );
 }
@@ -226,18 +298,28 @@ const styles = StyleSheet.create({
   },
 });
 
-export default function App() {
+function SemiApp() {
+  const themes = useSelector((state) => state.theme.theme);
+  const isDarkMode = themes === "dark";
   return (
     <>
-      <StatusBar style="auto" />
-      <Provider store={store}>
-        <NavigationContainer>
-          <BottomTabsNavigator />
-        </NavigationContainer>
-      </Provider>
+      <StatusBar style={isDarkMode ? "light" : "dark"} />
+      <NavigationContainer>
+        <BottomTabsNavigator />
+      </NavigationContainer>
     </>
   );
 }
+
+function App() {
+  return (
+    <Provider store={store}>
+      <SemiApp />
+    </Provider>
+  );
+}
+
+export default App;
 
 // facebook-with-circle
 // sc-facebook  EvilIcons

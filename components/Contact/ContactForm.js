@@ -34,8 +34,8 @@ function ContactForm() {
       
         const { name, email, message } = FormData;
         const words = message.trim().split(/\s+/);
-        console.log(name, email, message);
-        console.log(words);
+        // console.log(name, email, message);
+        // console.log(words);
         if (name.length >= 5 && words.length >= 5 && email.includes("@gmail.com")) {
             console.log("Good to good")
             setNameInput("");

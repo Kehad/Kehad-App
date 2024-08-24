@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
     color: GlobalStyles.colors.primary50,
   },
   darkMode: {
-    backgroundColor: GlobalStyles.colors.white,
+    backgroundColor: GlobalStyles.colors.white100,
   },
   darkModeText: {
     color: GlobalStyles.colors.white,

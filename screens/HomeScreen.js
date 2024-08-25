@@ -1,11 +1,14 @@
-import { Button, StyleSheet, Text, View } from "react-native";
+import { Animated, Button, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import { useSelector } from "react-redux";
+import Swipeable from "react-native-gesture-handler/Swipeable";
+
 import { GlobalStyles } from "../constants/styles";
 import PrimaryButton from "../components/Buttons/PrimaryButton";
 import SecondaryButton from "../components/Buttons/SecondaryButton";
 import SocialLinks from "../components/UI/SocialLinks";
 import Title from "../components/UI/Title";
-import { useNavigation } from "@react-navigation/native";
-import { useSelector } from "react-redux";
+
 
 function HomeScreen() {
   const themes = useSelector((state) => state.theme.theme);
@@ -21,37 +24,59 @@ function HomeScreen() {
     navigation.navigate("ContactScreen");
   }
 
+  const leftSwipe = (progress, dragX) => {
+    const scale = dragX.interpolate({
+      inputRange: [0, 100],
+      outputRange: [0, 1],
+      extrapolate: "clamp",
+    });
+
+    console.log(progress, dragX)
+    console.log('leftSwipe')
+   
+  };
+
   return (
     <View
-      style={[
-        isDarkMode ? styles.darkMode : styles.lightMode,
-        styles.container,
-      ]}
-    >
-      <Title>Hi.</Title>
-      <Text
-        style={[isDarkMode ? styles.darkModeText : styles.lightModeText, styles.name]}
+        style={[
+          isDarkMode ? styles.darkMode : styles.lightMode,
+          styles.container,
+        ]}
       >
-        I'm Kehinde Adigun
-      </Text>
-      <Text style={[isDarkMode ? styles.darkModeText : styles.lightModeText, styles.paragraph]}>
-        I am a web developer with over 5 years of experience, specializing in
-        creating dynamic and responsive web applications. Currently, I am on a
-        journey to become a full stack and mobile app developer, expanding my
-        skills to include backend technologies and mobile development. My
-        passion lies in crafting seamless user experiences and continuously
-        learning to stay ahead in the ever-evolving tech landscape.
-      </Text>
-      <SocialLinks />
-      <View style={styles.buttonsContainer}>
-        <View style={styles.buttonContainer}>
-          <PrimaryButton onPress={hireMeHandler}>hire me</PrimaryButton>
+          <Swipeable renderLeftActions={leftSwipe} style={styles.container}>
+        <Title>Hi.</Title>
+        <Text
+          style={[
+            isDarkMode ? styles.darkModeText : styles.lightModeText,
+            styles.name,
+          ]}
+        >
+          I'm Kehinde Adigun
+        </Text>
+        <Text
+          style={[
+            isDarkMode ? styles.darkModeText : styles.lightModeText,
+            styles.paragraph,
+          ]}
+        >
+          I am a web developer with over 5 years of experience, specializing in
+          creating dynamic and responsive web applications. Currently, I am on a
+          journey to become a full stack and mobile app developer, expanding my
+          skills to include backend technologies and mobile development. My
+          passion lies in crafting seamless user experiences and continuously
+          learning to stay ahead in the ever-evolving tech landscape.
+        </Text>
+        <SocialLinks />
+        <View style={styles.buttonsContainer}>
+          <View style={styles.buttonContainer}>
+            <PrimaryButton onPress={hireMeHandler}>hire me</PrimaryButton>
+          </View>
+          <View style={styles.buttonContainer}>
+            <SecondaryButton onPress={aboutMeHandler}>about me</SecondaryButton>
+          </View>
         </View>
-        <View style={styles.buttonContainer}>
-          <SecondaryButton onPress={aboutMeHandler}>about me</SecondaryButton>
-        </View>
+        </Swipeable>
       </View>
-    </View>
   );
 }
 

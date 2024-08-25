@@ -62,3 +62,5 @@ const styles = StyleSheet.create({
     color: GlobalStyles.colors.textBlack,
   },
 });
+
+

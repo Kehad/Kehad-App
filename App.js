@@ -1,98 +1,30 @@
 import { useState } from "react";
 import { StyleSheet, View } from "react-native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from "@react-navigation/native";
 import { StatusBar } from "expo-status-bar";
 import { Foundation, Ionicons } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
 import { useColorScheme } from "nativewind";
+import "react-native-gesture-handler";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 import HomeScreen from "./screens/HomeScreen";
 import SkillsScreen from "./screens/SkillsScreen";
-import WorksScreen from "./screens/WorksScreen";
-import ProjectsScreen from "./screens/ProjectsScreen";
 import AboutScreen from "./screens/AboutScreen";
 import ContactScreen from "./screens/ContactScreen";
 import IconButton from "./components/Buttons/IconButton";
 import Header from "./components/UI/Header";
-import ModalScreen from "./screens/ModalScreen";
 import ToggleMode from "./components/UI/ToggleMode";
 import { GlobalStyles } from "./constants/styles";
 import NativeScreen from "./screens/NativeScreen";
 import { Provider, useSelector } from "react-redux";
 import store from "./store/store";
-import { BlurView } from "expo-blur";
+import WorksNavigator from "./components/Navigation/WorksNavigation";
+import ProjectsNavigator from "./components/Navigation/ProjectsNavigator";
 
-const Stack = createNativeStackNavigator();
 const BottomTabs = createBottomTabNavigator();
 
-function StackNavigator() {
-  const themes = useSelector((state) => state.theme.theme);
-  const isDarkMode = themes === "dark";
-  return (
-    <Stack.Navigator
-      screenOptions={({ route }) => ({
-        // headerStyle: {
-        //   backgroundColor: isDarkMode && "#282828",
-        // },
-        headerTintColor: isDarkMode ? "#EFEFEF" : "#282828",
-      })}
-    >
-      <Stack.Screen
-        name="WorksScreen"
-        component={WorksScreen}
-        options={{
-          presentation: "card",
-          headerShown: false,
-        }}
-      />
-      <Stack.Screen
-        name="ModalScreen"
-        component={ModalScreen}
-        options={{
-          presentation: "modal",
-          headerStyle: { backgroundColor: "green" },
-        }} // This sets the screen as a modal
-      />
-    </Stack.Navigator>
-  );
-}
-
-function StackNavigator2() {
-  const themes = useSelector((state) => state.theme.theme);
-  const isDarkMode = themes === "dark";
-
-  return (
-    <Stack.Navigator
-      screenOptions={({ route }) => ({
-        headerStyle: {
-          // backgroundColor: isDarkMode
-          //   ? GlobalStyles.colors.textBlack
-          //   : GlobalStyles.colors.white,
-        },
-        headerTintColor: isDarkMode ? "#EFEFEF" : "#282828",
-      })}
-    >
-      <Stack.Screen
-        name="ProjectsScreen"
-        component={ProjectsScreen}
-        options={{
-          presentation: "card",
-          headerShown: false,
-        }}
-      />
-      <Stack.Screen
-        name="ModalScreen"
-        component={ModalScreen}
-        options={{
-          presentation: "modal",
-          headerTintColor: isDarkMode ? "white" : "black",
-        }}
-      />
-    </Stack.Navigator>
-  );
-}
 
 function BottomTabsNavigator() {
   const [modalVisible, setModalVisible] = useState(false);
@@ -115,6 +47,8 @@ function BottomTabsNavigator() {
         headerTitle: ({ tintColor }) => (
           <Header title="Kehad" color={tintColor} />
         ),
+        gestureEnabled: true,
+        swipeEnabled: true,
         headerTintColor: isDarkMode
           ? GlobalStyles.colors.white
           : GlobalStyles.colors.textBlack,
@@ -180,7 +114,7 @@ function BottomTabsNavigator() {
 
       <BottomTabs.Screen
         name="Works"
-        component={StackNavigator}
+        component={WorksNavigator}
         options={{
           headerTitle: <Header title="Works" />,
           title: (
@@ -201,7 +135,7 @@ function BottomTabsNavigator() {
       />
       <BottomTabs.Screen
         name="Projects"
-        component={StackNavigator2}
+        component={ProjectsNavigator}
         options={{
           headerTitle: <Header title="Projects" />,
           title: (
@@ -303,10 +237,12 @@ function SemiApp() {
   const isDarkMode = themes === "dark";
   return (
     <>
-      <StatusBar style={isDarkMode ? "light" : "dark"} />
-      <NavigationContainer>
-        <BottomTabsNavigator />
-      </NavigationContainer>
+      <GestureHandlerRootView style={{ flex: 1 }}>
+        <StatusBar style={isDarkMode ? "light" : "dark"} />
+        <NavigationContainer>
+          <BottomTabsNavigator />
+        </NavigationContainer>
+      </GestureHandlerRootView>
     </>
   );
 }

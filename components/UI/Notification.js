@@ -1,6 +1,5 @@
 import { useEffect } from "react";
-import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Button, View } from "react-native";
+import { StyleSheet, Button, View, Pressable } from "react-native";
 import * as Notifications from "expo-notifications";
 
 Notifications.setNotificationHandler({
@@ -13,7 +12,9 @@ Notifications.setNotificationHandler({
   },
 });
 
-export default function App() {
+export default function Notification({ children, click }) {
+
+  
   useEffect(() => {
     const subscription1 = Notifications.addNotificationReceivedListener(
       (notification) => {
@@ -33,6 +34,8 @@ export default function App() {
       }
     );
 
+    
+
     return () => {
       subscription1.remove();
       subscription2.remove();
@@ -50,16 +53,23 @@ export default function App() {
         seconds: 5,
       },
     });
-  }
+  };
+  console.log(children)
+  console.log(click)
+
 
   return (
-    <View style={styles.container}>
+    <>
+    {/* <View style={styles.container}>
       <Button
         title="Schedule Notification"
         onPress={scheduleNotificationHandler}
       />
-      <StatusBar style="auto" />
-    </View>
+     </View> */}
+    <Pressable onPress={scheduleNotificationHandler}>
+      {children}
+    </Pressable>
+    </>
   );
 }
 

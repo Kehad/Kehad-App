@@ -77,7 +77,7 @@ function renderSkillsItem(itemData) {
 
 function SkillsScreen() {
   const [modalVisible, setModalVisible] = useState(false);
-   const themes = useSelector((state) => state.theme.theme);
+  const themes = useSelector((state) => state.theme.theme);
   const isDarkMode = themes === "dark";
 
   function showModalHandler(isModalVisible) {
@@ -102,26 +102,27 @@ function SkillsScreen() {
     <View
       style={[
         isDarkMode ? styles.darkMode : styles.lightMode,
-        , styles.container,
+        ,
+        styles.container,
       ]}
     >
       {/* <Title>My Skills</Title> */}
-      <ScrollView>
-        <FlatList
-          data={itemList}
-          keyExtractor={(item) => item.id}
-          renderItem={renderSkillsItem}
-          scrollEnabled={false}
-        />
-        <View style={styles.button}>
-          {/* <PrimaryButton icon="jdh">Download CV</PrimaryButton>
-        <IconButton icon="menu" size={32}>
-        Download CV
-        </IconButton> */}
-          <IconNameButton onPress={showModalHandler} />
-          {modalVisible && <ModalDownload isModalVisible={showModalHandler} />}
-        </View>
-      </ScrollView>
+      <View style={styles.box}>
+        <ScrollView>
+          <FlatList
+            data={itemList}
+            keyExtractor={(item) => item.id}
+            renderItem={renderSkillsItem}
+            scrollEnabled={false}
+          />
+          <View style={styles.button}>
+            <IconNameButton onPress={showModalHandler} />
+            {modalVisible && (
+              <ModalDownload isModalVisible={showModalHandler} />
+            )}
+          </View>
+        </ScrollView>
+      </View>
     </View>
   );
 }
@@ -132,6 +133,11 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 24,
+    justifyContent: 'space-between',
+  },
+  box: {
+    justifyContent: "space-between",
+    justifyContentAlign: "center",
   },
   button: {
     // width: "70%",

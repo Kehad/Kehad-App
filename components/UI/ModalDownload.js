@@ -3,6 +3,7 @@ import { GlobalStyles } from "../../constants/styles";
 import PrimaryButton from "../Buttons/PrimaryButton";
 import { Ionicons } from "@expo/vector-icons";
 import IconButton from "../Buttons/IconButton";
+import Notification from "./Notification";
 
 const ModalDownload = ({ isModalVisible }) => {
   return (
@@ -10,26 +11,32 @@ const ModalDownload = ({ isModalVisible }) => {
       <Modal animationType="fade" transparent={true} visible={true}>
         <View style={styles.backdrop}>
           <View style={styles.centeredView}>
-        
-              <View style={styles.modalView}>
-                <View style={styles.button}>
-                  <PrimaryButton>Download Image</PrimaryButton>
-                </View>
-                <View style={styles.button}>
-                  <PrimaryButton>Download PDF</PrimaryButton>
-                </View>
-                <Pressable
-                  style={styles.buttonOpen}
-                  onPress={() => isModalVisible(false)}
-                >
-                  <IconButton
-                    icon="close-circle-outline" // close-circle, close
-                    size={48}
-                    color={GlobalStyles.colors.primary50}
-                    onPress={() => isModalVisible(false)}
-                  />
-                </Pressable>
+            <View style={styles.modalView}>
+              <View style={styles.button}>
+                <Notification click='click'>
+                  <PrimaryButton onPress={() => isModalVisible(false)}>
+                    Download Image
+                  </PrimaryButton>
+                </Notification>
               </View>
+              <View style={styles.button}>
+                <PrimaryButton onPress={() => isModalVisible(false)}>
+                  Download PDF
+                </PrimaryButton>
+              </View>
+              <Pressable
+                style={styles.buttonOpen}
+                onPress={() => isModalVisible(false)}
+              >
+                <IconButton
+                  iconTitle="Ionicons"
+                  iconName="close-circle-outline" // close-circle, close
+                  iconSize={48}
+                  iconColor={GlobalStyles.colors.primary50}
+                  onPress={() => isModalVisible(false)}
+                />
+              </Pressable>
+            </View>
           </View>
         </View>
       </Modal>

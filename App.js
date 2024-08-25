@@ -8,6 +8,7 @@ import { MaterialIcons } from "@expo/vector-icons";
 import { useColorScheme } from "nativewind";
 import "react-native-gesture-handler";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
+import Notification from './components/UI/Notification';
 
 import HomeScreen from "./screens/HomeScreen";
 import SkillsScreen from "./screens/SkillsScreen";
@@ -196,9 +197,9 @@ function BottomTabsNavigator() {
           ),
         }}
       />
-      {/* <BottomTabs.Screen
+      <BottomTabs.Screen
         name="NativeScreen"
-        component={NativeScreen}
+        component={Notification}
         options={{
           headerTitle: <Header title="Native" />,
           title: <Header title="Native" />,
@@ -207,7 +208,7 @@ function BottomTabsNavigator() {
             <Ionicons name="mail" size={size} color={color} />
           ),
         }}
-      /> */}
+      />
     </BottomTabs.Navigator>
   );
 }

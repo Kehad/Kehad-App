@@ -1,7 +1,6 @@
 import { Alert, Modal, StyleSheet, Text, Pressable, View } from "react-native";
 import { GlobalStyles } from "../../constants/styles";
 import PrimaryButton from "../Buttons/PrimaryButton";
-import { Ionicons } from "@expo/vector-icons";
 import IconButton from "../Buttons/IconButton";
 import Notification from "./Notification";
 
@@ -13,16 +12,25 @@ const ModalDownload = ({ isModalVisible }) => {
           <View style={styles.centeredView}>
             <View style={styles.modalView}>
               <View style={styles.button}>
-                <Notification click='click'>
+                {/* <Notification click="click">
                   <PrimaryButton onPress={() => isModalVisible(false)}>
                     Download Image
                   </PrimaryButton>
-                </Notification>
+                </Notification> */}
+                <Notification
+                  title="Image Download Successful"
+                  name="Download Image"
+                  body="You've sucessfully downloaded the Image version of the CV"
+                  onPress={() => isModalVisible(false)}
+                />
               </View>
               <View style={styles.button}>
-                <PrimaryButton onPress={() => isModalVisible(false)}>
-                  Download PDF
-                </PrimaryButton>
+                <Notification
+                  title="PDF Download Successful"
+                  name="Download PDF"
+                  body="You've sucessfully downloaded the PDF version of the CV"
+                  onPress={() => isModalVisible(false)}
+                />
               </View>
               <Pressable
                 style={styles.buttonOpen}

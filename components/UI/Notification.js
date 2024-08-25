@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { StyleSheet, Button, View, Pressable } from "react-native";
 import * as Notifications from "expo-notifications";
+import PrimaryButton from "../Buttons/PrimaryButton";
 
 Notifications.setNotificationHandler({
   handleNotification: async () => {
@@ -12,9 +13,7 @@ Notifications.setNotificationHandler({
   },
 });
 
-export default function Notification({ children, click }) {
-
-  
+export default function Notification({ title, name, body, onPress }) {
   useEffect(() => {
     const subscription1 = Notifications.addNotificationReceivedListener(
       (notification) => {
@@ -34,8 +33,6 @@ export default function Notification({ children, click }) {
       }
     );
 
-    
-
     return () => {
       subscription1.remove();
       subscription2.remove();
@@ -45,30 +42,30 @@ export default function Notification({ children, click }) {
   function scheduleNotificationHandler() {
     Notifications.scheduleNotificationAsync({
       content: {
-        title: "My first local notification",
-        body: "This is the body of the notification.",
+        title: title,
+        body: body,
         data: { userName: "Max" },
       },
       trigger: {
         seconds: 5,
       },
     });
-  };
-  console.log(children)
-  console.log(click)
+    console.log('Notification')
+  }
 
+  function finalPress() {
+    onPress();
+    scheduleNotificationHandler();
+  }
 
   return (
     <>
-    {/* <View style={styles.container}>
-      <Button
-        title="Schedule Notification"
-        onPress={scheduleNotificationHandler}
-      />
-     </View> */}
-    <Pressable onPress={scheduleNotificationHandler}>
+      <PrimaryButton onPress={finalPress}>
+          {name}
+        </PrimaryButton>
+      {/* <Pressable onPress={scheduleNotificationHandler}>
       {children}
-    </Pressable>
+    </Pressable> */}
     </>
   );
 }

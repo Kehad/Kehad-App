@@ -105,3 +105,82 @@
 // };
 
 // export default MyComponent;
+
+
+import React, { useState, useEffect } from "react";
+import { View, TextInput, Button, Text, StyleSheet } from "react-native";
+
+const DynamicValidationForm = () => {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
+
+  const [isFormValid, setIsFormValid] = useState(false);
+
+  // Dynamic validation logic
+  useEffect(() => {
+    const isNameValid = name.length >= 3;
+    const isEmailValid = email.includes("@gmail.com");
+    const isMessageValid = message.trim().split(/\s+/).length >= 5;
+
+    // Update form validity based on the input validations
+    setIsFormValid(isNameValid && isEmailValid && isMessageValid);
+  }, [name, email, message]);
+
+  return (
+    <View style={styles.container}>
+      <Text>Name:</Text>
+      <TextInput
+        style={styles.input}
+        value={name}
+        onChangeText={setName}
+        placeholder="Enter your name"
+      />
+
+      <Text>Email:</Text>
+      <TextInput
+        style={styles.input}
+        value={email}
+        onChangeText={setEmail}
+        placeholder="Enter your email"
+        keyboardType="email-address"
+      />
+
+      <Text>Message:</Text>
+      <TextInput
+        style={styles.input}
+        value={message}
+        onChangeText={setMessage}
+        placeholder="Enter your message"
+        multiline
+      />
+
+      {/* Conditionally change button color based on form validation */}
+      <Button
+        title="Submit"
+        color={isFormValid ? "blue" : "green"}
+        onPress={() => {
+          if (isFormValid) {
+            alert("Form is valid! Submission successful.");
+          } else {
+            alert("Please fill out the form correctly.");
+          }
+        }}
+      />
+    </View>
+  );
+};
+
+const styles = StyleSheet.create({
+  container: {
+    padding: 20,
+  },
+  input: {
+    height: 40,
+    borderColor: "gray",
+    borderWidth: 1,
+    marginBottom: 10,
+  },
+});
+
+export default DynamicValidationForm;

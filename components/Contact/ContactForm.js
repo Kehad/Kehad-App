@@ -3,12 +3,12 @@ import { Alert, StyleSheet, TextInput, View } from "react-native";
 import SocialLinks from "../UI/SocialLinks";
 import PrimaryButton from "../Buttons/PrimaryButton";
 import { GlobalStyles } from "../../constants/styles";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Notification from "../UI/Notification";
 import SecondaryButton from "../Buttons/SecondaryButton";
 
 function ContactForm() {
-  const [isFormEligible, setIsFormEligible] = useState(null);
+  const [isFormEligible, setIsFormEligible] = useState(false);
   const [nameInput, setNameInput] = useState("");
   const [emailInput, setEmailInput] = useState("");
   const [messageInput, setMessageInput] = useState("");
@@ -47,30 +47,42 @@ function ContactForm() {
   //   setMessageInput("");
   // }
 
-  function checkLogic() {
-    // const { name, email, message } = FormData;
-    // Check if the name is less than 3 characters
-    setIsFormEligible(false);
-    if (nameInput.length < 3) {
-      // Alert.alert("Error", "Name must be at least 3 characters long");
-      return;
-    } 
-    // Check if the email does not include '@gmail.com'
-    if (!emailInput.includes("@gmail.com")) {
-      // setIsFormEligible(false);
-      // Alert.alert("Error", "Email must be a Gmail address");
-      return;
-    }
+  // function checkLogic() {
+  //   // const { name, email, message } = FormData;
+  //   // Check if the name is less than 3 characters
+  //   setIsFormEligible(false);
+  //   if (nameInput.length < 3) {
+  //     // Alert.alert("Error", "Name must be at least 3 characters long");
+  //     return;
+  //   } 
+  //   // Check if the email does not include '@gmail.com'
+  //   if (!emailInput.includes("@gmail.com")) {
+  //     // setIsFormEligible(false);
+  //     // Alert.alert("Error", "Email must be a Gmail address");
+  //     return;
+  //   }
 
-    // Check if the message body is less than 5 words
-    const words = messageInput.trim().split(/\s+/).length;
-    if (words < 5) {
-      // setIsFormEligible(false);
-      // Alert.alert("Error", "Message must contain at least 5 words");
-      return;
-    }
-    setIsFormEligible(true); 
-  }
+  //   // Check if the message body is less than 5 words
+  //   const words = messageInput.trim().split(/\s+/).length;
+  //   if (words < 5) {
+  //     // setIsFormEligible(false);
+  //     // Alert.alert("Error", "Message must contain at least 5 words");
+  //     return;
+  //   }
+  //   setIsFormEligible(true); 
+  // }
+
+    const [isFormValid, setIsFormValid] = useState(false);
+
+    // Dynamic validation logic
+    useEffect(() => {
+      const isNameValid = nameInput.length >= 3;
+      const isEmailValid = emailInput.includes("@gmail.com");
+      const isMessageValid = messageInput.trim().split(/\s+/).length >= 5;
+
+      // Update form validity based on the input validations
+      setIsFormEligible(isNameValid && isEmailValid && isMessageValid);
+    }, [nameInput, emailInput, messageInput]);
 
   const handleSubmit = () => {
 
@@ -85,15 +97,15 @@ function ContactForm() {
 
     function getNameValue(input) {
       setNameInput(input);
-     checkLogic();
+    //  checkLogic();
     }
     function getEmailValue(input) {
       setEmailInput(input);
-     checkLogic();
+    //  checkLogic();
     }
     function getMessageValue(input) {
       setMessageInput(input);
-     checkLogic();
+    //  checkLogic();s
     }
 
   return (
@@ -133,11 +145,39 @@ function ContactForm() {
               title="Message sent"
               name="send"
               body="You've sucessfully sent your message"
-              onPress={handleSubmit}
+              // onPress={handleSubmit}
+              onPress={() => {
+                if (isFormEligible) {
+                  alert("Form is valid! Submission successful.");
+                } else {
+                  alert("Please fill out the form correctly.");
+                }
+              }}
             />
           ) : (
-            <PrimaryButton>send me</PrimaryButton>
+            <PrimaryButton
+              onPress={() => {
+                if (!isFormEligible) {
+                  alert("The name must be at least 3 characters long, The email address must be a valid email address, The message must be at least 5 words");
+                }
+              }}
+            >
+              send me
+            </PrimaryButton>
           )}
+          {/* <Notification
+            title="Message sent"
+            name="send"
+            body="You've sucessfully sent your message"
+            // onPress={handleSubmit}
+            onPress={() => {
+              if (isFormEligible) {
+                alert("Form is valid! Submission successful.");
+              } else {
+                alert("Please fill out the form correctly.");
+              }
+            }}
+          /> */}
         </View>
       </View>
     </View>

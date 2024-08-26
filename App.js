@@ -199,7 +199,7 @@ function BottomTabsNavigator() {
       />
       <BottomTabs.Screen
         name="NativeScreen"
-        component={Notification}
+        component={NativeScreen}
         options={{
           headerTitle: <Header title="Native" />,
           title: <Header title="Native" />,

@@ -1,11 +1,13 @@
-import { StyleSheet, TextInput, View } from "react-native";
+import { Alert, StyleSheet, TextInput, View } from "react-native";
 
 import SocialLinks from "../UI/SocialLinks";
 import PrimaryButton from "../Buttons/PrimaryButton";
 import { GlobalStyles } from "../../constants/styles";
 import { useRef, useState } from "react";
+import Notification from "../UI/Notification";
 
 function ContactForm() {
+  const [isFormEligible, setIsFormEligible] = useState(null);
   const [nameInput, setNameInput] = useState("");
   const [emailInput, setEmailInput] = useState("");
   const [messageInput, setMessageInput] = useState("");
@@ -26,25 +28,63 @@ function ContactForm() {
     setMessageInput(input);
   }
 
+  // function formSubmit() {
+  //   console.log(FormData)
+  //   // if (FormData.name === "") return;
+  //   // if (FormData.email === "") return;
+  //   // if (FormData.message === "") return;
 
+  //   const { name, email, message } = FormData;
+  //   const words = message.trim().split(/\s+/);
+  //   console.log(name, email, message);
+  //   // console.log(words);
+  //   if (name.length <= 2 && words.length < 5 && !email.includes("@gmail.com")) {
+  //     console.log("Form data failed");
+  //     console.log(name, words, email);
+  //     setIsFormEligible(false);
+  //     console.log('Failure')
+  //   }
+  //   if (name.length >= 3 && words.length >= 5 && email.includes("@gmail.com")) {
+  //     console.log(name, words, email)
+  //     setIsFormEligible(true);
+  //     console.log("Good to good");
+  //   }
+  //   setNameInput("");
+  //   setEmailInput("");
+  //   setMessageInput("");
+  // }
 
-  
-  function formSubmit() {
-      if (!FormData) return;
-      
-        const { name, email, message } = FormData;
-        const words = message.trim().split(/\s+/);
-        // console.log(name, email, message);
-        // console.log(words);
-        if (name.length >= 5 && words.length >= 5 && email.includes("@gmail.com")) {
-            console.log("Good to good")
-            setNameInput("");
-            setEmailInput("");
-            setMessageInput("");
-        } else {
-            console.log("Form data failed");
-        }
-    } 
+  const handleSubmit = () => {
+    const { name, email, message } = FormData;
+    // Check if the name is less than 3 characters
+    if (name.length < 3) {
+      setIsFormEligible(false);
+      Alert.alert("Error", "Name must be at least 3 characters long");
+      return;
+    }
+
+    // Check if the email does not include '@gmail.com'
+    if (!email.includes("@gmail.com")) {
+      setIsFormEligible(false)
+      Alert.alert("Error", "Email must be a Gmail address");
+      return;
+    }
+
+    // Check if the message body is less than 5 words
+    const words = message.trim().split(/\s+/).length;
+    if (words < 5) {
+      setIsFormEligible(false)
+      Alert.alert("Error", "Message must contain at least 5 words");
+      return;
+    }
+
+    // If all checks pass
+        console.log(name, words, email)
+        setIsFormEligible(true);
+        console.log("Good to good");
+    Alert.alert("Success", "Form submitted successfully");
+  };
+
 
   return (
     <View style={styles.form}>
@@ -77,7 +117,13 @@ function ContactForm() {
       <View style={styles.socialsBox}>
         <SocialLinks />
         <View style={styles.buttonBox}>
-          <PrimaryButton onPress={formSubmit}>send</PrimaryButton>
+          <Notification
+            title="Message sent"
+            name="send"
+            body="You've sucessfully sent your message"
+            onPress={handleSubmit}
+            onCheck={isFormEligible}
+          />
         </View>
       </View>
     </View>

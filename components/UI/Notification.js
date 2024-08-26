@@ -13,7 +13,7 @@ Notifications.setNotificationHandler({
   },
 });
 
-export default function Notification({ title, name, body, onPress }) {
+export default function Notification({ title, name, body, onPress, onCheck }) {
   useEffect(() => {
     const subscription1 = Notifications.addNotificationReceivedListener(
       (notification) => {
@@ -54,8 +54,20 @@ export default function Notification({ title, name, body, onPress }) {
   }
 
   function finalPress() {
-    onPress();
-    scheduleNotificationHandler();
+    console.log(onCheck);
+      onPress();
+
+    if (onCheck === false) {
+      onPress();
+      console.log(onCheck);
+      console.log('Dont notify user')
+    }
+    if (onCheck === true) {
+      onPress();
+      console.log(onCheck);
+      console.log('Notify user')
+      scheduleNotificationHandler();
+    }
   }
 
   return (

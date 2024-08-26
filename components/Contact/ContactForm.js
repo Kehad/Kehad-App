@@ -1,4 +1,5 @@
 import { Alert, StyleSheet, TextInput, View } from "react-native";
+import emailjs from "@emailjs/react-native";
 
 import SocialLinks from "../UI/SocialLinks";
 import PrimaryButton from "../Buttons/PrimaryButton";
@@ -162,7 +163,7 @@ function ContactForm() {
                 }
               }}
             >
-              send me
+              send
             </PrimaryButton>
           )}
           {/* <Notification

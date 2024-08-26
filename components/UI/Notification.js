@@ -50,31 +50,32 @@ export default function Notification({ title, name, body, onPress, onCheck }) {
         seconds: 5,
       },
     });
-    console.log('Notification')
   }
+  console.log("Notification");
 
   function finalPress() {
     console.log(onCheck);
-      onPress();
+    onPress();
+    scheduleNotificationHandler();
 
-    if (onCheck === false) {
-      onPress();
-      console.log(onCheck);
-      console.log('Dont notify user')
-    }
-    if (onCheck === true) {
-      onPress();
-      console.log(onCheck);
-      console.log('Notify user')
-      scheduleNotificationHandler();
-    }
+    // if (onCheck === false) {
+    //   console.log('Dont notify user')
+    //   onPress();
+    //   console.log(onCheck);
+    //   console.log("Dont notify user")
+    // }
+    // if (onCheck === true) {
+    //   console.log('Notify user')
+    //   onPress();
+    //   console.log(onCheck);
+    //   console.log("Notify user");
+    //   // scheduleNotificationHandler();
+    // }
   }
 
   return (
     <>
-      <PrimaryButton onPress={finalPress}>
-          {name}
-        </PrimaryButton>
+      <PrimaryButton onPress={finalPress}>{name}</PrimaryButton>
       {/* <Pressable onPress={scheduleNotificationHandler}>
       {children}
     </Pressable> */}

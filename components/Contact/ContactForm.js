@@ -5,6 +5,7 @@ import PrimaryButton from "../Buttons/PrimaryButton";
 import { GlobalStyles } from "../../constants/styles";
 import { useRef, useState } from "react";
 import Notification from "../UI/Notification";
+import SecondaryButton from "../Buttons/SecondaryButton";
 
 function ContactForm() {
   const [isFormEligible, setIsFormEligible] = useState(null);
@@ -18,15 +19,7 @@ function ContactForm() {
     message: messageInput,
   };
 
-  function getNameValue(input) {
-    setNameInput(input);
-  }
-  function getEmailValue(input) {
-    setEmailInput(input);
-  }
-  function getMessageValue(input) {
-    setMessageInput(input);
-  }
+
 
   // function formSubmit() {
   //   console.log(FormData)
@@ -54,37 +47,54 @@ function ContactForm() {
   //   setMessageInput("");
   // }
 
-  const handleSubmit = () => {
-    const { name, email, message } = FormData;
+  function checkLogic() {
+    // const { name, email, message } = FormData;
     // Check if the name is less than 3 characters
-    if (name.length < 3) {
-      setIsFormEligible(false);
-      Alert.alert("Error", "Name must be at least 3 characters long");
+    setIsFormEligible(false);
+    if (nameInput.length < 3) {
+      // Alert.alert("Error", "Name must be at least 3 characters long");
       return;
-    }
-
+    } 
     // Check if the email does not include '@gmail.com'
-    if (!email.includes("@gmail.com")) {
-      setIsFormEligible(false)
-      Alert.alert("Error", "Email must be a Gmail address");
+    if (!emailInput.includes("@gmail.com")) {
+      // setIsFormEligible(false);
+      // Alert.alert("Error", "Email must be a Gmail address");
       return;
     }
 
     // Check if the message body is less than 5 words
-    const words = message.trim().split(/\s+/).length;
+    const words = messageInput.trim().split(/\s+/).length;
     if (words < 5) {
-      setIsFormEligible(false)
-      Alert.alert("Error", "Message must contain at least 5 words");
+      // setIsFormEligible(false);
+      // Alert.alert("Error", "Message must contain at least 5 words");
       return;
     }
+    setIsFormEligible(true); 
+  }
 
-    // If all checks pass
-        console.log(name, words, email)
-        setIsFormEligible(true);
-        console.log("Good to good");
+  const handleSubmit = () => {
+
+    console.log("Good to good");
+    setNameInput("");
+    setEmailInput("");
+    setMessageInput("");
+    setIsFormEligible(false); 
+
     Alert.alert("Success", "Form submitted successfully");
   };
 
+    function getNameValue(input) {
+      setNameInput(input);
+     checkLogic();
+    }
+    function getEmailValue(input) {
+      setEmailInput(input);
+     checkLogic();
+    }
+    function getMessageValue(input) {
+      setMessageInput(input);
+     checkLogic();
+    }
 
   return (
     <View style={styles.form}>
@@ -100,6 +110,7 @@ function ContactForm() {
           placeholder="email"
           style={styles.textInput}
           placeholderTextColor={GlobalStyles.colors.primary50}
+          keyboardType="email-address"
           onChangeText={getEmailValue}
           value={emailInput}
         />
@@ -117,13 +128,16 @@ function ContactForm() {
       <View style={styles.socialsBox}>
         <SocialLinks />
         <View style={styles.buttonBox}>
-          <Notification
-            title="Message sent"
-            name="send"
-            body="You've sucessfully sent your message"
-            onPress={handleSubmit}
-            onCheck={isFormEligible}
-          />
+          {isFormEligible ? (
+            <Notification
+              title="Message sent"
+              name="send"
+              body="You've sucessfully sent your message"
+              onPress={handleSubmit}
+            />
+          ) : (
+            <PrimaryButton>send me</PrimaryButton>
+          )}
         </View>
       </View>
     </View>

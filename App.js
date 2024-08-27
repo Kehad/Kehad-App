@@ -197,7 +197,7 @@ function BottomTabsNavigator() {
           ),
         }}
       />
-      <BottomTabs.Screen
+      {/* <BottomTabs.Screen
         name="NativeScreen"
         component={NativeScreen}
         options={{
@@ -208,7 +208,7 @@ function BottomTabsNavigator() {
             <Ionicons name="mail" size={size} color={color} />
           ),
         }}
-      />
+      /> */}
     </BottomTabs.Navigator>
   );
 }

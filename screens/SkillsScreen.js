@@ -107,19 +107,23 @@ function SkillsScreen() {
       ]}
     >
       {/* <Title>My Skills</Title> */}
-      <View style={styles.box}>
+      <View>
         <ScrollView>
-          <FlatList
-            data={itemList}
-            keyExtractor={(item) => item.id}
-            renderItem={renderSkillsItem}
-            scrollEnabled={false}
-          />
-          <View style={styles.button}>
-            <IconNameButton onPress={showModalHandler} />
-            {modalVisible && (
-              <ModalDownload isModalVisible={showModalHandler} />
-            )}
+          <View style={styles.box}>
+            <View>
+              <FlatList
+                data={itemList}
+                keyExtractor={(item) => item.id}
+                renderItem={renderSkillsItem}
+                scrollEnabled={false}
+              />
+            </View>
+            <View style={styles.button}>
+              <IconNameButton onPress={showModalHandler} />
+              {modalVisible && (
+                <ModalDownload isModalVisible={showModalHandler} />
+              )}
+            </View>
           </View>
         </ScrollView>
       </View>
@@ -133,14 +137,18 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 24,
-    justifyContent: 'space-between',
+    paddingBottom: 0,
+    justifyContent: "space-between",
   },
   box: {
-    justifyContent: "space-between",
-    justifyContentAlign: "center",
+    // justifyContent: "space-between",
+    display: "flex",
+    justifyContent: 'flex-end'
   },
   button: {
     // width: "70%",
+    // alignItems: "center",
+    marginVertical: 20,
   },
   darkMode: {
     backgroundColor: GlobalStyles.colors.textBlack,

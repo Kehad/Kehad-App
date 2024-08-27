@@ -1,6 +1,6 @@
 import { Alert, StyleSheet, TextInput, View } from "react-native";
-import emailjs from "@emailjs/react-native";
-
+import { sendEmail } from "../../constants/email";
+import * as Linking from "expo-linking";
 import SocialLinks from "../UI/SocialLinks";
 import PrimaryButton from "../Buttons/PrimaryButton";
 import { GlobalStyles } from "../../constants/styles";
@@ -11,16 +11,8 @@ import SecondaryButton from "../Buttons/SecondaryButton";
 function ContactForm() {
   const [isFormEligible, setIsFormEligible] = useState(false);
   const [nameInput, setNameInput] = useState("");
-  const [emailInput, setEmailInput] = useState("");
+  // const [emailInput, setEmailInput] = useState("");
   const [messageInput, setMessageInput] = useState("");
-
-  const FormData = {
-    name: nameInput,
-    email: emailInput,
-    message: messageInput,
-  };
-
-
 
   // function formSubmit() {
   //   console.log(FormData)
@@ -55,7 +47,7 @@ function ContactForm() {
   //   if (nameInput.length < 3) {
   //     // Alert.alert("Error", "Name must be at least 3 characters long");
   //     return;
-  //   } 
+  //   }
   //   // Check if the email does not include '@gmail.com'
   //   if (!emailInput.includes("@gmail.com")) {
   //     // setIsFormEligible(false);
@@ -70,67 +62,88 @@ function ContactForm() {
   //     // Alert.alert("Error", "Message must contain at least 5 words");
   //     return;
   //   }
-  //   setIsFormEligible(true); 
+  //   setIsFormEligible(true);
   // }
 
-    const [isFormValid, setIsFormValid] = useState(false);
+  const [isFormValid, setIsFormValid] = useState(false);
 
-    // Dynamic validation logic
-    useEffect(() => {
-      const isNameValid = nameInput.length >= 3;
-      const isEmailValid = emailInput.includes("@gmail.com");
-      const isMessageValid = messageInput.trim().split(/\s+/).length >= 5;
+  // Dynamic validation logic
+  useEffect(() => {
+    const isNameValid = nameInput.length >= 3;
+    // const isEmailValid = emailInput.includes("@gmail.com");
+    const isMessageValid = messageInput.trim().split(/\s+/).length >= 5;
 
-      // Update form validity based on the input validations
-      setIsFormEligible(isNameValid && isEmailValid && isMessageValid);
-    }, [nameInput, emailInput, messageInput]);
+    // Update form validity based on the input validations
+    setIsFormEligible(isNameValid && isMessageValid);
+    const FormData = {
+      name: nameInput,
+      // email: emailInput,
+      message: messageInput,
+    };
+  }, [nameInput, messageInput]);
 
-  const handleSubmit = () => {
+  const openLink = async (body, messaage) => {
+    const url = `mailto:keahnney01@gmail.com?subject=${body}&body=${messaage}`; // Replace with your URL
+    console.log(url);
+    try {
+      const supported = await Linking.canOpenURL(url);
 
-    console.log("Good to good");
-    setNameInput("");
-    setEmailInput("");
-    setMessageInput("");
-    setIsFormEligible(false); 
-
-    Alert.alert("Success", "Form submitted successfully");
+      if (supported) {
+        await Linking.openURL(url);
+      } else {
+        Alert.alert(`Don't know how to open this URL: ${url}`);
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
-    function getNameValue(input) {
-      setNameInput(input);
+  const handleSubmit = () => {
+    console.log("Good to good");
+    console.log(FormData);
+    openLink(nameInput, messageInput);
+    // alert("Success, Form submitted successfully");
+    setIsFormEligible(false);
+    setNameInput("");
+    // setEmailInput("");
+    setMessageInput("");
+  };
+
+  function getNameValue(input) {
+    setNameInput(input);
     //  checkLogic();
-    }
-    function getEmailValue(input) {
-      setEmailInput(input);
-    //  checkLogic();
-    }
-    function getMessageValue(input) {
-      setMessageInput(input);
+  }
+  // function getEmailValue(input) {
+  //   setEmailInput(input);
+  //   //  checkLogic();
+  // }
+  function getMessageValue(input) {
+    setMessageInput(input);
     //  checkLogic();s
-    }
+  }
 
   return (
     <View style={styles.form}>
       <View style={styles.textBox}>
         <TextInput
-          placeholder="name"
+          placeholder="Name"
           style={styles.textInput}
           placeholderTextColor={GlobalStyles.colors.primary50}
           onChangeText={getNameValue}
           value={nameInput}
         />
-        <TextInput
-          placeholder="email"
+        {/* <TextInput
+          placeholder="Sender email?"
           style={styles.textInput}
           placeholderTextColor={GlobalStyles.colors.primary50}
           keyboardType="email-address"
           onChangeText={getEmailValue}
           value={emailInput}
-        />
+        /> */}
       </View>
       <View style={styles.messageBox}>
         <TextInput
-          placeholder="your message"
+          placeholder="Your message"
           multiline
           placeholderTextColor={GlobalStyles.colors.primary50}
           style={styles.messageInput}
@@ -142,43 +155,20 @@ function ContactForm() {
         <SocialLinks />
         <View style={styles.buttonBox}>
           {isFormEligible ? (
-            <Notification
-              title="Message sent"
-              name="send"
-              body="You've sucessfully sent your message"
-              // onPress={handleSubmit}
-              onPress={() => {
-                if (isFormEligible) {
-                  alert("Form is valid! Submission successful.");
-                } else {
-                  alert("Please fill out the form correctly.");
-                }
-              }}
-            />
+            <PrimaryButton onPress={handleSubmit}>send</PrimaryButton>
           ) : (
             <PrimaryButton
               onPress={() => {
                 if (!isFormEligible) {
-                  alert("The name must be at least 3 characters long, The email address must be a valid email address, The message must be at least 5 words");
+                  alert(
+                    "The name must be at least 3 characters long, \nThe message must be at least 5 words"
+                  );
                 }
               }}
             >
               send
             </PrimaryButton>
           )}
-          {/* <Notification
-            title="Message sent"
-            name="send"
-            body="You've sucessfully sent your message"
-            // onPress={handleSubmit}
-            onPress={() => {
-              if (isFormEligible) {
-                alert("Form is valid! Submission successful.");
-              } else {
-                alert("Please fill out the form correctly.");
-              }
-            }}
-          /> */}
         </View>
       </View>
     </View>

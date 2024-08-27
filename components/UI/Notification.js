@@ -91,3 +91,35 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
 });
+
+// use this in the contact form when you want a notification to show after submitting the form 
+//  {
+//    isFormEligible ? (
+//      // <Notification
+//      //   title="Message sent"
+//      //   name="send"
+//      //   body="You've sucessfully sent your message"
+//      //   // onPress={handleSubmit}
+//      //   onPress={() => {
+//      //     if (isFormEligible) {
+//      //       // alert("Form is valid! Submission successful.");
+//      //       handleSubmit();
+//      //     } else {
+//      //       alert("Please fill out the form correctly.");
+//      //     }
+//      //   }}
+//      // />
+//    ) : (
+//      <PrimaryButton
+//        onPress={() => {
+//          if (!isFormEligible) {
+//            alert(
+//              "The name must be at least 3 characters long, \nThe message must be at least 5 words"
+//            );
+//          }
+//        }}
+//      >
+//        send
+//      </PrimaryButton>
+//    );
+//  }

@@ -18,7 +18,8 @@ function ContactScreen() {
    const isDarkMode = themes === "dark";
 
   const openLink = async () => {
-    const url = "mailto:keahnney01@gmail.com"; // Replace with your URL
+    const url =
+      "mailto:keahnney01@gmail.com"; // Replace with your URL
 
     try {
       const supported = await Linking.canOpenURL(url);

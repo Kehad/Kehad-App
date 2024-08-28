@@ -1,186 +1,357 @@
-// // import { useColorScheme } from "nativewind";
-// // import React from "react";
-// // import { View, Text, StyleSheet, Switch } from "react-native";
-// // import tw from "tailwind-react-native-classnames";
+// import { StatusBar } from "expo-status-bar";
+// import { useEffect, useState } from "react";
+// import { Button, Platform, StyleSheet, Text, View } from "react-native";
+// import * as FileSystem from "expo-file-system";
+// import * as Sharing from "expo-sharing";
+// import AsyncStorage from "@react-native-async-storage/async-storage";
 
-// // const NativeScreen = () => {
-// //   const { colorScheme, toggleColorScheme } = useColorScheme();
-// //   const isDarkMode = colorScheme === "dark";
-// //   console.log(colorScheme);
+// export default function App() {
+//   const [downloadProgress, setDownloadProgress] = useState(0);
+//   const [download, setDownload] = useState();
+//   const [isDownloading, setIsDownloading] = useState(false);
+//   const [isDownloaded, setIsDownloaded] = useState(false);
+//   const [isPaused, setIsPaused] = useState(false);
 
-// //   return (
-// //     <View
-// //       style={[tw`flex-1 justify-center items-center`, styles.customContainer]}
-// //     >
-// //       <Text style={[tw`text-white text-lg`, styles.customText]}>
-// //         Hello Tailwind + StyleSheet!
-// //       </Text>
-// //       <Text
-// //         className="mx-4 text-justify bg-red-400"
-// //         style={isDarkMode ? styles.textWhite : styles.textBlack}
-// //         // style={colorScheme == "dark" ? styles.textWhite : styles.textBlack}
-// //       >
-// //         Lorem Ipsum is simply dummy text of the printing and typesetting
-// //         industry. Lorem Ipsum has been the industry's standard dummy text ever
-// //         since the 1500s, when an unknown printer took a galley of type and
-// //         scrambled it to make a type specimen book. It has survived not only five
-// //         centuries, but also the leap into electronic typesetting, remaining
-// //         essentially unchanged.
-// //       </Text>
-
-// //       <Switch value={colorScheme == "dark"} onChange={toggleColorScheme} />
-// //     </View>
-// //   );
-// // };
-
-// // export default NativeScreen;
-
-// // const styles = StyleSheet.create({
-// //   customContainer: {
-// //     padding: 20, // You can define more specific or reusable styles here
-// //     borderRadius: 10,
-// //   },
-// //   customText: {
-// //     fontSize: 24,
-// //     fontWeight: "bold",
-// //   },
-// //   textWhite: {
-// //     color: "red",
-// //   },
-// //   textBlack: {
-// //     color: "green",
-// //   },
-// // });
-
-
-// import React, { useState } from "react";
-// import { View, Text, Button, useColorScheme } from "react-native";
-// import tw from "tailwind-react-native-classnames";
-// import { useSelector } from "react-redux";
-
-// const MyComponent = () => {
-//   const themes = useSelector((state) => state.theme.theme)
-
-
-//   const systemColorScheme = useColorScheme();
-
-//   // Create state for the theme, defaulting to the system color scheme
-//   const [theme, setTheme] = useState(systemColorScheme);
-
-//   // Function to switch to light mode
-//   const switchToLightMode = () => {
-//     setTheme("light");
+//   const callback = (progress) => {
+//     const percentProgress = (
+//       (progress.totalBytesWritten / progress.totalBytesExpectedToWrite) *
+//       100
+//     ).toFixed(2);
+//     setDownloadProgress(percentProgress);
 //   };
 
-//   // Function to switch to dark mode
-//   const switchToDarkMode = () => {
-//     setTheme("dark");
+//   useEffect(() => {
+//     const getDownloadable = async () => {
+//       try {
+//         const savedDownloadJSON = await AsyncStorage.getItem("download");
+
+//         if (savedDownloadJSON !== undefined && savedDownloadJSON !== null) {
+//           const savedDownload = JSON.parse(savedDownloadJSON);
+//           const downloadResumable = FileSystem.createDownloadResumable(
+//             savedDownload.url,
+//             savedDownload.fileUri,
+//             savedDownload.options,
+//             callback,
+//             savedDownload.resumeData
+//           );
+
+//           setDownload(downloadResumable);
+//           setIsPaused(true);
+//           setIsDownloading(true);
+//         } else {
+//           const downloadResumable = FileSystem.createDownloadResumable(
+//             "https://drive.google.com/uc?export=download&id=1_JHSQ7nsJIki8y2eiOBTw3bZayFpJa0q", // https://drive.google.com/file/d/1_JHSQ7nsJIki8y2eiOBTw3bZayFpJa0q/view?usp=sharing
+//             FileSystem.documentDirectory + "large.jpeg",
+//             {},
+//             callback
+//           );
+//           setDownload(downloadResumable);
+//         }
+//       } catch (e) {
+//         console.log(e);
+//       }
+//     };
+//     getDownloadable();
+
+//     return async () => {
+//       if (isDownloading) {
+//         await pauseDownload();
+//       }
+//     };
+//   }, []);
+
+//   const downloadFile = async () => {
+//     setIsDownloading(true);
+//     const { uri } = await download.downloadAsync();
+//     console.log(uri)
+//     // AsyncStorage.removeItem("download");
+//     setIsDownloaded(true);
+//   };
+
+//   const pauseDownload = async () => {
+//     setIsPaused(true);
+//     await download.pauseAsync();
+//     // AsyncStorage.setItem("download", JSON.stringify(download.savable()));
+//     console.log("Paused download");
+//   };
+
+//   const resumeDownload = async () => {
+//     setIsPaused(false);
+//     const { uri } = await download.resumeAsync();
+//     // AsyncStorage.removeItem("download");
+//     setIsDownloaded(true);
+//   };
+
+//   // const resetDownload = async () => {
+//   //   setIsDownloaded(false);
+//   //   setIsDownloading(false);
+//   //   setIsPaused(false);
+//   //   setDownloadProgress(0);
+
+//   //   AsyncStorage.removeItem("download");
+//   //   const downloadResumable = FileSystem.createDownloadResumable(
+//   //     "https://storage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.jpeg",
+//   //     FileSystem.documentDirectory + "large.jpeg",
+//   //     {},
+//   //     callback
+//   //   );
+//   //   setDownload(downloadResumable);
+//   // };
+
+//   const exportDownload = async () => {
+//     if (Platform.OS === "android") {
+//       const permissions =
+//         await FileSystem.StorageAccessFramework.requestDirectoryPermissionsAsync();
+//       if (permissions.granted) {
+//         const base64 = await FileSystem.readAsStringAsync(
+//           FileSystem.documentDirectory + "large.jpeg",
+//           { encoding: FileSystem.EncodingType.Base64 }
+//         );
+
+//         await FileSystem.StorageAccessFramework.createFileAsync(
+//           permissions.directoryUri,
+//           "large.jpeg",
+//           "application/jpeg"
+//         )
+//           .then(async (uri) => {
+//             await FileSystem.writeAsStringAsync(uri, base64, {
+//               encoding: FileSystem.EncodingType.base64,
+//             });
+//           })
+//           .catch((e) => console.log(e));
+//       }
+//     } else {
+//       await Sharing.shareAsync(FileSystem.documentDirectory + "large.jpeg");
+//     }
 //   };
 
 //   return (
-//     <View
-//       style={tw`${
-//         themes === "dark" ? "bg-gray-900" : "bg-white"
-//       } flex-1 justify-center items-center`}
-//     >
-//       <Text
-//         style={tw`${
-//           themes === "dark" ? "text-white" : "text-black"
-//         } text-lg mb-4`}
-//       >
-//         {themes === "dark" ? "Dark Mode" : "Light Mode"}
-//       </Text>
+//     <View style={styles.container}>
+//       {isDownloading && <Text>Progress: {downloadProgress}%</Text>}
+//       {!isDownloading && !isPaused && (
+//         <Button title="Download" onPress={downloadFile} />
+//       )}
+//       {/* {isDownloading && !isPaused && (
+//         <Button title="Pause" onPress={pauseDownload} />
+//       )} */}
+//       {/* {isPaused && <Button title="Resume" onPress={resumeDownload} />} */}
+//       {/* {(isDownloading || isDownloaded) && (
+//         <Button title="Reset" onPress={resetDownload} />
+//       )} */}
 
-//       {/* Button to switch to Light Mode */}
-//       <Button title="Switch to Light Mode" onPress={switchToLightMode} />
-
-//       {/* Button to switch to Dark Mode */}
-//       <Button
-//         title="Switch to Dark Mode"
-//         onPress={switchToDarkMode}
-//         style={tw`mt-4`}
-//       />
+//       {isDownloaded && <Button title="Export File" onPress={exportDownload} />}
+//       <StatusBar style="auto" />
 //     </View>
 //   );
-// };
+// }
 
-// export default MyComponent;
+// const styles = StyleSheet.create({
+//   container: {
+//     flex: 1,
+//     backgroundColor: "#fff",
+//     alignItems: "center",
+//     justifyContent: "center",
+//   },
+// });
+
+///////////////////////// --------------------------- ////////////////////////////////////////
+///////////////////// METHOD 2 --------- ////////////////////////////////////////////
+///////////////////////// --------------------------- ////////////////////////////////////////
+
+// import { StatusBar } from "expo-status-bar";
+// import { StyleSheet, Button, View, Platform } from "react-native";
+// import * as FileSystem from "expo-file-system";
+// import { shareAsync } from "expo-sharing";
+
+// export default function App() {
+//   const downloadFromUrl = async () => {
+//     const filename = "kehad.jpeg";
+//     const result = await FileSystem.downloadAsync(
+//       "https://drive.google.com/uc?export=download&id=1_JHSQ7nsJIki8y2eiOBTw3bZayFpJa0q",
+//       FileSystem.documentDirectory + filename
+//     );
+//     console.log(result);
+
+//     save(result.uri, filename, result.headers["Content-Type"]);
+//   };
+
+//   const downloadFromAPI = async () => {
+//     const filename = "MissCoding.pdf";
+//     const localhost = Platform.OS === "android" ? "10.0.2.2" : "127.0.0.1";
+//     const result = await FileSystem.downloadAsync(
+//       `http://${localhost}:5000/generate-pdf?name=MissCoding&email=hello@tripwiretech.com`,
+//       FileSystem.documentDirectory + filename,
+//       {
+//         headers: {
+//           MyHeader: "MyValue",
+//         },
+//       }
+//     );
+//     console.log(result);
+//     save(result.uri, filename, result.headers["Content-Type"]);
+//   };
+
+//   const save = async (uri, filename, mimetype) => {
+//     if (Platform.OS === "android") {
+//       const permissions =
+//         await FileSystem.StorageAccessFramework.requestDirectoryPermissionsAsync();
+//       if (permissions.granted) {
+//         const base64 = await FileSystem.readAsStringAsync(uri, {
+//           encoding: FileSystem.EncodingType.Base64,
+//         });
+//         await FileSystem.StorageAccessFramework.createFileAsync(
+//           permissions.directoryUri,
+//           filename,
+//           mimetype
+//         )
+//           .then(async (uri) => {c
+//             await FileSystem.writeAsStringAsync(uri, base64, {
+//               encoding: FileSystem.EncodingType.Base64,
+//             });
+//           })
+//           .catch((e) => console.log(e));
+//       } else {
+//         shareAsync(uri);
+//       }
+//     } else {
+//       shareAsync(uri);
+//     }
+    
+//       shareAsync(uri);
+
+//   };
+//   return (
+//     <View style={styles.container}>
+//       <Button title="Download From URL" onPress={downloadFromUrl} />
+//       <Button title="Download From API" onPress={downloadFromAPI} />
+//       <StatusBar style="auto" />
+//     </View>
+//   );
+// }
+
+// const styles = StyleSheet.create({
+//   container: {
+//     flex: 1,
+//     backgroundColor: "#fff",
+//     alignItems: "center",
+//     justifyContent: "center",
+//   },
+// });
 
 
-import React, { useState, useEffect } from "react";
-import { View, TextInput, Button, Text, StyleSheet } from "react-native";
 
-const DynamicValidationForm = () => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [message, setMessage] = useState("");
+///////////////////////// --------------------------- ////////////////////////////////////////
+///////////////////// METHOD 3 --------- ////////////////////////////////////////////
+///////////////////////// --------------------------- ////////////////////////////////////////
 
-  const [isFormValid, setIsFormValid] = useState(false);
+import React, { useState } from "react";
+import { Button, Text, View } from "react-native";
+import * as FileSystem from "expo-file-system";
 
-  // Dynamic validation logic
-  useEffect(() => {
-    const isNameValid = name.length >= 3;
-    const isEmailValid = email.includes("@gmail.com");
-    const isMessageValid = message.trim().split(/\s+/).length >= 5;
+export default function App() {
+  const [downloadProgress, setDownloadProgress] = useState(0);
+  const [fileUri, setFileUri] = useState(null);
 
-    // Update form validity based on the input validations
-    setIsFormValid(isNameValid && isEmailValid && isMessageValid);
-  }, [name, email, message]);
+  const downloadFile = async () => {
+    const uri =
+      "https://drive.google.com/uc?export=download&id=1_JHSQ7nsJIki8y2eiOBTw3bZayFpJa0q"; // Replace with the URL of the file you want to download
+    const fileUri = FileSystem.documentDirectory + "downloadedImage.jpg"; // Path to save the file
+
+    const downloadResumable = FileSystem.createDownloadResumable(
+      uri,
+      fileUri,
+      {},
+      (progress) => {
+        const progressPercentage =
+          (progress.totalBytesWritten / progress.totalBytesExpectedToWrite) *
+          100;
+        setDownloadProgress(progressPercentage.toFixed(2));
+      }
+    );
+
+    try {
+      const { uri } = await downloadResumable.downloadAsync();
+      setFileUri(uri);
+      console.log("File saved to:", uri);
+    } catch (e) {
+      console.error("Download failed:", e);
+    }
+  };
 
   return (
-    <View style={styles.container}>
-      <Text>Name:</Text>
-      <TextInput
-        style={styles.input}
-        value={name}
-        onChangeText={setName}
-        placeholder="Enter your name"
-      />
-
-      <Text>Email:</Text>
-      <TextInput
-        style={styles.input}
-        value={email}
-        onChangeText={setEmail}
-        placeholder="Enter your email"
-        keyboardType="email-address"
-      />
-
-      <Text>Message:</Text>
-      <TextInput
-        style={styles.input}
-        value={message}
-        onChangeText={setMessage}
-        placeholder="Enter your message"
-        multiline
-      />
-
-      {/* Conditionally change button color based on form validation */}
-      <Button
-        title="Submit"
-        color={isFormValid ? "blue" : "green"}
-        onPress={() => {
-          if (isFormValid) {
-            alert("Form is valid! Submission successful.");
-          } else {
-            alert("Please fill out the form correctly.");
-          }
-        }}
-      />
+    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+      <Text>Download Progress: {downloadProgress}%</Text>
+      <Button title="Download File" onPress={downloadFile} />
+      {fileUri && <Text>File saved at: {fileUri}</Text>}
     </View>
   );
-};
+}
 
-const styles = StyleSheet.create({
-  container: {
-    padding: 20,
-  },
-  input: {
-    height: 40,
-    borderColor: "gray",
-    borderWidth: 1,
-    marginBottom: 10,
-  },
-});
 
-export default DynamicValidationForm;
+///////////////////////// --------------------------- ////////////////////////////////////////
+///////////////////// METHOD 4 --------- ////////////////////////////////////////////
+///////////////////////// --------------------------- ////////////////////////////////////////
+// import React, { useState } from "react";
+// import { Image, Button, View, Text } from "react-native";
+// import * as FileSystem from "expo-file-system";
+// import * as Sharing from "expo-sharing";
+
+// export default function App() {
+//   const [fileUri, setFileUri] = useState(null);
+//   const [downloadProgress, setDownloadProgress] = useState(0);
+
+//   const downloadImage = async () => {
+//     const uri =
+//       "https://drive.google.com/uc?export=download&id=1_JHSQ7nsJIki8y2eiOBTw3bZayFpJa0q"; // Replace with the file URL
+//     const fileUri = FileSystem.documentDirectory + "downloadedImage.jpg";
+
+//     const downloadResumable = FileSystem.createDownloadResumable(
+//       uri,
+//       fileUri,
+//       {},
+//       (progress) => {
+//         const progressPercentage =
+//           (progress.totalBytesWritten / progress.totalBytesExpectedToWrite) *
+//           100;
+//         setDownloadProgress(progressPercentage.toFixed(2));
+//       }
+//     );
+
+//     try {
+//       const { uri } = await downloadResumable.downloadAsync();
+//       setFileUri(uri);
+//       console.log("Image saved to:", uri);
+
+
+//       const shareFile = async () => {
+//         const fileUri = FileSystem.documentDirectory + "downloadedImage.jpg";
+//         if (await Sharing.isAvailableAsync()) {
+//           await Sharing.shareAsync(fileUri);
+//         } else {
+//           console.log("Sharing is not available on this platform");
+//         }
+//       };
+
+//       await shareFile(uri);
+
+//     } catch (e) {
+//       console.error("Error downloading image:", e);
+//     }
+//   };
+
+//   return (
+//     <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+//       <Button title="Download Image" onPress={downloadImage} />
+//       <Button title="Download Image" onPress={() => downloadImage()} />
+//       <Text>Download Progress: {downloadProgress}%</Text>
+//       {fileUri && (
+//         <Image
+//           source={{ uri: fileUri }}
+//           style={{ width: 200, height: 200, marginTop: 20 }}
+//         />
+//       )}
+//     </View>
+//   );
+// }
+
+

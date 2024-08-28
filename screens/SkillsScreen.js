@@ -19,6 +19,8 @@ import { useState } from "react";
 import Modal from "../components/UI/ModalDownload";
 import ModalDownload from "../components/UI/ModalDownload";
 import { useSelector } from "react-redux";
+import { Swipeable } from "react-native-gesture-handler";
+import { useNavigation } from "@react-navigation/native";
 
 const itemList = [
   {
@@ -75,7 +77,10 @@ function renderSkillsItem(itemData) {
   return <SkillsList {...itemData.item} />;
 }
 
+
+
 function SkillsScreen() {
+  const navigation = useNavigation();
   const [modalVisible, setModalVisible] = useState(false);
   const themes = useSelector((state) => state.theme.theme);
   const isDarkMode = themes === "dark";
@@ -83,6 +88,8 @@ function SkillsScreen() {
   function showModalHandler(isModalVisible) {
     setModalVisible(isModalVisible);
   }
+
+   
   // const downloadFile = async () => {
   //   const url = "http://techslides.com/demos/sample-videos/small.mp4";
   //   console.log(url) // Replace with your file URL
@@ -106,27 +113,27 @@ function SkillsScreen() {
         styles.container,
       ]}
     >
-      {/* <Title>My Skills</Title> */}
-      <View>
-        <ScrollView>
-          <View style={styles.box}>
-            <View>
-              <FlatList
-                data={itemList}
-                keyExtractor={(item) => item.id}
-                renderItem={renderSkillsItem}
-                scrollEnabled={false}
-              />
+        {/* <Title>My Skills</Title> */}
+        <View>
+          <ScrollView>
+            <View style={styles.box}>
+              <View>
+                <FlatList
+                  data={itemList}
+                  keyExtractor={(item) => item.id}
+                  renderItem={renderSkillsItem}
+                  scrollEnabled={false}
+                />
+              </View>
+              <View style={styles.button}>
+                <IconNameButton onPress={showModalHandler} />
+                {modalVisible && (
+                  <ModalDownload isModalVisible={showModalHandler} />
+                )}
+              </View>
             </View>
-            <View style={styles.button}>
-              <IconNameButton onPress={showModalHandler} />
-              {modalVisible && (
-                <ModalDownload isModalVisible={showModalHandler} />
-              )}
-            </View>
-          </View>
-        </ScrollView>
-      </View>
+          </ScrollView>
+        </View>
     </View>
   );
 }

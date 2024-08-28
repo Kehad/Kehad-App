@@ -397,7 +397,7 @@ export default function App() {
       <Button title="Download Image only" onPress={downloadImage} />
       <Button
         title="Download PDF"
-        onPress={() => downloadImage("1gwqfikX13tzy5Bcenp_TrLNtX097Y5gH", "Kehinde Adigun CV.PDF")}
+        onPress={() => downloadImage("1gwqfikX13tzy5Bcenp_TrLNtX097Y5gH", "Kehinde Adigun CV.pdf")}
       />
       <Text>Download Progress: {downloadProgress}%</Text>
       {fileUri && (

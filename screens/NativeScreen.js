@@ -304,6 +304,8 @@ const allUrl = 'https://drive.google.com/uc?export=download&id=1_JHSQ7nsJIki8y2e
 export default function App() {
   const [fileUri, setFileUri] = useState(null);
   const [downloadProgress, setDownloadProgress] = useState(0);
+  const [oneurl, setOneUrl] = useState('');
+  const [oneName, setOneName] = useState('');
 
   // const downloadImage = async () => {
   //   const uri =
@@ -343,6 +345,8 @@ export default function App() {
   // };
 
   const downloadImage = async (oneUrl, oneName) => {
+    setOneUrl(oneUrl);
+    setOneName(oneName);
     const uri =
       `https://drive.google.com/uc?export=download&id=${oneUrl}`; // Replace with the file URL  https://drive.google.com/file/d/1gwqfikX13tzy5Bcenp_TrLNtX097Y5gH/view?usp=drive_link
     const fileUri = FileSystem.documentDirectory + oneName;
@@ -365,7 +369,7 @@ export default function App() {
       console.log("Image saved to:", uri);
 
       const shareFile = async () => {
-        const fileUri = FileSystem.documentDirectory + "Kehinde Adigun CV.jpg";
+        const fileUri = FileSystem.documentDirectory + oneName;
         if (await Sharing.isAvailableAsync()) {
           await Sharing.shareAsync(fileUri);
         } else {

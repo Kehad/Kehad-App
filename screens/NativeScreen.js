@@ -1,158 +1,158 @@
-import { StatusBar } from "expo-status-bar";
-import { useEffect, useState } from "react";
-import { Button, Platform, StyleSheet, Text, View } from "react-native";
-import * as FileSystem from "expo-file-system";
-import * as Sharing from "expo-sharing";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+// import { StatusBar } from "expo-status-bar";
+// import { useEffect, useState } from "react";
+// import { Button, Platform, StyleSheet, Text, View } from "react-native";
+// import * as FileSystem from "expo-file-system";
+// import * as Sharing from "expo-sharing";
+// import AsyncStorage from "@react-native-async-storage/async-storage";
 
-export default function App() {
-  const [downloadProgress, setDownloadProgress] = useState(0);
-  const [download, setDownload] = useState();
-  const [isDownloading, setIsDownloading] = useState(false);
-  const [isDownloaded, setIsDownloaded] = useState(false);
-  const [isPaused, setIsPaused] = useState(false);
+// export default function App() {
+//   const [downloadProgress, setDownloadProgress] = useState(0);
+//   const [download, setDownload] = useState();
+//   const [isDownloading, setIsDownloading] = useState(false);
+//   const [isDownloaded, setIsDownloaded] = useState(false);
+//   const [isPaused, setIsPaused] = useState(false);
 
-  const callback = (progress) => {
-    const percentProgress = (
-      (progress.totalBytesWritten / progress.totalBytesExpectedToWrite) *
-      100
-    ).toFixed(2);
-    setDownloadProgress(percentProgress);
-  };
+//   const callback = (progress) => {
+//     const percentProgress = (
+//       (progress.totalBytesWritten / progress.totalBytesExpectedToWrite) *
+//       100
+//     ).toFixed(2);
+//     setDownloadProgress(percentProgress);
+//   };
 
-  useEffect(() => {
-    const getDownloadable = async () => {
-      try {
-        const savedDownloadJSON = await AsyncStorage.getItem("download");
+//   useEffect(() => {
+//     const getDownloadable = async () => {
+//       try {
+//         const savedDownloadJSON = await AsyncStorage.getItem("download");
 
-        if (savedDownloadJSON !== undefined && savedDownloadJSON !== null) {
-          const savedDownload = JSON.parse(savedDownloadJSON);
-          const downloadResumable = FileSystem.createDownloadResumable(
-            savedDownload.url,
-            savedDownload.fileUri,
-            savedDownload.options,
-            callback,
-            savedDownload.resumeData
-          );
+//         if (savedDownloadJSON !== undefined && savedDownloadJSON !== null) {
+//           const savedDownload = JSON.parse(savedDownloadJSON);
+//           const downloadResumable = FileSystem.createDownloadResumable(
+//             savedDownload.url,
+//             savedDownload.fileUri,
+//             savedDownload.options,
+//             callback,
+//             savedDownload.resumeData
+//           );
 
-          setDownload(downloadResumable);
-          setIsPaused(true);
-          setIsDownloading(true);
-        } else {
-          const downloadResumable = FileSystem.createDownloadResumable(
-            "https://drive.google.com/uc?export=download&id=1_JHSQ7nsJIki8y2eiOBTw3bZayFpJa0q", // https://drive.google.com/file/d/1_JHSQ7nsJIki8y2eiOBTw3bZayFpJa0q/view?usp=sharing
-            FileSystem.documentDirectory + "large.jpeg",
-            {},
-            callback
-          );
-          setDownload(downloadResumable);
-        }
-      } catch (e) {
-        console.log(e);
-      }
-    };
-    getDownloadable();
+//           setDownload(downloadResumable);
+//           setIsPaused(true);
+//           setIsDownloading(true);
+//         } else {
+//           const downloadResumable = FileSystem.createDownloadResumable(
+//             "https://drive.google.com/uc?export=download&id=1_JHSQ7nsJIki8y2eiOBTw3bZayFpJa0q", // https://drive.google.com/file/d/1_JHSQ7nsJIki8y2eiOBTw3bZayFpJa0q/view?usp=sharing
+//             FileSystem.documentDirectory + "large.jpeg",
+//             {},
+//             callback
+//           );
+//           setDownload(downloadResumable);
+//         }
+//       } catch (e) {
+//         console.log(e);
+//       }
+//     };
+//     getDownloadable();
 
-    return async () => {
-      if (isDownloading) {
-        await pauseDownload();
-      }
-    };
-  }, []);
+//     return async () => {
+//       if (isDownloading) {
+//         await pauseDownload();
+//       }
+//     };
+//   }, []);
 
-  const downloadFile = async () => {
-    setIsDownloading(true);
-    const { uri } = await download.downloadAsync();
-    console.log(uri)
-    AsyncStorage.removeItem("download");
-    setIsDownloaded(true);
-  };
+//   const downloadFile = async () => {
+//     setIsDownloading(true);
+//     const { uri } = await download.downloadAsync();
+//     console.log(uri)
+//     AsyncStorage.removeItem("download");
+//     setIsDownloaded(true);
+//   };
 
-  const pauseDownload = async () => {
-    setIsPaused(true);
-    await download.pauseAsync();
-    // AsyncStorage.setItem("download", JSON.stringify(download.savable()));
-    console.log("Paused download");
-  };
+//   const pauseDownload = async () => {
+//     setIsPaused(true);
+//     await download.pauseAsync();
+//     // AsyncStorage.setItem("download", JSON.stringify(download.savable()));
+//     console.log("Paused download");
+//   };
 
-  const resumeDownload = async () => {
-    setIsPaused(false);
-    const { uri } = await download.resumeAsync();
-    // AsyncStorage.removeItem("download");
-    setIsDownloaded(true);
-  };
+//   const resumeDownload = async () => {
+//     setIsPaused(false);
+//     const { uri } = await download.resumeAsync();
+//     // AsyncStorage.removeItem("download");
+//     setIsDownloaded(true);
+//   };
 
-  // const resetDownload = async () => {
-  //   setIsDownloaded(false);
-  //   setIsDownloading(false);
-  //   setIsPaused(false);
-  //   setDownloadProgress(0);
+//   // const resetDownload = async () => {
+//   //   setIsDownloaded(false);
+//   //   setIsDownloading(false);
+//   //   setIsPaused(false);
+//   //   setDownloadProgress(0);
 
-  //   AsyncStorage.removeItem("download");
-  //   const downloadResumable = FileSystem.createDownloadResumable(
-  //     "https://storage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.jpeg",
-  //     FileSystem.documentDirectory + "large.jpeg",
-  //     {},
-  //     callback
-  //   );
-  //   setDownload(downloadResumable);
-  // };
+//   //   AsyncStorage.removeItem("download");
+//   //   const downloadResumable = FileSystem.createDownloadResumable(
+//   //     "https://storage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.jpeg",
+//   //     FileSystem.documentDirectory + "large.jpeg",
+//   //     {},
+//   //     callback
+//   //   );
+//   //   setDownload(downloadResumable);
+//   // };
 
-  const exportDownload = async () => {
-    if (Platform.OS === "android") {
-      const permissions =
-        await FileSystem.StorageAccessFramework.requestDirectoryPermissionsAsync();
-      if (permissions.granted) {
-        const base64 = await FileSystem.readAsStringAsync(
-          FileSystem.documentDirectory + "large.jpeg",
-          { encoding: FileSystem.EncodingType.Base64 }
-        );
+//   const exportDownload = async () => {
+//     if (Platform.OS === "android") {
+//       const permissions =
+//         await FileSystem.StorageAccessFramework.requestDirectoryPermissionsAsync();
+//       if (permissions.granted) {
+//         const base64 = await FileSystem.readAsStringAsync(
+//           FileSystem.documentDirectory + "large.jpeg",
+//           { encoding: FileSystem.EncodingType.Base64 }
+//         );
 
-        await FileSystem.StorageAccessFramework.createFileAsync(
-          permissions.directoryUri,
-          "large.jpeg",
-          "application/jpeg"
-        )
-          .then(async (uri) => {
-            await FileSystem.writeAsStringAsync(uri, base64, {
-              encoding: FileSystem.EncodingType.base64,
-            });
-          })
-          .catch((e) => console.log(e));
-      }
-    } else {
-      await Sharing.shareAsync(FileSystem.documentDirectory + "large.jpeg");
-    }
-  };
+//         await FileSystem.StorageAccessFramework.createFileAsync(
+//           permissions.directoryUri,
+//           "large.jpeg",
+//           "application/jpeg"
+//         )
+//           .then(async (uri) => {
+//             await FileSystem.writeAsStringAsync(uri, base64, {
+//               encoding: FileSystem.EncodingType.base64,
+//             });
+//           })
+//           .catch((e) => console.log(e));
+//       }
+//     } else {
+//       await Sharing.shareAsync(FileSystem.documentDirectory + "large.jpeg");
+//     }
+//   };
 
-  return (
-    <View style={styles.container}>
-      {isDownloading && <Text>Progress: {downloadProgress}%</Text>}
-      {!isDownloading && !isPaused && (
-        <Button title="Download" onPress={downloadFile} />
-      )}
-      {/* {isDownloading && !isPaused && (
-        <Button title="Pause" onPress={pauseDownload} />
-      )} */}
-      {/* {isPaused && <Button title="Resume" onPress={resumeDownload} />} */}
-      {/* {(isDownloading || isDownloaded) && (
-        <Button title="Reset" onPress={resetDownload} />
-      )} */}
+//   return (
+//     <View style={styles.container}>
+//       {isDownloading && <Text>Progress: {downloadProgress}%</Text>}
+//       {!isDownloading && !isPaused && (
+//         <Button title="Download" onPress={downloadFile} />
+//       )}
+//       {/* {isDownloading && !isPaused && (
+//         <Button title="Pause" onPress={pauseDownload} />
+//       )} */}
+//       {/* {isPaused && <Button title="Resume" onPress={resumeDownload} />} */}
+//       {/* {(isDownloading || isDownloaded) && (
+//         <Button title="Reset" onPress={resetDownload} />
+//       )} */}
 
-      {isDownloaded && <Button title="Export File" onPress={exportDownload} />}
-      <StatusBar style="auto" />
-    </View>
-  );
-}
+//       {isDownloaded && <Button title="Export File" onPress={exportDownload} />}
+//       <StatusBar style="auto" />
+//     </View>
+//   );
+// }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
+// const styles = StyleSheet.create({
+//   container: {
+//     flex: 1,
+//     backgroundColor: "#fff",
+//     alignItems: "center",
+//     justifyContent: "center",
+//   },
+// });
 
 ///////////////////////// --------------------------- ////////////////////////////////////////
 ///////////////////// METHOD 2 for downloading and saving but it is not loading image--------- ////////////////////////////////////////////
@@ -294,67 +294,116 @@ const styles = StyleSheet.create({
 ///////////////////////// --------------------------- ////////////////////////////////////////
 ///////////////////// METHOD 4 for downloading and saving --------- ////////////////////////////////////////////
 ///////////////////////// --------------------------- ////////////////////////////////////////
-// import React, { useState } from "react";
-// import { Image, Button, View, Text } from "react-native";
-// import * as FileSystem from "expo-file-system";
-// import * as Sharing from "expo-sharing";
+import React, { useState } from "react";
+import { Image, Button, View, Text } from "react-native";
+import * as FileSystem from "expo-file-system";
+import * as Sharing from "expo-sharing";
 
-// export default function App() {
-//   const [fileUri, setFileUri] = useState(null);
-//   const [downloadProgress, setDownloadProgress] = useState(0);
+const allUrl = 'https://drive.google.com/uc?export=download&id=1_JHSQ7nsJIki8y2eiOBTw3bZayFpJa0q';
 
-//   const downloadImage = async () => {
-//     const uri =
-//       "https://drive.google.com/uc?export=download&id=1_JHSQ7nsJIki8y2eiOBTw3bZayFpJa0q"; // Replace with the file URL
-//     const fileUri = FileSystem.documentDirectory + "Kehinde Adigun CV.jpg";
+export default function App() {
+  const [fileUri, setFileUri] = useState(null);
+  const [downloadProgress, setDownloadProgress] = useState(0);
 
-//     const downloadResumable = FileSystem.createDownloadResumable(
-//       uri,
-//       fileUri,
-//       {},
-//       (progress) => {
-//         const progressPercentage =
-//           (progress.totalBytesWritten / progress.totalBytesExpectedToWrite) *
-//           100;
-//         setDownloadProgress(progressPercentage.toFixed(2));
-//       }
-//     );
+  // const downloadImage = async () => {
+  //   const uri =
+  //     "https://drive.google.com/uc?export=download&id=1_JHSQ7nsJIki8y2eiOBTw3bZayFpJa0q"; // Replace with the file URL  https://drive.google.com/file/d/1gwqfikX13tzy5Bcenp_TrLNtX097Y5gH/view?usp=drive_link
+  //   const fileUri = FileSystem.documentDirectory + "Kehinde Adigun CV.jpg";
 
-//     try {
-//       const { uri } = await downloadResumable.downloadAsync();
-//       setFileUri(uri);
-//       console.log("Image saved to:", uri);
+  //   const downloadResumable = FileSystem.createDownloadResumable(
+  //     uri,
+  //     fileUri,
+  //     {},
+  //     (progress) => {
+  //       const progressPercentage =
+  //         (progress.totalBytesWritten / progress.totalBytesExpectedToWrite) *
+  //         100;
+  //       setDownloadProgress(progressPercentage.toFixed(2));
+  //     }
+  //   );
 
+  //   try {
+  //     const { uri } = await downloadResumable.downloadAsync();
+  //     setFileUri(uri);
+  //     console.log("Image saved to:", uri);
 
-//       const shareFile = async () => {
-//         const fileUri = FileSystem.documentDirectory + "Kehinde Adigun CV.jpg";
-//         if (await Sharing.isAvailableAsync()) {
-//           await Sharing.shareAsync(fileUri);
-//         } else {
-//           console.log("Sharing is not available on this platform");
-//         }
-//       };
+  //     const shareFile = async () => {
+  //       const fileUri = FileSystem.documentDirectory + "Kehinde Adigun CV.jpg";
+  //       if (await Sharing.isAvailableAsync()) {
+  //         await Sharing.shareAsync(fileUri);
+  //       } else {
+  //         console.log("Sharing is not available on this platform");
+  //       }
+  //     };
 
-//       await shareFile(uri);
+  //     await shareFile(uri);
+  //   } catch (e) {
+  //     console.error("Error downloading image:", e);
+  //   }
+  // };
 
-//     } catch (e) {
-//       console.error("Error downloading image:", e);
-//     }
-//   };
+  const downloadImage = async (oneUrl, oneName) => {
+    const uri =
+      `https://drive.google.com/uc?export=download&id=${oneUrl}`; // Replace with the file URL  https://drive.google.com/file/d/1gwqfikX13tzy5Bcenp_TrLNtX097Y5gH/view?usp=drive_link
+    const fileUri = FileSystem.documentDirectory + oneName;
 
-//   return (
-//     <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-//       <Button title="Download Image" onPress={downloadImage} />
-//       <Button title="Download Image" onPress={() => downloadImage()} />
-//       <Text>Download Progress: {downloadProgress}%</Text>
-//       {fileUri && (
-//         <Image
-//           source={{ uri: fileUri }}
-//           style={{ width: 200, height: 200, marginTop: 20 }}
-//         />
-//       )}
-//     </View>
-//   );
-// }
+    const downloadResumable = FileSystem.createDownloadResumable(
+      uri,
+      fileUri,
+      {},
+      (progress) => {
+        const progressPercentage =
+          (progress.totalBytesWritten / progress.totalBytesExpectedToWrite) *
+          100;
+        setDownloadProgress(progressPercentage.toFixed(2));
+      }
+    );
+
+    try {
+      const { uri } = await downloadResumable.downloadAsync();
+      setFileUri(uri);
+      console.log("Image saved to:", uri);
+
+      const shareFile = async () => {
+        const fileUri = FileSystem.documentDirectory + "Kehinde Adigun CV.jpg";
+        if (await Sharing.isAvailableAsync()) {
+          await Sharing.shareAsync(fileUri);
+        } else {
+          console.log("Sharing is not available on this platform");
+        }
+      };
+
+      await shareFile(uri);
+    } catch (e) {
+      console.error("Error downloading image:", e);
+    }
+  };
+
+  return (
+    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+      <Button
+        title="Download Image"
+        onPress={() =>
+          downloadImage(
+            "1_JHSQ7nsJIki8y2eiOBTw3bZayFpJa0q",
+            'Kehinde Adigun CV.jpg'
+          )
+        }
+      />
+      <Button title="Download Image only" onPress={downloadImage} />
+      <Button
+        title="Download PDF"
+        onPress={() => downloadImage("1gwqfikX13tzy5Bcenp_TrLNtX097Y5gH", "Kehinde Adigun CV.PDF")}
+      />
+      <Text>Download Progress: {downloadProgress}%</Text>
+      {fileUri && (
+        <Image
+          source={{ uri: fileUri }}
+          style={{ width: 200, height: 200, marginTop: 20 }}
+        />
+      )}
+    </View>
+  );
+}
 
 

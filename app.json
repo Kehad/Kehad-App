@@ -4,10 +4,10 @@
     "slug": "Kehad-App",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/kehadLogo.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets//KehadSplash2.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -27,7 +27,8 @@
       [
         "expo-notifications",
         {
-          "icon": "./local/assets/icon.png",
+          // "icon": "./local/assets/icon.png",
+          "icon": "./local/assets/kehadLogo.png",
           "color": "#ffffff",
           "defaultChannel": "default"
         }

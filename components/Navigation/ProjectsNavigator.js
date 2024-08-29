@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 
 import ProjectsScreen from "../../screens/ProjectsScreen";
 import ModalScreen from "../../screens/ModalScreen";
+import { GlobalStyles } from "../../constants/styles";
 
 const Stack = createNativeStackNavigator();
 
@@ -18,8 +19,10 @@ function ProjectsNavigator() {
           // backgroundColor: isDarkMode
           //   ? GlobalStyles.colors.textBlack
           //   : GlobalStyles.colors.white,
+          // backgroundColor: isDarkMode ? '#2e2e2e' : '#efefef',
         },
-        headerTintColor: isDarkMode ? "#EFEFEF" : "#282828",
+        // headerTintColor: isDarkMode ? "#EFEFEF" : "#282828",
+        // headerTintColor: 'black',
       })}
     >
       <Stack.Screen
@@ -35,7 +38,15 @@ function ProjectsNavigator() {
         component={ModalScreen}
         options={{
           presentation: "modal",
-          headerTintColor: isDarkMode ? "white" : "black",
+          headerTintColor: isDarkMode ? "#efefef" : "black",
+          headerTintColor: '#000000',
+          headerStyle: {
+            // backgroundColor: isDarkMode
+            //   ? GlobalStyles.colors.textBlack
+            //   : GlobalStyles.colors.white,
+            backgroundColor: "green",
+            backgroundColor: isDarkMode ? "#2e2e2e" : "#efefef",
+          },
         }}
       />
     </Stack.Navigator>

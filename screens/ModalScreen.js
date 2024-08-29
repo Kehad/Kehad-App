@@ -8,11 +8,11 @@ import { useLayoutEffect } from "react";
 import { useSelector } from "react-redux";
 import { openBrowserAsync } from "expo-web-browser";
 
-function ModalScreen() {
+function ModalScreen({ route, navigation}) {
    const themes = useSelector((state) => state.theme.theme);
    const isDarkMode = themes === "dark";
-  const navigation = useNavigation();
-  const route = useRoute();
+  // const navigation = useNavigation();
+  // const route = useRoute();
 console.log(isDarkMode)
   // console.log(route);
   const ModalData = {
@@ -28,10 +28,12 @@ console.log(isDarkMode)
         // backgroundColor: isDarkMode
         //   ? GlobalStyles.colors.textBlack
         //   : GlobalStyles.colors.white,
+        // backgroundColor: !isDarkMode ? "white" : "#282828",
         // backgroundColor: isDarkMode ? "#282828" : "#EFEFEF",
         // backgroundColor: isDarkMode
         // backgroundColor: isDarkMode && "#282828",
         // backgroundColor: isDarkMode && "#EFEFEF",
+        // backgroundColor: "green",
       },
       headerTitleStyle: {
         // color: GlobalStyles.colors.primary50,

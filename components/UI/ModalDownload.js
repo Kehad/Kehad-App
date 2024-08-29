@@ -1,17 +1,28 @@
 import { useState } from "react";
 import { Alert, Modal, StyleSheet, Text, Pressable, View } from "react-native";
+import * as Network from "expo-network";
 
 import IconButton from "../Buttons/IconButton";
 import Notification from "./Notification";
 import { downloadImage } from "../../constants/download";
 import { GlobalStyles } from "../../constants/styles";
+import { NetworkState } from "../../constants/NetworkState";
 
 const ModalDownload = ({ isModalVisible }) => {
     const [fileUri, setFileUri] = useState(null);
-    const [downloadProgress, setDownloadProgress] = useState(0);
+  const [downloadProgress, setDownloadProgress] = useState(0);
+    const [ipAddress, setIpAddress] = useState(null);
+    const [networkState, setNetworkState] = useState(null);
 
-  async function  imageDownloadHandler() {
-     await downloadImage(
+    
+    async function imageDownloadHandler() {
+      await NetworkState(setIpAddress, setNetworkState);
+      console.log("Modal download");
+      console.log(ipAddress);
+      console.log(networkState);
+      console.log("Modal download");
+   
+    await downloadImage(
        "1_JHSQ7nsJIki8y2eiOBTw3bZayFpJa0q",
        "Kehinde Adigun CV.jpg",
        setDownloadProgress,

@@ -1,27 +1,48 @@
+import { useState } from "react";
 import { Alert, Modal, StyleSheet, Text, Pressable, View } from "react-native";
-import { GlobalStyles } from "../../constants/styles";
-import PrimaryButton from "../Buttons/PrimaryButton";
+
 import IconButton from "../Buttons/IconButton";
 import Notification from "./Notification";
+import { downloadImage } from "../../constants/download";
+import { GlobalStyles } from "../../constants/styles";
 
 const ModalDownload = ({ isModalVisible }) => {
+    const [fileUri, setFileUri] = useState(null);
+    const [downloadProgress, setDownloadProgress] = useState(0);
+
+  async function  imageDownloadHandler() {
+     await downloadImage(
+       "1_JHSQ7nsJIki8y2eiOBTw3bZayFpJa0q",
+       "Kehinde Adigun CV.jpg",
+       setDownloadProgress,
+       setFileUri
+    );
+    isModalVisible(false);
+  }
+
+  async function pdfDownloadHandler() {
+    await downloadImage(
+      "1gwqfikX13tzy5Bcenp_TrLNtX097Y5gH",
+      "Kehinde Adigun CV.pdf",
+      setDownloadProgress,
+      setFileUri
+    );
+    isModalVisible(false);
+  }
+
   return (
     <View style={styles.centeredView}>
       <Modal animationType="fade" transparent={true} visible={true}>
         <View style={styles.backdrop}>
           <View style={styles.centeredView}>
             <View style={styles.modalView}>
+              <Text>Downloading: {downloadProgress}</Text>
               <View style={styles.button}>
-                {/* <Notification click="click">
-                  <PrimaryButton onPress={() => isModalVisible(false)}>
-                    Download Image
-                  </PrimaryButton>
-                </Notification> */}
                 <Notification
                   title="Image Download Successful"
                   name="Download Image"
                   body="You've sucessfully downloaded the Image version of the CV"
-                  onPress={() => isModalVisible(false)}
+                  onPress={imageDownloadHandler}
                 />
               </View>
               <View style={styles.button}>
@@ -29,7 +50,7 @@ const ModalDownload = ({ isModalVisible }) => {
                   title="PDF Download Successful"
                   name="Download PDF"
                   body="You've sucessfully downloaded the PDF version of the CV"
-                  onPress={() => isModalVisible(false)}
+                  onPress={pdfDownloadHandler}
                 />
               </View>
               <Pressable

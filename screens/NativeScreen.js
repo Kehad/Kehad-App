@@ -296,92 +296,17 @@
 ///////////////////////// --------------------------- ////////////////////////////////////////
 import React, { useState } from "react";
 import { Image, Button, View, Text } from "react-native";
-import * as FileSystem from "expo-file-system";
-import * as Sharing from "expo-sharing";
+import { downloadImage } from "../constants/download";
 
 const allUrl = 'https://drive.google.com/uc?export=download&id=1_JHSQ7nsJIki8y2eiOBTw3bZayFpJa0q';
+const pdf =
+  "https://drive.google.com/file/d/1gwqfikX13tzy5Bcenp_TrLNtX097Y5gH/view?usp=sharing";
 
 export default function App() {
   const [fileUri, setFileUri] = useState(null);
   const [downloadProgress, setDownloadProgress] = useState(0);
-  const [oneurl, setOneUrl] = useState('');
-  const [oneName, setOneName] = useState('');
 
-  // const downloadImage = async () => {
-  //   const uri =
-  //     "https://drive.google.com/uc?export=download&id=1_JHSQ7nsJIki8y2eiOBTw3bZayFpJa0q"; // Replace with the file URL  https://drive.google.com/file/d/1gwqfikX13tzy5Bcenp_TrLNtX097Y5gH/view?usp=drive_link
-  //   const fileUri = FileSystem.documentDirectory + "Kehinde Adigun CV.jpg";
 
-  //   const downloadResumable = FileSystem.createDownloadResumable(
-  //     uri,
-  //     fileUri,
-  //     {},
-  //     (progress) => {
-  //       const progressPercentage =
-  //         (progress.totalBytesWritten / progress.totalBytesExpectedToWrite) *
-  //         100;
-  //       setDownloadProgress(progressPercentage.toFixed(2));
-  //     }
-  //   );
-
-  //   try {
-  //     const { uri } = await downloadResumable.downloadAsync();
-  //     setFileUri(uri);
-  //     console.log("Image saved to:", uri);
-
-  //     const shareFile = async () => {
-  //       const fileUri = FileSystem.documentDirectory + "Kehinde Adigun CV.jpg";
-  //       if (await Sharing.isAvailableAsync()) {
-  //         await Sharing.shareAsync(fileUri);
-  //       } else {
-  //         console.log("Sharing is not available on this platform");
-  //       }
-  //     };
-
-  //     await shareFile(uri);
-  //   } catch (e) {
-  //     console.error("Error downloading image:", e);
-  //   }
-  // };
-
-  const downloadImage = async (oneUrl, oneName) => {
-    setOneUrl(oneUrl);
-    setOneName(oneName);
-    const uri =
-      `https://drive.google.com/uc?export=download&id=${oneUrl}`; // Replace with the file URL  https://drive.google.com/file/d/1gwqfikX13tzy5Bcenp_TrLNtX097Y5gH/view?usp=drive_link
-    const fileUri = FileSystem.documentDirectory + oneName;
-
-    const downloadResumable = FileSystem.createDownloadResumable(
-      uri,
-      fileUri,
-      {},
-      (progress) => {
-        const progressPercentage =
-          (progress.totalBytesWritten / progress.totalBytesExpectedToWrite) *
-          100;
-        setDownloadProgress(progressPercentage.toFixed(2));
-      }
-    );
-
-    try {
-      const { uri } = await downloadResumable.downloadAsync();
-      setFileUri(uri);
-      console.log("Image saved to:", uri);
-
-      const shareFile = async () => {
-        const fileUri = FileSystem.documentDirectory + oneName;
-        if (await Sharing.isAvailableAsync()) {
-          await Sharing.shareAsync(fileUri);
-        } else {
-          console.log("Sharing is not available on this platform");
-        }
-      };
-
-      await shareFile(uri);
-    } catch (e) {
-      console.error("Error downloading image:", e);
-    }
-  };
 
   return (
     <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
@@ -390,14 +315,23 @@ export default function App() {
         onPress={() =>
           downloadImage(
             "1_JHSQ7nsJIki8y2eiOBTw3bZayFpJa0q",
-            'Kehinde Adigun CV.jpg'
+            "Kehinde Adigun CV.jpg",
+            setDownloadProgress,
+            setFileUri
           )
         }
       />
       <Button title="Download Image only" onPress={downloadImage} />
       <Button
         title="Download PDF"
-        onPress={() => downloadImage("1gwqfikX13tzy5Bcenp_TrLNtX097Y5gH", "Kehinde Adigun CV.pdf")}
+        onPress={() =>
+          downloadImage(
+            "1gwqfikX13tzy5Bcenp_TrLNtX097Y5gH",
+            "Kehinde Adigun CV.pdf",
+            setDownloadProgress,
+            setFileUri
+          )
+        }
       />
       <Text>Download Progress: {downloadProgress}%</Text>
       {fileUri && (

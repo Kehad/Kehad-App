@@ -13,58 +13,6 @@ function ContactForm() {
   const [nameInput, setNameInput] = useState("");
   // const [emailInput, setEmailInput] = useState("");
   const [messageInput, setMessageInput] = useState("");
-
-  // function formSubmit() {
-  //   console.log(FormData)
-  //   // if (FormData.name === "") return;
-  //   // if (FormData.email === "") return;
-  //   // if (FormData.message === "") return;
-
-  //   const { name, email, message } = FormData;
-  //   const words = message.trim().split(/\s+/);
-  //   console.log(name, email, message);
-  //   // console.log(words);
-  //   if (name.length <= 2 && words.length < 5 && !email.includes("@gmail.com")) {
-  //     console.log("Form data failed");
-  //     console.log(name, words, email);
-  //     setIsFormEligible(false);
-  //     console.log('Failure')
-  //   }
-  //   if (name.length >= 3 && words.length >= 5 && email.includes("@gmail.com")) {
-  //     console.log(name, words, email)
-  //     setIsFormEligible(true);
-  //     console.log("Good to good");
-  //   }
-  //   setNameInput("");
-  //   setEmailInput("");
-  //   setMessageInput("");
-  // }
-
-  // function checkLogic() {
-  //   // const { name, email, message } = FormData;
-  //   // Check if the name is less than 3 characters
-  //   setIsFormEligible(false);
-  //   if (nameInput.length < 3) {
-  //     // Alert.alert("Error", "Name must be at least 3 characters long");
-  //     return;
-  //   }
-  //   // Check if the email does not include '@gmail.com'
-  //   if (!emailInput.includes("@gmail.com")) {
-  //     // setIsFormEligible(false);
-  //     // Alert.alert("Error", "Email must be a Gmail address");
-  //     return;
-  //   }
-
-  //   // Check if the message body is less than 5 words
-  //   const words = messageInput.trim().split(/\s+/).length;
-  //   if (words < 5) {
-  //     // setIsFormEligible(false);
-  //     // Alert.alert("Error", "Message must contain at least 5 words");
-  //     return;
-  //   }
-  //   setIsFormEligible(true);
-  // }
-
   const [isFormValid, setIsFormValid] = useState(false);
 
   // Dynamic validation logic
@@ -75,16 +23,11 @@ function ContactForm() {
 
     // Update form validity based on the input validations
     setIsFormEligible(isNameValid && isMessageValid);
-    const FormData = {
-      name: nameInput,
-      // email: emailInput,
-      message: messageInput,
-    };
+   
   }, [nameInput, messageInput]);
 
   const openLink = async (body, messaage) => {
     const url = `mailto:keahnney01@gmail.com?subject=${body}&body=${messaage}`; // Replace with your URL
-    console.log(url);
     try {
       const supported = await Linking.canOpenURL(url);
 
@@ -99,10 +42,7 @@ function ContactForm() {
   };
 
   const handleSubmit = () => {
-    console.log("Good to good");
-    console.log(FormData);
     openLink(nameInput, messageInput);
-    // alert("Success, Form submitted successfully");
     setIsFormEligible(false);
     setNameInput("");
     // setEmailInput("");

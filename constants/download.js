@@ -1,9 +1,10 @@
-
 import * as FileSystem from "expo-file-system";
 import * as Sharing from "expo-sharing";
 
-const imageUrl = 'https://drive.google.com/uc?export=download&id=1_JHSQ7nsJIki8y2eiOBTw3bZayFpJa0q';
-const pdfFileUrl = 'https://drive.google.com/uc?export=download&id=1gwqfikX13tzy5Bcenp_TrLNtX097Y5gH';
+const imageUrl =
+  "https://drive.google.com/uc?export=download&id=1_JHSQ7nsJIki8y2eiOBTw3bZayFpJa0q";
+const pdfFileUrl =
+  "https://drive.google.com/uc?export=download&id=1gwqfikX13tzy5Bcenp_TrLNtX097Y5gH";
 
 export const downloadImage = async (
   oneUrl,

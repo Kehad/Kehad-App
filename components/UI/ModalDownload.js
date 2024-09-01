@@ -7,26 +7,31 @@ import Notification from "./Notification";
 import { downloadImage } from "../../constants/download";
 import { GlobalStyles } from "../../constants/styles";
 import { NetworkState } from "../../constants/NetworkState";
+import PrimaryButton from "../Buttons/PrimaryButton";
+import { NewNotification } from "../../screens/NewNotification";
 
 const ModalDownload = ({ isModalVisible }) => {
-    const [fileUri, setFileUri] = useState(null);
+  const [fileUri, setFileUri] = useState(null);
   const [downloadProgress, setDownloadProgress] = useState(0);
-    const [ipAddress, setIpAddress] = useState(null);
-    const [networkState, setNetworkState] = useState(null);
+  const [ipAddress, setIpAddress] = useState(null);
+  const [networkState, setNetworkState] = useState(null);
 
-    
-    async function imageDownloadHandler() {
-      await NetworkState(setIpAddress, setNetworkState);
-      console.log("Modal download");
-      console.log(ipAddress);
-      console.log(networkState);
-      console.log("Modal download");
-   
+  async function imageDownloadHandler() {
+    // await NetworkState(setIpAddress, setNetworkState);
+    console.log("Modal download");
+    console.log(ipAddress);
+    console.log(networkState);
+    console.log("Modal download");
+
     await downloadImage(
-       "1_JHSQ7nsJIki8y2eiOBTw3bZayFpJa0q",
-       "Kehinde Adigun CV.jpg",
-       setDownloadProgress,
-       setFileUri
+      "1_JHSQ7nsJIki8y2eiOBTw3bZayFpJa0q",
+      "Kehinde Adigun CV.jpg",
+      setDownloadProgress,
+      setFileUri
+    );
+    NewNotification(
+      "Image Download Successful",
+      "You've sucessfully downloaded the Image version of the CV"
     );
     isModalVisible(false);
   }
@@ -37,6 +42,10 @@ const ModalDownload = ({ isModalVisible }) => {
       "Kehinde Adigun CV.pdf",
       setDownloadProgress,
       setFileUri
+    );
+    NewNotification(
+      "PDF Download Successful",
+      "You've sucessfully downloaded the PDF version of the CV"
     );
     isModalVisible(false);
   }
@@ -49,20 +58,26 @@ const ModalDownload = ({ isModalVisible }) => {
             <View style={styles.modalView}>
               <Text>Downloading: {downloadProgress}</Text>
               <View style={styles.button}>
-                <Notification
+                {/* <Notification
                   title="Image Download Successful"
                   name="Download Image"
                   body="You've sucessfully downloaded the Image version of the CV"
                   onPress={imageDownloadHandler}
-                />
+                /> */}
+                <PrimaryButton onPress={imageDownloadHandler}>
+                  Download Image
+                </PrimaryButton>
               </View>
               <View style={styles.button}>
-                <Notification
+                {/* <Notification
                   title="PDF Download Successful"
                   name="Download PDF"
                   body="You've sucessfully downloaded the PDF version of the CV"
                   onPress={pdfDownloadHandler}
-                />
+                /> */}
+                <PrimaryButton onPress={pdfDownloadHandler}>
+                  Download PDF
+                </PrimaryButton>
               </View>
               <Pressable
                 style={styles.buttonOpen}

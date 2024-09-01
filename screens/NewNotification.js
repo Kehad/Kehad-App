@@ -11,7 +11,7 @@ Notifications.setNotificationHandler({
   },
 });
 
-export function NewNotification( title, body ) {
+export const NewNotification = ( title, body ) => {
   console.log("New notification");
 
     console.log(title, body);

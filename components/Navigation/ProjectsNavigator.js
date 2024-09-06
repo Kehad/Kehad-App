@@ -29,7 +29,7 @@ function ProjectsNavigator() {
         name="ProjectsScreen"
         component={ProjectsScreen}
         options={{
-          presentation: "card",
+          // presentation: "card",
           headerShown: false,
         }}
       />
@@ -39,13 +39,33 @@ function ProjectsNavigator() {
         options={{
           presentation: "modal",
           headerTintColor: isDarkMode ? "#efefef" : "black",
-          headerTintColor: '#000000',
+          headerTintColor: "#000000",
           headerStyle: {
             // backgroundColor: isDarkMode
             //   ? GlobalStyles.colors.textBlack
             //   : GlobalStyles.colors.white,
             backgroundColor: "green",
             backgroundColor: isDarkMode ? "#2e2e2e" : "#efefef",
+          },
+          animations: {
+            showModal: {
+              enter: {
+                enabled: true,
+                alpha: {
+                  from: 0,
+                  to: 1,
+                  duration: 300,
+                },
+              },
+              exit: {
+                enabled: true,
+                alpha: {
+                  from: 1,
+                  to: 0,
+                  duration: 300,
+                },
+              },
+            },
           },
         }}
       />

@@ -1,25 +1,18 @@
-import React, { useEffect, useRef } from "react";
+import { useFocusEffect } from "@react-navigation/native";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { Text, View, StyleSheet, Animated } from "react-native";
 
-const TextAnimator = ({
-  content,
-  timing = 600,
-  textStyle,
-  style,
-}) => {
+const TextAnimator = ({ content, timing = 600000, textStyle, style }) => {
   const animatedValues = useRef([]).current;
-  const textArr = content.trim().split(" ");
+  console.log(animatedValues)
+  const textArr = content.trim().split(''); // .split(" ") to make it animate word by word
+  const [rerun, setReRun] = useState(null);
 
   if (animatedValues.length === 0) {
     textArr.forEach((_, i) => {
       animatedValues[i] = new Animated.Value(0);
     });
   }
-
-  useEffect(() => {
-    animate(1);
-    return () => animate(0); // Cleanup on unmount
-  }, []);
 
   const animate = (toValue = 1) => {
     const animations = textArr.map((_, i) => {
@@ -29,11 +22,18 @@ const TextAnimator = ({
         useNativeDriver: true,
       });
     });
-
-
-
     Animated.stagger(timing / 2, animations).start();
   };
+  useFocusEffect(
+    useCallback(() => {
+      //   Perform any action when the screen is focused
+      animate(1);
+      return () => {
+        animate(0);
+        // Perform any cleanup or action when the screen loses focus
+      };
+    }, [rerun])
+  );
 
   return (
     <View style={[style, styles.textWrapper]}>
@@ -57,7 +57,8 @@ const TextAnimator = ({
           ]}
         >
           {v}
-          {`${i < textArr.length ? " " : ""}`}
+          {`${i < textArr.length ? "" : ""}`}
+           {/* {`${i < textArr.length ? ' ' : ''}`}  // to add a space after each word when the animation is word by word  */}
         </Animated.Text>
       ))}
     </View>

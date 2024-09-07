@@ -23,6 +23,7 @@
     "expo-device": "~6.0.2",
     "expo-file-system": "~17.0.1",
     "expo-linking": "~6.3.1",
+    "expo-network": "~6.0.1",
     "expo-notifications": "~0.28.16",
     "expo-sharing": "~12.0.1",
     "expo-sqlite": "~14.0.6",
@@ -31,6 +32,7 @@
     "nativewind": "^2.0.11",
     "react": "18.2.0",
     "react-native": "0.74.5",
+    "react-native-animatable": "^1.4.0",
     "react-native-event-listeners": "^1.0.7",
     "react-native-fs": "^2.20.0",
     "react-native-gesture-handler": "~2.16.1",
@@ -40,8 +42,7 @@
     "react-native-svg": "15.2.0",
     "react-redux": "^9.1.2",
     "tailwind-react-native-classnames": "^3.0.1",
-    "typed.js": "^2.1.0",
-    "expo-network": "~6.0.1"
+    "typed.js": "^2.1.0"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",

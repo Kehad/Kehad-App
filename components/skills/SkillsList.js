@@ -1,4 +1,7 @@
 import { StyleSheet, Text, View } from "react-native";
+import * as Animatable from "react-native-animatable";
+import Animated, { BounceIn, BounceOut , PinwheelIn} from "react-native-reanimated";
+
 
 import IconButton from "../Buttons/IconButton";
 import { GlobalStyles } from "../../constants/styles";
@@ -10,13 +13,14 @@ const SkillsList = function ({
   iconName,
   iconSize,
   iconColor,
+  index
 }) {
   const themes = useSelector((state) => state.theme.theme);
   const isDarkMode = themes === "dark";
 
   return (
     <View style={styles.container}>
-      <View
+      <Animatable.View animation="fadeInUp" duration={1000} delay={100 * index}
         style={[isDarkMode ? styles.darkMode : styles.lightMode, styles.box]}
       >
         <Text style={styles.iconText}>{name}</Text>
@@ -26,7 +30,7 @@ const SkillsList = function ({
           iconSize={iconSize}
           iconColor={iconColor}
         />
-      </View>
+      </Animatable.View>
     </View>
   );
 };

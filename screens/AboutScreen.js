@@ -38,7 +38,7 @@ function AboutScreen() {
           Hello! I'm a frontend developer with a passion for creating highly
           responsive and functional websites that work seamlessly across all
           devices. I've worked on several projects where I've gained experience
-          in HTML, CSS, JavaScript, ReactJS, I am currently React Native to
+          in HTML, CSS, JavaScript, ReactJS, I am currently learning React Native to
           expand my skillset even further. {"\n"}
           {"\n"}As a self-motivated individual, I am always looking for
           opportunities to learn and grow in my career. I have a keen eye for

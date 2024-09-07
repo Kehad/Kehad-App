@@ -71,13 +71,12 @@ const itemList = [
     iconColor: GlobalStyles.colors.primary50,
     iconName: "react",
   },
+
 ];
 
-function renderSkillsItem(itemData) {
-  return <SkillsList {...itemData.item} />;
+function renderSkillsItem({ item, index }) {
+  return <SkillsList {...item} index={index} />;
 }
-
-
 
 function SkillsScreen() {
   const navigation = useNavigation();
@@ -89,7 +88,6 @@ function SkillsScreen() {
     setModalVisible(isModalVisible);
   }
 
-   
   // const downloadFile = async () => {
   //   const url = "http://techslides.com/demos/sample-videos/small.mp4";
   //   console.log(url) // Replace with your file URL
@@ -109,31 +107,30 @@ function SkillsScreen() {
     <View
       style={[
         isDarkMode ? styles.darkMode : styles.lightMode,
-        ,
         styles.container,
       ]}
     >
-        {/* <Title>My Skills</Title> */}
-        <View>
-          <ScrollView>
-            <View style={styles.box}>
-              <View>
-                <FlatList
-                  data={itemList}
-                  keyExtractor={(item) => item.id}
-                  renderItem={renderSkillsItem}
-                  scrollEnabled={false}
-                />
-              </View>
-              <View style={styles.button}>
-                <IconNameButton onPress={showModalHandler} />
-                {modalVisible && (
-                  <ModalDownload isModalVisible={showModalHandler} />
-                )}
-              </View>
+      {/* <Title>My Skills</Title> */}
+      <View>
+        <ScrollView>
+          <View style={styles.box}>
+            <View>
+              <FlatList
+                data={itemList}
+                keyExtractor={(item) => item.id}
+                renderItem={renderSkillsItem}
+                scrollEnabled={false}
+              />
             </View>
-          </ScrollView>
-        </View>
+            <View style={styles.button}>
+              <IconNameButton onPress={showModalHandler} />
+              {modalVisible && (
+                <ModalDownload isModalVisible={showModalHandler} />
+              )}
+            </View>
+          </View>
+        </ScrollView>
+      </View>
     </View>
   );
 }
@@ -150,7 +147,7 @@ const styles = StyleSheet.create({
   box: {
     // justifyContent: "space-between",
     display: "flex",
-    justifyContent: 'flex-end'
+    justifyContent: "flex-end",
   },
   button: {
     // width: "70%",

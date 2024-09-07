@@ -62,7 +62,7 @@ function HomeScreen() {
           styles.paragraph,
         ]}
       >
-        I am a web developer with over 5 years of experience, specializing in
+        I am a web developer with over 3 years of experience, specializing in
         creating dynamic and responsive web applications. Currently, I am on a
         journey to become a full stack and mobile app developer, expanding my
         skills to include backend technologies and mobile development. My

@@ -24,6 +24,7 @@ import store from "./store/store";
 import WorksNavigator from "./components/Navigation/WorksNavigation";
 import ProjectsNavigator from "./components/Navigation/ProjectsNavigator";
 
+
 const BottomTabs = createBottomTabNavigator();
 
 
@@ -234,6 +235,9 @@ const styles = StyleSheet.create({
 });
 
 function SemiApp() {
+  const colorScheme = useColorScheme();
+  console.log(colorScheme);
+
   const themes = useSelector((state) => state.theme.theme);
   const isDarkMode = themes === "dark";
   return (

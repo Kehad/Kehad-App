@@ -1,4 +1,4 @@
-import { Alert, StyleSheet, TextInput, View } from "react-native";
+import { Alert, KeyboardAvoidingView, StyleSheet, TextInput, View } from "react-native";
 import { sendEmail } from "../../constants/email";
 import * as Linking from "expo-linking";
 import SocialLinks from "../UI/SocialLinks";
@@ -63,7 +63,7 @@ function ContactForm() {
   }
 
   return (
-    <View style={styles.form}>
+    <KeyboardAvoidingView enabled style={styles.form}>
       <View style={styles.textBox}>
         <TextInput
           placeholder="Name"
@@ -111,7 +111,7 @@ function ContactForm() {
           )}
         </View>
       </View>
-    </View>
+    </KeyboardAvoidingView>
   );
 }
 

@@ -52,6 +52,7 @@ const styles = StyleSheet.create({
   iconText: {
     fontSize: 20,
     color: GlobalStyles.colors.primary50,
+    fontWeight: '400'
   },
   darkMode: {
     backgroundColor: GlobalStyles.colors.white100,

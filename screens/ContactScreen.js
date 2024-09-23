@@ -6,6 +6,7 @@ import {
   Modal,
   Pressable,
   ScrollView,
+  KeyboardAvoidingView,
 } from "react-native";
 import { useSelector } from "react-redux";
 import * as Linking from "expo-linking";

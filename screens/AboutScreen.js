@@ -54,7 +54,7 @@ function AboutScreen() {
           development and Application Development to a full-time position where
           I can make a meaningful impact. If you're looking for a dedicated and
           driven developer who is always eager to take on new challenges, then I
-          would love to hear from you!
+          would love to hear from you!
         </Text>
         <SocialLinks />
         <View style={styles.buttonsContainer}>

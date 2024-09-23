@@ -7,7 +7,7 @@
     "icon": "./assets/kehadLogo.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets//KehadSplash2.png",
+      "image": "./assets/KehadSplash2.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -27,7 +27,6 @@
       [
         "expo-notifications",
         {
-          // "icon": "./local/assets/icon.png",
           "icon": "./local/assets/kehadLogo.png",
           "color": "#ffffff",
           "defaultChannel": "default"

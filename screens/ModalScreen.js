@@ -13,7 +13,7 @@ function ModalScreen({ route, navigation}) {
    const isDarkMode = themes === "dark";
   // const navigation = useNavigation();
   // const route = useRoute();
-console.log(isDarkMode)
+// console.log(isDarkMode)
   // console.log(route);
   const ModalData = {
     title: route.params.title,
@@ -25,24 +25,16 @@ console.log(isDarkMode)
     navigation.setOptions({
       title: ModalData.title,
       headerStyle: {
-        // backgroundColor: isDarkMode
-        //   ? GlobalStyles.colors.textBlack
-        //   : GlobalStyles.colors.white,
-        // backgroundColor: !isDarkMode ? "white" : "#282828",
-        // backgroundColor: isDarkMode ? "#282828" : "#EFEFEF",
-        // backgroundColor: isDarkMode
-        // backgroundColor: isDarkMode && "#282828",
-        // backgroundColor: isDarkMode && "#EFEFEF",
-        // backgroundColor: "green",
+        backgroundColor: isDarkMode ? GlobalStyles.colors.textBlack : GlobalStyles.colors.white,
       },
+      headerTintColor: isDarkMode ? GlobalStyles.colors.white : GlobalStyles.colors.textBlack,
       headerTitleStyle: {
-        // color: GlobalStyles.colors.primary50,
-        // color: isDarkMode ? 'white' : 'black',
         fontSize: 25,
         fontWeight: "bold",
+        color: isDarkMode ? GlobalStyles.colors.white : GlobalStyles.colors.textBlack,
       },
     });
-  }, []);
+  }, [isDarkMode, ModalData.title]);
   const openLink = async () => {
     const url = ModalData.website; // Replace with your URL
 

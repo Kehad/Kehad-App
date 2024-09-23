@@ -1,12 +1,5 @@
-import {
-  Animated,
-  Button,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from "react-native";
-import { useFocusEffect, useNavigation } from "@react-navigation/native";
+import { StyleSheet, Text, View } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 import { useSelector } from "react-redux";
 
 import { GlobalStyles } from "../constants/styles";
@@ -15,7 +8,6 @@ import SecondaryButton from "../components/Buttons/SecondaryButton";
 import SocialLinks from "../components/UI/SocialLinks";
 import Title from "../components/UI/Title";
 import TextAnimator from "../constants/TextAnimator";
-import { useCallback } from "react";
 
 function HomeScreen() {
   const themes = useSelector((state) => state.theme.theme);
@@ -30,8 +22,6 @@ function HomeScreen() {
     navigation.navigate("ContactScreen");
   }
 
- 
-
   return (
     <View
       style={[
@@ -40,14 +30,6 @@ function HomeScreen() {
       ]}
     >
       <Title>Hi.</Title>
-      {/* <Text
-        style={[
-          isDarkMode ? styles.darkModeText : styles.lightModeText,
-          styles.name,
-        ]}
-      >
-        I'm Kehinde Adigun
-      </Text> */}
       <TextAnimator
         content="I'm Kehinde Adigun"
         textStyle={[
@@ -102,7 +84,7 @@ const styles = StyleSheet.create({
     fontSize: 36,
     marginBottom: 24,
     color: GlobalStyles.colors.primary50,
-    fontStyle: 'italic',
+    fontStyle: "italic",
     fontWeight: 500,
   },
   paragraph: {

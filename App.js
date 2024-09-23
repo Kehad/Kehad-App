@@ -118,12 +118,12 @@ function BottomTabsNavigator() {
         name="Works"
         component={WorksNavigator}
         options={{
-          headerTitle: <Header title="Works" />,
+          // headerTitle: <Header title="Works" />,
           title: (
             <Header
               title="Works"
               color={
-                isDarkMode
+                !isDarkMode
                   ? GlobalStyles.colors.white
                   : GlobalStyles.colors.textBlack
               }
@@ -139,7 +139,8 @@ function BottomTabsNavigator() {
         name="Projects"
         component={ProjectsNavigator}
         options={{
-          headerTitle: <Header title="Projects" />,
+          // headerTitle: <Header title="Projects" />,
+          
           title: (
             <Header
               title="Projects"
@@ -198,18 +199,7 @@ function BottomTabsNavigator() {
           ),
         }}
       />
-      {/* <BottomTabs.Screen
-        name="NativeScreen"
-        component={NativeScreen}
-        options={{
-          headerTitle: <Header title="Native" />,
-          title: <Header title="Native" />,
-          tabBarLabel: "Native",
-          tabBarIcon: ({ color, size }) => (
-            <Ionicons name="mail" size={size} color={color} />
-          ),
-        }}
-      /> */}
+      
     </BottomTabs.Navigator>
   );
 }
@@ -235,9 +225,6 @@ const styles = StyleSheet.create({
 });
 
 function SemiApp() {
-  const colorScheme = useColorScheme();
-  console.log(colorScheme);
-
   const themes = useSelector((state) => state.theme.theme);
   const isDarkMode = themes === "dark";
   return (
@@ -262,8 +249,3 @@ function App() {
 
 export default App;
 
-// facebook-with-circle
-// sc-facebook  EvilIcons
-// linkedin
-// mail
-// logo-react

@@ -51,7 +51,6 @@ export default function Notification({ title, name, body, onPress, onCheck }) {
       },
     });
   }
-  // console.log("Notification");
 
   function finalPress() {
     console.log(onCheck);

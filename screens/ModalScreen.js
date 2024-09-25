@@ -11,10 +11,6 @@ import { openBrowserAsync } from "expo-web-browser";
 function ModalScreen({ route, navigation}) {
    const themes = useSelector((state) => state.theme.theme);
    const isDarkMode = themes === "dark";
-  // const navigation = useNavigation();
-  // const route = useRoute();
-// console.log(isDarkMode)
-  // console.log(route);
   const ModalData = {
     title: route.params.title,
     description: route.params.description,

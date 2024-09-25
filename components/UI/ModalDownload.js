@@ -85,7 +85,7 @@ const ModalDownload = ({ isModalVisible }) => {
               >
                 <IconButton
                   iconTitle="Ionicons"
-                  iconName="close-circle-outline" // close-circle, close
+                  iconName="close-circle-outline"
                   iconSize={48}
                   iconColor={GlobalStyles.colors.primary50}
                   onPress={() => isModalVisible(false)}

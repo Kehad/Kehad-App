@@ -15,12 +15,8 @@ function WorksNavigator() {
     <Stack.Navigator
       screenOptions={({ route }) => ({
         headerStyle: {
-          // backgroundColor: isDarkMode && "#282828",
-          // backgroundColor: "green",
           backgroundColor: isDarkMode ? "#2e2e2e" : "#efefef",
         },
-        // headerTintColor: isDarkMode ? "#EFEFEF" : "#282828",
-        headerTintColor: "red",
       })}
     >
       <Stack.Screen
@@ -37,14 +33,10 @@ function WorksNavigator() {
         options={{
           presentation: "modal",
           headerStyle: {
-            // backgroundColor: "green",
             color: "pink",
-            // color: isDarkMode ? "#efefef" : "black",
-            // backgroundColor: isDarkMode ? "#2e2e2e" : "#efefef",
           },
-          // headerStyle: 'red',
           headerTintColor: isDarkMode ? "#efefef" : "black",
-        }} // This sets the screen as a modal
+        }} 
       />
     </Stack.Navigator>
   );

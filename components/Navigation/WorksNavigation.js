@@ -3,7 +3,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { useSelector } from "react-redux";
 import WorksScreen from "../../screens/WorksScreen";
 import ModalScreen from "../../screens/ModalScreen";
-import { GlobalStyles } from "../../constants/styles";
+
 
 const Stack = createNativeStackNavigator();
 

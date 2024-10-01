@@ -9,7 +9,6 @@ import SocialLinks from "../components/UI/SocialLinks";
 import Title from "../components/UI/Title";
 import TextAnimator from "../constants/TextAnimator";
 
-import kehadlogo1 from '../assets/kehadlogo@4x-8.png'
 
 
 function HomeScreen() {

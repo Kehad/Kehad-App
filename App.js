@@ -1,14 +1,14 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { StyleSheet, View } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from "@react-navigation/native";
 import { StatusBar } from "expo-status-bar";
 import { Foundation, Ionicons } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
-import { useColorScheme } from "nativewind";
+import { useColorScheme } from "react-native";
 import "react-native-gesture-handler";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
-import Notification from './components/UI/Notification';
+
 
 import HomeScreen from "./screens/HomeScreen";
 import SkillsScreen from "./screens/SkillsScreen";
@@ -19,10 +19,11 @@ import Header from "./components/UI/Header";
 import ToggleMode from "./components/UI/ToggleMode";
 import { GlobalStyles } from "./constants/styles";
 import NativeScreen from "./screens/NativeScreen";
-import { Provider, useSelector } from "react-redux";
+import { Provider, useDispatch, useSelector } from "react-redux";
 import store from "./store/store";
 import WorksNavigator from "./components/Navigation/WorksNavigation";
 import ProjectsNavigator from "./components/Navigation/ProjectsNavigator";
+import { setSystemTheme } from "./store/themeSlice";
 
 
 const BottomTabs = createBottomTabNavigator();
@@ -30,7 +31,7 @@ const BottomTabs = createBottomTabNavigator();
 
 function BottomTabsNavigator() {
   const [modalVisible, setModalVisible] = useState(false);
-  const { colorScheme, toggleColorScheme } = useColorScheme();
+
   const themes = useSelector((state) => state.theme.theme);
   const isDarkMode = themes === "dark";
 
@@ -44,7 +45,7 @@ function BottomTabsNavigator() {
         headerStyle: {
           backgroundColor: isDarkMode
             ? GlobalStyles.colors.textBlack
-            : GlobalStyles.colors.white,
+            : GlobalStyles.colors.white,   
         },
         headerTitle: ({ tintColor }) => (
           <Header title="Kehad" color={tintColor} />
@@ -227,9 +228,20 @@ const styles = StyleSheet.create({
 function SemiApp() {
   const themes = useSelector((state) => state.theme.theme);
   const isDarkMode = themes === "dark";
+
+  const dispatch = useDispatch();
+  const colorScheme = useColorScheme();
+  const { manualOverride } = useSelector((state) => state.theme);
+
+  useEffect(() => {
+    if (!manualOverride) {
+      dispatch(setSystemTheme(colorScheme));
+    }
+  }, [colorScheme, manualOverride, dispatch]);
+
   return (
     <>
-      <GestureHandlerRootView style={{ flex: 1 }}>
+      <GestureHandlerRootView style={{ flex: 1, backgroundColor: 'red' }}>
         <StatusBar style={isDarkMode ? "light" : "dark"} />
         <NavigationContainer>
           <BottomTabsNavigator />

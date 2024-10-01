@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from "react-native";
+import { Image, StyleSheet, Text, View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { useSelector } from "react-redux";
 
@@ -8,6 +8,9 @@ import SecondaryButton from "../components/Buttons/SecondaryButton";
 import SocialLinks from "../components/UI/SocialLinks";
 import Title from "../components/UI/Title";
 import TextAnimator from "../constants/TextAnimator";
+
+import kehadlogo1 from '../assets/kehadlogo@4x-8.png'
+
 
 function HomeScreen() {
   const themes = useSelector((state) => state.theme.theme);
@@ -60,6 +63,7 @@ function HomeScreen() {
           <SecondaryButton onPress={aboutMeHandler}>about me</SecondaryButton>
         </View>
       </View>
+    
     </View>
   );
 }
@@ -110,4 +114,5 @@ const styles = StyleSheet.create({
   lightModeText: {
     color: GlobalStyles.colors.textBlack,
   },
+  
 });

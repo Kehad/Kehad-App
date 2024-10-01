@@ -4,7 +4,6 @@ import logo from '../../assets/Logo-only.png'
 import kehadlogo1 from '../../assets/kehadlogo@4x-8.png'
 
 function Header({title, color}) {
-  // console.log(color);
   const logoName = {
     color: color,
     fontSize: 32,

@@ -7,7 +7,7 @@ import PrimaryButton from "../components/Buttons/PrimaryButton";
 import { GlobalStyles } from "../constants/styles";
 import { useColorScheme } from "nativewind";
 import { useSelector } from "react-redux";
-
+import { FontAwesome } from "@expo/vector-icons";
 
 function AboutScreen() {
   const themes = useSelector((state) => state.theme.theme);
@@ -28,40 +28,17 @@ function AboutScreen() {
     >
       {/* <Title>About me</Title> */}
       <ScrollView>
-        {/* <Text
-          style={[
-            !isDarkMode ? styles.lightMode : styles.darkModeText,
-            styles.paragraph,
-          ]}
-          textBreakStrategy="simple"
-          lineBreakStrategyIOS="standard"
-        >
-          Hello! I'm a frontend developer with a passion for creating highly
-          responsive and functional websites that work seamlessly across all
-          devices. I've worked on several projects where I've gained experience
-          in HTML, CSS, JavaScript, ReactJS, I am currently learning React Native to
-          expand my skillset even further. {"\n"}
-          {"\n"}As a self-motivated individual, I am always looking for
-          opportunities to learn and grow in my career. I have a keen eye for
-          design and a strong understanding of user experience, which helps me
-          to create websites that are not only visually appealing but also
-          highly functional. {"\n"} {"\n"}I've always been fascinated by the
-          intersection of design and technology, and I've made it my mission to
-          bring beautiful, user-friendly websites to life. With 5+ years of
-          experience in the industry, I've had the privilege of working on a
-          diverse range of projects, each one presenting a unique challenge that
-          I've eagerly tackled. {"\n"}
-          {"\n"}I am excited to bring my skills and passion for frontend
-          development and Application Development to a full-time position where
-          I can make a meaningful impact. If you're looking for a dedicated and
-          driven developer who is always eager to take on new challenges, then I
-          would love to hear from you!
-        </Text> */}
-        <Text style={styles.paragraph}>
+        <Text style={[styles.darkModeText, styles.paragraph]}>
           Welcome to my Portfolio app! I'm a frontend developer with a passion
           for creating highly responsive and functional websites that work
           seamlessly across all devices
         </Text>
+        <View>
+          <View style={styles.options}>
+            <Text style={[styles.paragraph]}>About me</Text>
+            <FontAwesome name="arrow-down" size={24} color="black" />
+          </View>
+        </View>
         <SocialLinks />
         <View style={styles.buttonsContainer}>
           <View style={styles.buttonContainer}>
@@ -98,6 +75,16 @@ const styles = StyleSheet.create({
   buttonContainer: {
     flex: 1,
   },
+  options: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    height: 50,
+    paddingHorizontal: 10,
+    alignItems: 'center',
+    backgroundColor: '#ffff'
+  },
+
+  // Additional styles for dark mode and light mode can be added here...
   darkMode: {
     backgroundColor: GlobalStyles.colors.textBlack,
   },
@@ -111,3 +98,35 @@ const styles = StyleSheet.create({
     color: GlobalStyles.colors.textBlack,
   },
 });
+
+{
+  /* <Text
+          style={[
+            !isDarkMode ? styles.lightMode : styles.darkModeText,
+            styles.paragraph,
+          ]}
+          textBreakStrategy="simple"
+          lineBreakStrategyIOS="standard"
+        >
+          Hello! I'm a frontend developer with a passion for creating highly
+          responsive and functional websites that work seamlessly across all
+          devices. I've worked on several projects where I've gained experience
+          in HTML, CSS, JavaScript, ReactJS, I am currently learning React Native to
+          expand my skillset even further. {"\n"}
+          {"\n"}As a self-motivated individual, I am always looking for
+          opportunities to learn and grow in my career. I have a keen eye for
+          design and a strong understanding of user experience, which helps me
+          to create websites that are not only visually appealing but also
+          highly functional. {"\n"} {"\n"}I've always been fascinated by the
+          intersection of design and technology, and I've made it my mission to
+          bring beautiful, user-friendly websites to life. With 5+ years of
+          experience in the industry, I've had the privilege of working on a
+          diverse range of projects, each one presenting a unique challenge that
+          I've eagerly tackled. {"\n"}
+          {"\n"}I am excited to bring my skills and passion for frontend
+          development and Application Development to a full-time position where
+          I can make a meaningful impact. If you're looking for a dedicated and
+          driven developer who is always eager to take on new challenges, then I
+          would love to hear from you!
+        </Text> */
+}

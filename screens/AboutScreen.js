@@ -8,6 +8,7 @@ import { GlobalStyles } from "../constants/styles";
 import { useColorScheme } from "nativewind";
 import { useSelector } from "react-redux";
 
+
 function AboutScreen() {
   const themes = useSelector((state) => state.theme.theme);
   const isDarkMode = themes === "dark";
@@ -27,7 +28,7 @@ function AboutScreen() {
     >
       {/* <Title>About me</Title> */}
       <ScrollView>
-        <Text
+        {/* <Text
           style={[
             !isDarkMode ? styles.lightMode : styles.darkModeText,
             styles.paragraph,
@@ -55,6 +56,11 @@ function AboutScreen() {
           I can make a meaningful impact. If you're looking for a dedicated and
           driven developer who is always eager to take on new challenges, then I
           would love to hear from you!
+        </Text> */}
+        <Text style={styles.paragraph}>
+          Welcome to my Portfolio app! I'm a frontend developer with a passion
+          for creating highly responsive and functional websites that work
+          seamlessly across all devices
         </Text>
         <SocialLinks />
         <View style={styles.buttonsContainer}>

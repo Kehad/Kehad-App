@@ -8,7 +8,9 @@ import { setDarkMode, setLightMode } from "../../store/themeSlice";
 
 const ToggleMode = ({ isModalVisible }) => {
   const dispatch = useDispatch();
-  const themes = useSelector((state) => state.theme.theme)
+  const themes = useSelector((state) => state.theme.theme);
+  const isDarkMode = themes === "dark";
+
 
   // const { colorScheme, toggleColorScheme } = useColorScheme();
     const systemColorScheme = useColorScheme(); // 'light' or 'dark'
@@ -34,23 +36,23 @@ const ToggleMode = ({ isModalVisible }) => {
 
   return (
     <View style={styles.toggleIcon}>
-      <Pressable style={styles.sun} onPress={switchToLightMode}>
+      <Pressable style={[isDarkMode ? '' : styles.active ,styles.sun]} onPress={switchToLightMode}>
         <IconButton
           iconTitle="Feather"
           iconName="sun"
-          iconSize={24}
-          iconColor="black"
+          iconSize={26}
+          iconColor="white"
           // onPress={() => isModalVisible(false)}
           onPress={switchToLightMode}
         />
       </Pressable>
-      <Pressable style={styles.moon} onPress={switchToDarkMode}>
+      <Pressable style={[isDarkMode ? styles.active : '' , styles.moon]} onPress={switchToDarkMode}>
         <Pressable style={styles.moonView} onPress={switchToDarkMode}>
           <IconButton
             iconTitle="Ionicons"
             iconName="moon"
             iconSize={24}
-            iconColor="black"
+            iconColor="black"     
             onPress={switchToDarkMode}
           />
         </Pressable>
@@ -85,20 +87,23 @@ const styles = StyleSheet.create({
     width: "50%",
     borderRadius: 20,
   },
-  moonView: {
-    borderRadius: 20,
-    padding: 3,
-    backgroundColor: GlobalStyles.colors.primary50,
-    height: "min-height",
-  },
   sun: {
     borderRadius: 20,
     borderBottomRightRadius: 0,
-    backgroundColor: GlobalStyles.colors.primary50,
+    // backgroundColor: GlobalStyles.colors.primary50,
     borderTopRightRadius: 0,
     width: "50%",
     height: "100%",
     alignItems: "center",
     justifyContent: "center",
   },
+  moonView: {
+    borderRadius: 20,
+    padding: 3,
+    backgroundColor: GlobalStyles.colors.primary50,
+    height: "min-height",
+  },
+  active: {
+    backgroundColor: GlobalStyles.colors.primary50
+  }
 });

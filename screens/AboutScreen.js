@@ -4,16 +4,16 @@ import {
   Text,
   View,
   TouchableOpacity,
+  Image,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import * as Animatable from "react-native-animatable";
 
-import Title from "../components/UI/Title";
 import SocialLinks from "../components/UI/SocialLinks";
 import PrimaryButton from "../components/Buttons/PrimaryButton";
 import { GlobalStyles } from "../constants/styles";
-import { useColorScheme } from "nativewind";
 import { useSelector } from "react-redux";
-import { FontAwesome, Ionicons } from "@expo/vector-icons";
+import { Ionicons } from "@expo/vector-icons";
 import { useState } from "react";
 
 function AboutScreen() {
@@ -38,7 +38,7 @@ function AboutScreen() {
       "I am a frontend developer with a passion for creating engaging user experiences. My journey in web development began with a keen interest in design and technology.",
     "Technologies & Tools":
       "I primarily work with React, Next.js, Tailwind CSS, and other modern web technologies to build responsive and user-friendly applications.",
-    Experience:
+    "Experience":
       "I have worked on various projects, including e-commerce sites, portfolios, and web applications, utilizing my skills in JavaScript and UI/UX design.",
   };
 
@@ -67,7 +67,6 @@ function AboutScreen() {
         styles.container,
       ]}
     >
-      {/* <Title>About me</Title> */}
       <ScrollView>
         <Text
           style={[
@@ -79,65 +78,79 @@ function AboutScreen() {
           for creating highly responsive and functional websites that work
           seamlessly across all devices
         </Text>
-      
-        {newSectionContent.map((section, index) => (
-          <View key={index}>
-            <TouchableOpacity
-              style={[
-                { backgroundColor: isDarkMode ? "#d9d9d956" : "#373e503f" },
-                styles.sectionButton,
-              ]}
-              onPress={() => toggleSection(section.name)}
-            >
-              <View style={styles.sectionHeader}>
+        
+        <View style={styles.menu}>
+          {newSectionContent.map((section, index) => (
+            <View key={index}>
+              <TouchableOpacity
+                style={[
+                  { backgroundColor: isDarkMode ? "#d9d9d956" : "#373e503f" },
+                  styles.sectionButton,
+                ]}
+                onPress={() => toggleSection(section.name)}
+              >
+                <View style={styles.sectionHeader}>
+                  <Ionicons
+                    name={section.icon}
+                    size={24}
+                    color={
+                      isDarkMode
+                        ? GlobalStyles.colors.white
+                        : GlobalStyles.colors.textBlack
+                    }
+                  />
+                  <Text
+                    style={[
+                      isDarkMode ? styles.darkModeText : styles.lightModeText,
+                      styles.sectionText,
+                    ]}
+                  >
+                    {section.name}
+                  </Text>
+                </View>
                 <Ionicons
-                  name={section.icon}
+                  name={
+                    expandedSection === section.name
+                      ? "chevron-up"
+                      : "chevron-down"
+                  }
                   size={24}
+                  // color={isDarkMode ? "white" : "black"}
                   color={
                     isDarkMode
                       ? GlobalStyles.colors.white
                       : GlobalStyles.colors.textBlack
                   }
                 />
-                <Text
-                  style={[
-                    isDarkMode ? styles.darkModeText : styles.lightModeText,
-                    styles.sectionText,
-                  ]}
+              </TouchableOpacity>
+              {expandedSection === section.name && (
+                <Animatable.View
+                  style={styles.expandedSection}
+                  animation="fadeInUp"
+                  duration={1000}
+                  delay={100 * index}
                 >
-                  {section.name}
-                </Text>
-              </View>
-              <Ionicons
-                name={
-                  expandedSection === section.name
-                    ? "chevron-up"
-                    : "chevron-down"
-                }
-                size={24}
-                // color={isDarkMode ? "white" : "black"}
-                color={
-                  isDarkMode
-                    ? GlobalStyles.colors.white
-                    : GlobalStyles.colors.textBlack
-                }
-              />
-            </TouchableOpacity>
-            {expandedSection === section.name && (
-              <View style={styles.expandedSection}>
-                <Text
-                  style={[
-                    isDarkMode ? styles.darkModeText : styles.lightModeText,
-                    styles.sectionContent,
-                  ]}
-                >
-                  {sectionContents[section.name]}
-                </Text>
-              </View>
-            )}
-          </View>
-        ))}
-        <SocialLinks />
+                  <Text
+                    style={[
+                      isDarkMode ? styles.darkModeText : styles.lightModeText,
+                      styles.sectionContent,
+                    ]}
+                  >
+                    {sectionContents[section.name]}
+                  </Text>
+                </Animatable.View>
+              )}
+            </View>
+          ))}
+        </View>
+        <View
+          style={{
+            marginHorizontal: 16,
+          }}
+        >
+          <SocialLinks />
+        </View>
+
         <View style={styles.buttonsContainer}>
           <View style={styles.buttonContainer}>
             <PrimaryButton onPress={hireMeHandler}>hire me</PrimaryButton>
@@ -165,6 +178,11 @@ const styles = StyleSheet.create({
     fontSize: 20,
     lineHeight: 30,
     fontWeight: "400",
+  },
+  tinyLogo: {
+    height: 100,
+    width: 100,
+    resizeMode: "contain",
   },
   buttonsContainer: {
     flexDirection: "row",
@@ -198,7 +216,9 @@ const styles = StyleSheet.create({
   option: {
     gap: 4,
   },
-
+  menu: {
+    marginVertical: 16,
+  },
   sectionText: {
     fontSize: 20,
   },
@@ -225,34 +245,3 @@ const styles = StyleSheet.create({
   },
 });
 
-{
-  /* <Text
-          style={[
-            !isDarkMode ? styles.lightMode : styles.darkModeText,
-            styles.paragraph,
-          ]}
-          textBreakStrategy="simple"
-          lineBreakStrategyIOS="standard"
-        >
-          Hello! I'm a frontend developer with a passion for creating highly
-          responsive and functional websites that work seamlessly across all
-          devices. I've worked on several projects where I've gained experience
-          in HTML, CSS, JavaScript, ReactJS, I am currently learning React Native to
-          expand my skillset even further. {"\n"}
-          {"\n"}As a self-motivated individual, I am always looking for
-          opportunities to learn and grow in my career. I have a keen eye for
-          design and a strong understanding of user experience, which helps me
-          to create websites that are not only visually appealing but also
-          highly functional. {"\n"} {"\n"}I've always been fascinated by the
-          intersection of design and technology, and I've made it my mission to
-          bring beautiful, user-friendly websites to life. With 5+ years of
-          experience in the industry, I've had the privilege of working on a
-          diverse range of projects, each one presenting a unique challenge that
-          I've eagerly tackled. {"\n"}
-          {"\n"}I am excited to bring my skills and passion for frontend
-          development and Application Development to a full-time position where
-          I can make a meaningful impact. If you're looking for a dedicated and
-          driven developer who is always eager to take on new challenges, then I
-          would love to hear from you!
-        </Text> */
-}

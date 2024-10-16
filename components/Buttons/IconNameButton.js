@@ -4,13 +4,17 @@ import { GlobalStyles } from "../../constants/styles";
 import { FontAwesome } from "@expo/vector-icons";
 
 function IconNameButton({ onPress }) {
+
   return (
     <View style={styles.container}>
       <Pressable
         style={styles.innerContainer}
         android_ripple={{ color: GlobalStyles.colors.primary100 }}
       >
-        <TouchableOpacity style={styles.button} onPress={onPress}>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={onPress}
+        >
           <Text style={styles.buttonText}>Download CV</Text>
           <FontAwesome name="arrow-down" size={24} color="black" />
         </TouchableOpacity>

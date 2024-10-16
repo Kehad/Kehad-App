@@ -1,4 +1,10 @@
-import { ScrollView, StyleSheet, Text, View } from "react-native";
+import {
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+} from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
 import Title from "../components/UI/Title";
@@ -7,7 +13,8 @@ import PrimaryButton from "../components/Buttons/PrimaryButton";
 import { GlobalStyles } from "../constants/styles";
 import { useColorScheme } from "nativewind";
 import { useSelector } from "react-redux";
-import { FontAwesome } from "@expo/vector-icons";
+import { FontAwesome, Ionicons } from "@expo/vector-icons";
+import { useState } from "react";
 
 function AboutScreen() {
   const themes = useSelector((state) => state.theme.theme);
@@ -19,6 +26,40 @@ function AboutScreen() {
     navigation.navigate("ContactScreen");
   }
 
+  const [expandedSection, setExpandedSection] = useState(null);
+
+  const toggleSection = (section) => {
+    setExpandedSection(expandedSection === section ? null : section);
+  };
+
+  // Content for each section
+  const sectionContents = {
+    "About me":
+      "I am a frontend developer with a passion for creating engaging user experiences. My journey in web development began with a keen interest in design and technology.",
+    "Technologies & Tools":
+      "I primarily work with React, Next.js, Tailwind CSS, and other modern web technologies to build responsive and user-friendly applications.",
+    Experience:
+      "I have worked on various projects, including e-commerce sites, portfolios, and web applications, utilizing my skills in JavaScript and UI/UX design.",
+  };
+
+  const newSectionContent = [
+    {
+      name: "About me",
+      content: "hdshdsdfsdsdsd",
+      icon: "information-circle-outline",
+    },
+    {
+      name: "Technologies & Tools",
+      content: "hdshdsdfsdsdsd",
+      icon: "code-slash-outline",
+    },
+    {
+      name: "Experience",
+      content: "hdshdsdfsdsdsd",
+      icon: "briefcase-outline",
+    },
+  ];
+
   return (
     <View
       style={[
@@ -28,17 +69,74 @@ function AboutScreen() {
     >
       {/* <Title>About me</Title> */}
       <ScrollView>
-        <Text style={[styles.darkModeText, styles.paragraph]}>
+        <Text
+          style={[
+            isDarkMode ? styles.darkModeText : styles.lightModeText,
+            styles.paragraph,
+          ]}
+        >
           Welcome to my Portfolio app! I'm a frontend developer with a passion
           for creating highly responsive and functional websites that work
           seamlessly across all devices
         </Text>
-        <View>
-          <View style={styles.options}>
-            <Text style={[styles.paragraph]}>About me</Text>
-            <FontAwesome name="arrow-down" size={24} color="black" />
+      
+        {newSectionContent.map((section, index) => (
+          <View key={index}>
+            <TouchableOpacity
+              style={[
+                { backgroundColor: isDarkMode ? "#d9d9d956" : "#373e503f" },
+                styles.sectionButton,
+              ]}
+              onPress={() => toggleSection(section.name)}
+            >
+              <View style={styles.sectionHeader}>
+                <Ionicons
+                  name={section.icon}
+                  size={24}
+                  color={
+                    isDarkMode
+                      ? GlobalStyles.colors.white
+                      : GlobalStyles.colors.textBlack
+                  }
+                />
+                <Text
+                  style={[
+                    isDarkMode ? styles.darkModeText : styles.lightModeText,
+                    styles.sectionText,
+                  ]}
+                >
+                  {section.name}
+                </Text>
+              </View>
+              <Ionicons
+                name={
+                  expandedSection === section.name
+                    ? "chevron-up"
+                    : "chevron-down"
+                }
+                size={24}
+                // color={isDarkMode ? "white" : "black"}
+                color={
+                  isDarkMode
+                    ? GlobalStyles.colors.white
+                    : GlobalStyles.colors.textBlack
+                }
+              />
+            </TouchableOpacity>
+            {expandedSection === section.name && (
+              <View style={styles.expandedSection}>
+                <Text
+                  style={[
+                    isDarkMode ? styles.darkModeText : styles.lightModeText,
+                    styles.sectionContent,
+                  ]}
+                >
+                  {sectionContents[section.name]}
+                </Text>
+              </View>
+            )}
           </View>
-        </View>
+        ))}
         <SocialLinks />
         <View style={styles.buttonsContainer}>
           <View style={styles.buttonContainer}>
@@ -80,8 +178,8 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     height: 50,
     paddingHorizontal: 10,
-    alignItems: 'center',
-    backgroundColor: '#ffff'
+    alignItems: "center",
+    backgroundColor: "#ffff",
   },
 
   // Additional styles for dark mode and light mode can be added here...
@@ -96,6 +194,34 @@ const styles = StyleSheet.create({
   },
   lightModeText: {
     color: GlobalStyles.colors.textBlack,
+  },
+  option: {
+    gap: 4,
+  },
+
+  sectionText: {
+    fontSize: 20,
+  },
+  sectionButton: {
+    padding: 16,
+    borderRadius: 8,
+    marginBottom: 8,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+  expandedSection: {
+    padding: 16,
+    marginBottom: 8,
+  },
+  sectionContent: {
+    fontSize: 20,
+  },
+  sectionHeader: {
+    flexDirection: "row",
+    gap: 10,
+    alignItems: "center",
+    justifyContent: "center",
   },
 });
 

@@ -57,7 +57,7 @@ function AboutScreen() {
 
 
 
-  // I'm working on a project to build a Figma Plugin
+
   const newSectionContent = [
     {
       name: "About me",

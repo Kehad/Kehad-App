@@ -5,6 +5,7 @@ import {
   View,
   TouchableOpacity,
   Image,
+  FlatList,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import * as Animatable from "react-native-animatable";
@@ -42,23 +43,55 @@ function AboutScreen() {
       "I have worked on various projects, including e-commerce sites, portfolios, and web applications, utilizing my skills in JavaScript and UI/UX design.",
   };
 
+  const about = [
+    " 💻 I'm currently learning React Native and NextJS",
+    "🎵 I love listening to music while coding.",
+    "😐 Fun fact: He/Him",
+  ];
+
+  const experience = [
+    "I'm currently working at Lokatalent",
+    "I'm currently working at OSA",
+    "I'm working on a project to build a Figma Plugin",
+  ];
+
+  // I'm currently working at Lokatalent
+  // I'm currently working at OSA
+  // I'm working on a project to build a Figma Plugin
   const newSectionContent = [
     {
       name: "About me",
-      content: "hdshdsdfsdsdsd",
+      content: about,
       icon: "information-circle-outline",
     },
     {
       name: "Technologies & Tools",
-      content: "hdshdsdfsdsdsd",
+      content:
+        "I primarily work with React, Next.js, Tailwind CSS, and other modern web technologies to build responsive and user-friendly applications.",
       icon: "code-slash-outline",
     },
     {
       name: "Experience",
-      content: "hdshdsdfsdsdsd",
+      content: experience,
       icon: "briefcase-outline",
     },
   ];
+
+  const renderItem = function ({ item }) {
+    console.log(item);
+    return (
+      <View>
+        <Text
+          style={[
+            isDarkMode ? styles.darkModeText : styles.lightModeText,
+            styles.paragraph,
+          ]}
+        >
+          {item}
+        </Text>
+      </View>
+    );
+  };
 
   return (
     <View
@@ -78,7 +111,7 @@ function AboutScreen() {
           for creating highly responsive and functional websites that work
           seamlessly across all devices
         </Text>
-        
+
         <View style={styles.menu}>
           {newSectionContent.map((section, index) => (
             <View key={index}>
@@ -115,7 +148,6 @@ function AboutScreen() {
                       : "chevron-down"
                   }
                   size={24}
-                  // color={isDarkMode ? "white" : "black"}
                   color={
                     isDarkMode
                       ? GlobalStyles.colors.white
@@ -130,14 +162,32 @@ function AboutScreen() {
                   duration={1000}
                   delay={100 * index}
                 >
-                  <Text
+                  <View
                     style={[
                       isDarkMode ? styles.darkModeText : styles.lightModeText,
                       styles.sectionContent,
                     ]}
                   >
-                    {sectionContents[section.name]}
-                  </Text>
+                    {typeof section.content === "string" ? (
+                      <Text
+                        style={[
+                          isDarkMode
+                            ? styles.darkModeText
+                            : styles.lightModeText,
+                          styles.paragraph,
+                        ]}
+                      >
+                        {section.content}
+                      </Text>
+                    ) : (
+                      <FlatList
+                        data={section.content}
+                        key={index}
+                        renderItem={renderItem}
+                        scrollEnabled={false}
+                      />
+                    )}
+                  </View>
                 </Animatable.View>
               )}
             </View>
@@ -231,7 +281,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   expandedSection: {
-    padding: 16,
+    padding: 8,
     marginBottom: 8,
   },
   sectionContent: {
@@ -244,4 +294,3 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
 });
-

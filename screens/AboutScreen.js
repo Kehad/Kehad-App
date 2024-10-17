@@ -56,7 +56,7 @@ function AboutScreen() {
   ];
 
 
-  // I'm currently working at OSA
+
   // I'm working on a project to build a Figma Plugin
   const newSectionContent = [
     {

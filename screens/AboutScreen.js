@@ -51,11 +51,11 @@ function AboutScreen() {
 
   const experience = [
     "I'm currently working as an Intern at Lokatalent",
-    "I'm currently working as a frontend developerat OSA",
+    "I'm currently working as a frontend developer at OSA",
     "I'm working on a project to build a Figma Plugin",
   ];
 
-  // I'm currently working at Lokatalent
+
   // I'm currently working at OSA
   // I'm working on a project to build a Figma Plugin
   const newSectionContent = [

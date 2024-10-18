@@ -4,10 +4,10 @@
     "slug": "Kehad-App",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/kehadLogo.png",
+    "icon": "./assets/lol.png",
     "userInterfaceStyle": "automatic",
     "splash": {
-      "image": "./assets/kehadsplash.jpg",
+      "image": "./assets/kehadsplash2.png",
       "resizeMode": "cover",
       "backgroundColor": "#ffffff"
     },
@@ -18,7 +18,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.kehad.KehadApp"
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -27,12 +28,16 @@
       [
         "expo-notifications",
         {
-          "icon": "./local/assets/kehadLogo.png",
+          "icon": "./local/assets/lol.png",
           "color": "#ffffff",
           "defaultChannel": "default"
         }
       ]
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "65c47559-8847-42f2-8dea-c03b0ad04fab"
+      }
+    }
   }
 }
-

@@ -48,23 +48,8 @@ export default function Notification({ title, name, body, onPress, onCheck }) {
   }
 
   function finalPress() {
-    console.log(onCheck);
     onPress();
     scheduleNotificationHandler();
-
-    // if (onCheck === false) {
-    //   console.log('Dont notify user')
-    //   onPress();
-    //   console.log(onCheck);
-    //   console.log("Dont notify user")
-    // }
-    // if (onCheck === true) {
-    //   console.log('Notify user')
-    //   onPress();
-    //   console.log(onCheck);
-    //   console.log("Notify user");
-    //   // scheduleNotificationHandler();
-    // }
   }
 
   return (

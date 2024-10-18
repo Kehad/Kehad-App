@@ -4,7 +4,6 @@ import { Text, View, StyleSheet, Animated } from "react-native";
 
 const TextAnimator = ({ content, timing = 600000, textStyle, style }) => {
   const animatedValues = useRef([]).current;
-  console.log(animatedValues)
   const textArr = content.trim().split(''); // .split(" ") to make it animate word by word
   const [rerun, setReRun] = useState(null);
 

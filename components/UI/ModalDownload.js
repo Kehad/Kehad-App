@@ -18,10 +18,6 @@ const ModalDownload = ({ isModalVisible }) => {
 
   async function imageDownloadHandler() {
     // await NetworkState(setIpAddress, setNetworkState);
-    console.log("Modal download");
-    console.log(ipAddress);
-    console.log(networkState);
-    console.log("Modal download");
 
     await downloadImage(
       "1_JHSQ7nsJIki8y2eiOBTw3bZayFpJa0q",

@@ -78,7 +78,7 @@ function AboutScreen() {
   ];
 
   const renderItem = function ({ item }) {
-    console.log(item);
+ 
     return (
       <View>
         <Text

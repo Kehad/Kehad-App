@@ -29,13 +29,11 @@ export const downloadImage = async (
   try {
     const { uri } = await downloadResumable.downloadAsync();
     setFileUri(uri);
-    console.log("File saved to:", uri);
+   
 
     if (await Sharing.isAvailableAsync()) {
       await Sharing.shareAsync(fileUri);
-    } else {
-      console.log("Sharing is not available on this platform");
-    }
+    } 
   } catch (e) {
     console.error("Error downloading file:", e);
   }

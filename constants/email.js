@@ -11,7 +11,7 @@ export async function sendEmail(to, subject, body) {
     url += `?${query}`;
   }
 
-  console.log(url);
+
   // check if we can use this link
   const canOpen = await Linking.canOpenURL(url);
 

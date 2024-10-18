@@ -34,7 +34,7 @@ function ContactForm() {
         Alert.alert(`Don't know how to open this URL: ${url}`);
       }
     } catch (error) {
-      console.log(error);
+      throw new Error(error.message);
     }
   };
 

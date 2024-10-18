@@ -58,23 +58,13 @@ const ModalDownload = ({ isModalVisible }) => {
             <View style={styles.modalView}>
               <Text>Downloading: {downloadProgress}</Text>
               <View style={styles.button}>
-                {/* <Notification
-                  title="Image Download Successful"
-                  name="Download Image"
-                  body="You've sucessfully downloaded the Image version of the CV"
-                  onPress={imageDownloadHandler}
-                /> */}
+               
                 <PrimaryButton onPress={imageDownloadHandler}>
                   Download Image
                 </PrimaryButton>
               </View>
               <View style={styles.button}>
-                {/* <Notification
-                  title="PDF Download Successful"
-                  name="Download PDF"
-                  body="You've sucessfully downloaded the PDF version of the CV"
-                  onPress={pdfDownloadHandler}
-                /> */}
+               
                 <PrimaryButton onPress={pdfDownloadHandler}>
                   Download PDF
                 </PrimaryButton>

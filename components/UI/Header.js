@@ -22,7 +22,6 @@ const styles = StyleSheet.create({
   logo: {
     width: 40, // 120 for kehadlogo1
     height: 30,
-    // resizeMode: 'cover',
   },
   box: {
     display: 'flex',

@@ -16,20 +16,16 @@ function ProjectsNavigator() {
     <Stack.Navigator
       screenOptions={({ route }) => ({
         headerStyle: {
-          // backgroundColor: isDarkMode
-          //   ? GlobalStyles.colors.textBlack
-          //   : GlobalStyles.colors.white,
-          // backgroundColor: isDarkMode ? '#2e2e2e' : '#efefef',
+
         },
-        // headerTintColor: isDarkMode ? "#EFEFEF" : "#282828",
-        // headerTintColor: 'black',
+        
       })}
     >
       <Stack.Screen
         name="ProjectsScreen"
         component={ProjectsScreen}
         options={{
-          // presentation: "card",
+
           headerShown: false,
         }}
       />
@@ -41,9 +37,7 @@ function ProjectsNavigator() {
           headerTintColor: isDarkMode ? "#efefef" : "black",
           headerTintColor: "#000000",
           headerStyle: {
-            // backgroundColor: isDarkMode
-            //   ? GlobalStyles.colors.textBlack
-            //   : GlobalStyles.colors.white,
+           
             backgroundColor: "green",
             backgroundColor: isDarkMode ? "#2e2e2e" : "#efefef",
           },

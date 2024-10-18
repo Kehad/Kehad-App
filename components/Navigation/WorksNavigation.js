@@ -10,7 +10,6 @@ const Stack = createNativeStackNavigator();
 function WorksNavigator() {
   const themes = useSelector((state) => state.theme.theme);
   const isDarkMode = themes === "dark";
-  console.log(isDarkMode);
   return (
     <Stack.Navigator
       screenOptions={({ route }) => ({

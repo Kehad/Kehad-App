@@ -12,9 +12,9 @@ const ToggleMode = ({ isModalVisible }) => {
   const isDarkMode = themes === "dark";
 
 
-  // const { colorScheme, toggleColorScheme } = useColorScheme();
+  //
     const systemColorScheme = useColorScheme(); // 'light' or 'dark'
-    // console.log(systemColorScheme)
+
 
   // Create state for the theme, defaulting to the system color scheme
   const [theme, setTheme] = useState(systemColorScheme);
@@ -71,8 +71,7 @@ const styles = StyleSheet.create({
     // gap: 20,
     width: 120,
     justifyContent: "space-between",
-    // flex: 1,
-    // padding: 10,
+
     alignItems: "center",
     borderColor: GlobalStyles.colors.primary50,
     borderWidth: 2,
@@ -90,7 +89,6 @@ const styles = StyleSheet.create({
   sun: {
     borderRadius: 20,
     borderBottomRightRadius: 0,
-    // backgroundColor: GlobalStyles.colors.primary50,
     borderTopRightRadius: 0,
     width: "50%",
     height: "100%",

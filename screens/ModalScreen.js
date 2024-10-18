@@ -48,7 +48,6 @@ function ModalScreen({ route, navigation}) {
       ]}
     >
       <View style={styles.box}>
-        {/* <Text style={styles.headerHead}>{ModalData.title}</Text> */}
         <Text
           style={[
             isDarkMode ? styles.darkModeText : styles.lightModeText,

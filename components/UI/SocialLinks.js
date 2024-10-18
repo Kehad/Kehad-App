@@ -12,13 +12,12 @@ const SocialLinks = function () {
   };
 
   const openLink = async (website) => {
-    // console.log(website);
     const url = website; // Replace with your URL
 
     try {
       const supported = await openBrowserAsync(url);
     } catch (error) {
-      console.log(error);
+      throw new Error(`Failed to open' ${error.message}`);
     }
   };
 

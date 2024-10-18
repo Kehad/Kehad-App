@@ -17,19 +17,14 @@ export default function Notification({ title, name, body, onPress, onCheck }) {
   useEffect(() => {
     const subscription1 = Notifications.addNotificationReceivedListener(
       (notification) => {
-        // console.log("NOTIFICATION RECEIVED");
-        // console.log(notification);
         const userName = notification.request.content.data.userName;
-        // console.log(userName);
       }
     );
 
     const subscription2 = Notifications.addNotificationResponseReceivedListener(
       (response) => {
-        // console.log("NOTIFICATION RESPONSE RECEIVED");
-        // console.log(response);
         const userName = response.notification.request.content.data.userName;
-        // console.log(userName);
+;
       }
     );
 
@@ -75,9 +70,7 @@ export default function Notification({ title, name, body, onPress, onCheck }) {
   return (
     <>
       <PrimaryButton onPress={finalPress}>{name}</PrimaryButton>
-      {/* <Pressable onPress={scheduleNotificationHandler}>
-      {children}
-    </Pressable> */}
+      
     </>
   );
 }

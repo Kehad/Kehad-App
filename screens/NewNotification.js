@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import * as Notifications from "expo-notifications";
 
 Notifications.setNotificationHandler({
@@ -12,11 +11,7 @@ Notifications.setNotificationHandler({
 });
 
 export const NewNotification = ( title, body ) => {
-  console.log("New notification");
-
-    console.log(title, body);
   function scheduleNotificationHandler() {
-    console.log("show notification");
     Notifications.scheduleNotificationAsync({
       content: {
         title: title,
@@ -26,7 +21,6 @@ export const NewNotification = ( title, body ) => {
         seconds: 5,
       },
     });
-    console.log("showed notification");
   }
   scheduleNotificationHandler();
 }

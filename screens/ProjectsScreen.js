@@ -17,8 +17,6 @@ function ProjectsScreen() {
         styles.container,
       ]}
     >
-      {/* <Title>Projects</Title> */}
-
       <ProjectsList />
     </View>
   );
@@ -28,14 +26,12 @@ export default ProjectsScreen;
 
 const styles = StyleSheet.create({
   container: {
-    // backgroundColor: GlobalStyles.colors.white100,
     flex: 1,
     padding: 24,
   },
   headerHead: {
     marginBottom: 4,
     color: GlobalStyles.colors.primary50,
-    // backgroundColor: GlobalStyles.colors.textBlack,
     fontWeight: "bold",
     fontSize: 40,
   },

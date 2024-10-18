@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
   innerContainer: {
     backgroundColor: GlobalStyles.colors.primary50,
     paddingVertical: 8,
-    // paddingHorizontal: 4,
+
     elevation: 2,
     width: "max-width",
   },

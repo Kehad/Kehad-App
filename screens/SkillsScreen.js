@@ -6,21 +6,12 @@ import {
   StyleSheet,
   View,
 } from "react-native";
-import * as FileSystem from "expo-file-system";
-
-import Title from "../components/UI/Title";
 import { GlobalStyles } from "../constants/styles";
 import SkillsList from "../components/skills/SkillsList";
-import PrimaryButton from "../components/Buttons/PrimaryButton";
-import IconButton from "../components/Buttons/IconButton";
-import { Ionicons } from "@expo/vector-icons";
 import IconNameButton from "../components/Buttons/IconNameButton";
 import { useState } from "react";
-import Modal from "../components/UI/ModalDownload";
 import ModalDownload from "../components/UI/ModalDownload";
 import { useSelector } from "react-redux";
-import { Swipeable } from "react-native-gesture-handler";
-import { useNavigation } from "@react-navigation/native";
 
 const itemList = [
   {
@@ -79,7 +70,6 @@ function renderSkillsItem({ item, index }) {
 }
 
 function SkillsScreen() {
-  const navigation = useNavigation();
   const [modalVisible, setModalVisible] = useState(false);
   const themes = useSelector((state) => state.theme.theme);
   const isDarkMode = themes === "dark";
@@ -88,20 +78,7 @@ function SkillsScreen() {
     setModalVisible(isModalVisible);
   }
 
-  // const downloadFile = async () => {
-  //   const url = "http://techslides.com/demos/sample-videos/small.mp4";
-  //   console.log(url) // Replace with your file URL
-  //   // const fileUri = FileSystem.documentDirectory + 'icon.png'; // Local file path
-  //   const fileUri = `${FileSystem.documentDirectory}icon.png`;
 
-  //   try {
-  //     const { uri } = await FileSystem.downloadAsync(url, fileUri);
-  //     Alert.alert('Success', 'File downloaded to: ' + uri);
-  //   } catch (error) {
-  //     console.log(error)
-  //     Alert.alert('Error', 'Failed to download file: ' + error.message);
-  //   }
-  // };
 
   return (
     <View
@@ -110,7 +87,6 @@ function SkillsScreen() {
         styles.container,
       ]}
     >
-      {/* <Title>My Skills</Title> */}
       <View>
         <ScrollView>
           <View style={styles.box}>
@@ -145,13 +121,10 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
   box: {
-    // justifyContent: "space-between",
     display: "flex",
     justifyContent: "flex-end",
   },
   button: {
-    // width: "70%",
-    // alignItems: "center",
     marginVertical: 20,
   },
   darkMode: {

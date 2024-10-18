@@ -1,7 +1,6 @@
 import React from "react";
 import { FlatList, StyleSheet } from "react-native";
 import WorksItem from "./WorksItem";
-import { GlobalStyles } from "../../constants/styles";
 const worksData = [
   {
     id: "m1",

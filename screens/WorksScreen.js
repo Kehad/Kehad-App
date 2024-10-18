@@ -11,11 +11,8 @@ function WorksScreen() {
     const themes = useSelector((state) => state.theme.theme);
     const isDarkMode = themes === "dark";
   return (
-    <View style={[isDarkMode ? styles.darkMode : styles.lightMode, styles.container]}>
-      {/* <Title>Works</Title> */}
-      
+    <View style={[isDarkMode ? styles.darkMode : styles.lightMode, styles.container]}>    
       <WorksList />
-      
     </View>
   );
 }
@@ -24,7 +21,6 @@ export default WorksScreen;
 
 const styles = StyleSheet.create({
   container: {
-    // backgroundColor: GlobalStyles.colors.white,
     flex: 1,
     padding: 24,
   },

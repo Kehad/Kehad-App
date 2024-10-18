@@ -18,7 +18,7 @@ function IconButton({
   iconColor,
   iconTitle,
 }) {
-  // console.log(iconTitle, iconName, iconSize, iconColor,);
+
   let content = "";
   if (iconTitle === "FontAwesome6") {
     content = (

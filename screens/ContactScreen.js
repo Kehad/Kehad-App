@@ -1,12 +1,8 @@
 import {
   Text,
   View,
-  TextInput,
   StyleSheet,
-  Modal,
-  Pressable,
   ScrollView,
-  KeyboardAvoidingView,
 } from "react-native";
 import { useSelector } from "react-redux";
 import * as Linking from "expo-linking";
@@ -37,7 +33,6 @@ function ContactScreen() {
 
   return (
     <View style={[isDarkMode ? styles.darkMode : styles.lightMode, styles.container]}>
-      {/* <Title>Hello</Title> */}
       <ScrollView>
         <Text style={[isDarkMode ? styles.darkModeText : styles.lightModeText, styles.text]}>
           Looking to start a project and need that magical touch?{"\n"} {"\n"}{" "}

@@ -4,16 +4,7 @@ import { GlobalStyles } from "../../constants/styles";
 import { Ionicons } from "@expo/vector-icons";
 
 function PrimaryButton({ children, onPress, style }) {
-  // let content = <Text>{children}</Text>;
-  // console.log(icon)
-  // if (icon) {
-  //   return content = (
-  //     <View style={[{ flexDirection: "row", alignItems: "center" },styles.buttonText]}>
-  //       <Text>{children}</Text>
-  //       {/* <Ionicons name="logo-html5" size="23" color="black" /> */}
-  //     </View>
-  //   );
-  // }
+ 
   return (
     <View style={styles.buttonOuterContainer}>
       <Pressable

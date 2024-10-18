@@ -5,15 +5,12 @@ import SocialLinks from "../UI/SocialLinks";
 import PrimaryButton from "../Buttons/PrimaryButton";
 import { GlobalStyles } from "../../constants/styles";
 import { useEffect, useRef, useState } from "react";
-import Notification from "../UI/Notification";
-import SecondaryButton from "../Buttons/SecondaryButton";
+
 
 function ContactForm() {
   const [isFormEligible, setIsFormEligible] = useState(false);
   const [nameInput, setNameInput] = useState("");
-  // const [emailInput, setEmailInput] = useState("");
   const [messageInput, setMessageInput] = useState("");
-  const [isFormValid, setIsFormValid] = useState(false);
 
   // Dynamic validation logic
   useEffect(() => {
@@ -45,21 +42,18 @@ function ContactForm() {
     openLink(nameInput, messageInput);
     setIsFormEligible(false);
     setNameInput("");
-    // setEmailInput("");
+
     setMessageInput("");
   };
 
   function getNameValue(input) {
     setNameInput(input);
-    //  checkLogic();
+
   }
-  // function getEmailValue(input) {
-  //   setEmailInput(input);
-  //   //  checkLogic();
-  // }
+  
   function getMessageValue(input) {
     setMessageInput(input);
-    //  checkLogic();s
+   
   }
 
   return (
@@ -72,14 +66,7 @@ function ContactForm() {
           onChangeText={getNameValue}
           value={nameInput}
         />
-        {/* <TextInput
-          placeholder="Sender email?"
-          style={styles.textInput}
-          placeholderTextColor={GlobalStyles.colors.primary50}
-          keyboardType="email-address"
-          onChangeText={getEmailValue}
-          value={emailInput}
-        /> */}
+       
       </View>
       <View style={styles.messageBox}>
         <TextInput
@@ -120,14 +107,14 @@ export default ContactForm;
 const styles = StyleSheet.create({
   form: {
     width: "100%",
-    // height: 300,
+
     marginVertical: 20,
     borderRadius: 15,
     backgroundColor: GlobalStyles.colors.primary300,
     padding: 16,
   },
   textBox: {
-    // flexDirection: "row",
+
     overflow: "hidden",
   },
   textInput: {

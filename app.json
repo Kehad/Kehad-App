@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "Kehad-App",
+    "name": "Kehad",
     "slug": "Kehad-App",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -16,10 +16,10 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/logo.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.kehad.KehadApp"
+      "package": "com.kehad.Kehad"
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -28,7 +28,7 @@
       [
         "expo-notifications",
         {
-          "icon": "./local/assets/lol.png",
+          "icon": "./assets/lol.png",
           "color": "#ffffff",
           "defaultChannel": "default"
         }

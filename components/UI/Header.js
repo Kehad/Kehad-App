@@ -1,6 +1,6 @@
 import { Image, Text , View, StyleSheet } from 'react-native'
 
-import logo from '../../assets/Logo-only.png'
+import logo from '../../assets/logo.png'
 import kehadlogo1 from '../../assets/kehadlogo@4x-8.png'
 
 function Header({title, color}) {
